@@ -1,26 +1,178 @@
 [
   {
-    "name": "Linalool"
+    "name": "Acetanisole",
+    "casNumber": "100-06-1",
+    "ifraLimits": {},
+    "notes": "Sweet, hay, mimosa"
   },
   {
-    "name": "Limonene"
+    "name": "Acetophenone",
+    "casNumber": "98-86-2",
+    "ifraLimits": {},
+    "notes": "Hawthorn, almond, floral"
   },
   {
-    "name": "Coumarin"
+    "name": "Aldehyde C-10 (Decanal)",
+    "casNumber": "112-31-2",
+    "ifraLimits": {},
+    "notes": "Citrus, orange peel, waxy"
   },
   {
-    "name": "Ethyl Vanillin"
+    "name": "Ambroxan",
+    "casNumber": "6790-58-5",
+    "ifraLimits": {},
+    "notes": "Ambergris, woody, musky"
   },
   {
-    "name": "Hedione"
+    "name": "Benzyl Acetate",
+    "casNumber": "140-11-4",
+    "ifraLimits": {
+      "4": 5.8,
+      "5A": 1.1,
+      "5B": 0.3
+    },
+    "notes": "Jasmine, fruity, sweet"
   },
   {
-    "name": "Iso E Super"
+    "name": "Citral",
+    "casNumber": "5392-40-5",
+    "ifraLimits": {
+      "4": 0.6,
+      "5A": 0.2,
+      "5B": 0.1
+    },
+    "notes": "Strong lemon, citrus"
   },
   {
-    "name": "Citral"
+    "name": "Citronellol",
+    "casNumber": "106-22-9",
+    "ifraLimits": {
+      "4": 13.0
+    },
+    "notes": "Floral, rose, citrus"
   },
   {
-    "name": "Geraniol"
+    "name": "Coumarin",
+    "casNumber": "91-64-5",
+    "ifraLimits": {
+      "4": 1.6,
+      "5A": 0.3,
+      "5B": 0.1
+    },
+    "notes": "Hay, almond, vanilla"
+  },
+  {
+    "name": "Eugenol",
+    "casNumber": "97-53-0",
+    "ifraLimits": {
+      "4": 0.5,
+      "5A": 0.2,
+      "5B": 0.1
+    },
+    "notes": "Clove, spicy, woody"
+  },
+  {
+    "name": "Fixolide (Galaxolide)",
+    "casNumber": "1222-05-5",
+    "ifraLimits": {
+      "4": 44.4,
+      "5A": 22.2,
+      "5B": 8.9
+    },
+    "notes": "Clean, floral, musk"
+  },
+  {
+    "name": "Geraniol",
+    "casNumber": "106-24-1",
+    "ifraLimits": {
+      "4": 1.5,
+      "5A": 5.0,
+      "5B": 3.8
+    },
+    "notes": "Rosy, floral"
+  },
+  {
+    "name": "Hedione",
+    "casNumber": "24851-98-7",
+    "ifraLimits": {},
+    "notes": "Jasmine, floral booster"
+  },
+  {
+    "name": "Heliotropin",
+    "casNumber": "120-57-0",
+    "ifraLimits": {
+      "4": 0.7
+    },
+    "notes": "Sweet, powdery, almond"
+  },
+  {
+    "name": "Iso E Super",
+    "casNumber": "54464-57-2",
+    "ifraLimits": {
+      "4": 21.4,
+      "5A": 5.4,
+      "5B": 1.6
+    },
+    "notes": "Velvety, woody, amber"
+  },
+  {
+    "name": "Jasmine Absolute",
+    "casNumber": "8022-96-6",
+    "ifraLimits": {
+      "4": 0.7
+    },
+    "notes": "Rich, floral, jasmine"
+  },
+  {
+    "name": "Lemon Oil",
+    "casNumber": "8008-56-8",
+    "ifraLimits": {
+      "4": 2.0
+    },
+    "notes": "Fresh, citrus"
+  },
+  {
+    "name": "Limonene",
+    "casNumber": "138-86-3",
+    "ifraLimits": {
+      "4": 1.0
+    },
+    "notes": "Citrus, orange, fresh"
+  },
+  {
+    "name": "Linalool",
+    "casNumber": "78-70-6",
+    "ifraLimits": {
+      "4": 0.5,
+      "5A": 1.2,
+      "5B": 1.2
+    },
+    "notes": "Floral, woody"
+  },
+  {
+    "name": "Methyl Salicylate",
+    "casNumber": "119-36-8",
+    "ifraLimits": {
+      "4": 0.6
+    },
+    "notes": "Wintergreen, minty, sweet"
+  },
+  {
+    "name": "Patchouli Oil",
+    "casNumber": "8014-09-3",
+    "ifraLimits": {},
+    "notes": "Earthy, woody, sweet"
+  },
+  {
+    "name": "Phenethyl Alcohol (PEA)",
+    "casNumber": "60-12-8",
+    "ifraLimits": {},
+    "notes": "Floral, rose, honey"
+  },
+  {
+    "name": "Vanillin",
+    "casNumber": "121-33-5",
+    "ifraLimits": {},
+    "notes": "Sweet, vanilla, creamy"
   }
 ]

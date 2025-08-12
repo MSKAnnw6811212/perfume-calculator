@@ -11,24 +11,26 @@
 <body>
   <header class="app-header">
     <h1>Perfume Calculator</h1>
+    <nav class="modes">
+      <button id="modeSimple" class="tab-btn" data-mode="simple">Simple</button>
+      <button id="modePro" class="tab-btn" data-mode="pro">Pro</button>
+    </nav>
     <div class="header-actions">
       <button id="themeToggle" title="Toggle theme">🌓 Theme</button>
       <button id="installBtn" class="secondary" hidden>Install</button>
     </div>
   </header>
-
   <div id="updateBanner" class="update-banner" hidden>
     <span>Update available.</span>
     <button id="refreshBtn">Refresh</button>
   </div>
-
   <main>
-    <section class="panel">
+    <section id="simpleSection" class="panel" hidden>
+      <h2>Simple (Concentrate → Finished %)</h2>
       <div class="row">
         <label for="dosage">Dosage in finished product (%)</label>
         <input type="number" id="dosage" min="0" max="100" step="0.1" value="20" />
       </div>
-
       <div class="row wrap">
         <button id="addRow">+ Add ingredient</button>
         <input type="text" id="recipeName" placeholder="Recipe name" />
@@ -40,48 +42,115 @@
         <button id="printBtn" class="secondary">Print</button>
         <button id="clearAll" class="danger">Clear</button>
       </div>
-
       <div class="row">
         <small id="dataStatus">Loading data…</small>
       </div>
+      <section class="table-wrap">
+        <table id="ingredientsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ingredient</th>
+              <th>% in concentrate</th>
+              <th>Finished %</th>
+              <th>IFRA 4</th>
+              <th>IFRA 5A</th>
+              <th>IFRA 5B</th>
+              <th>IFRA 9</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Totals</td>
+              <td id="totalConcentrate">0</td>
+              <td id="totalFinished">0</td>
+              <td colspan="4"></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
     </section>
-
-    <section class="table-wrap">
-      <table id="ingredientsTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Ingredient</th>
-            <th>% in concentrate</th>
-            <th>Finished %</th>
-            <th>IFRA 4</th>
-            <th>IFRA 5A</th>
-            <th>IFRA 5B</th>
-            <th>IFRA 9</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2">Totals</td>
-            <td id="totalConcentrate">0</td>
-            <td id="totalFinished">0</td>
-            <td colspan="4"></td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
+    <section id="proSection" class="panel" hidden>
+      <h2>Pro (Batch/Volume, Density, Cost)</h2>
+      <div class="row wrap">
+        <label for="targetVolume">Target Volume (ml)</label>
+        <input type="number" id="targetVolume" value="100" style="max-width:120px" />
+        <label for="ifraCategory">IFRA Category</label>
+        <select id="ifraCategory">
+          <option value="4">4 – Fine Fragrance</option>
+          <option value="5A">5A – Body Lotion</option>
+          <option value="5B">5B – Face Cream</option>
+          <option value="9">9 – Soap</option>
+        </select>
+        <button id="proSave">Save Recipe</button>
+        <select id="proSaved"></select>
+        <button id="proLoad" class="secondary">Load</button>
+        <button id="proDelete" class="danger">Delete</button>
+        <button id="proNew" class="secondary">New</button>
+        <button id="proExport" class="secondary">Export CSV</button>
+        <button id="proPrint" class="secondary">Print</button>
+      </div>
+      <div class="table-wrap">
+        <table id="proTable">
+          <thead>
+            <tr>
+              <th style="min-width: 220px;">Ingredient</th>
+              <th>Volume (ml)</th>
+              <th>Density (g/ml)</th>
+              <th>Weight (g)</th>
+              <th>Price/10g (€)</th>
+              <th>Cost (€)</th>
+              <th>Formula % (by wt)</th>
+              <th>Note</th>
+              <th>Supplier</th>
+              <th>CAS</th>
+              <th>Notes</th>
+              <th>Del</th>
+            </tr>
+          </thead>
+          <tbody id="proBody"></tbody>
+          <tfoot>
+            <tr>
+              <td><strong>Totals</strong></td>
+              <td id="proTotalVol"></td>
+              <td>-</td>
+              <td id="proTotalWt"></td>
+              <td>-</td>
+              <td id="proTotalCost"></td>
+              <td id="proTotalPct"></td>
+              <td colspan="5"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <button id="proAdd">+ Add Ingredient</button>
+      <div class="cards">
+        <div id="noteSummary" class="card">
+          <h4>Note Balance (by weight)</h4>
+          <div id="noteSummaryText">—</div>
+        </div>
+        <div id="ifraStatus" class="card">
+          <h4>IFRA Compliance</h4>
+          <div id="ifraStatusText">Choose category & enter weights.</div>
+        </div>
+        <div id="priceHelper" class="card">
+          <h4>Price per 10g Helper</h4>
+          <div class="row">
+            <label>Total Cost (€)</label><input type="number" id="helperCost" />
+            <label>Total Weight (g)</label><input type="number" id="helperWeight" />
+            <strong>Result: <span id="helperResult">€0.00 per 10g</span></strong>
+          </div>
+        </div>
+      </div>
     </section>
-
     <datalist id="ingredientList"></datalist>
   </main>
-
   <footer class="app-footer">
-    <small>Placeholder IFRA limits &amp; ingredients for demo only. Replace <code>data/*.json</code> with authoritative data before any real use.</small>
+    <small>Demo data. Replace <code>data/*.json</code> with authoritative sources before real use.</small>
   </footer>
-
   <script src="app.js"></script>
 </body>
 </html>
