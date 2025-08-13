@@ -9,6 +9,9 @@
     "name": "Bergamot Oil"
   },
   {
+    "name": "Bergamot FCF Oil"
+  },
+  {
     "name": "Blood Orange Oil"
   },
   {
@@ -18,16 +21,19 @@
     "name": "Cade Oil"
   },
   {
-    "name": "Cedarwood Atlas Oil"
+    "name": "Cassia Oil"
   },
   {
-    "name": "Cedarwood Virginia Oil"
+    "name": "Cedarwood Atlas Oil"
   },
   {
     "name": "Cedarwood Himalayan Oil"
   },
   {
     "name": "Cedarwood Texas Oil"
+  },
+  {
+    "name": "Cedarwood Virginia Oil"
   },
   {
     "name": "Cistus Absolute"
@@ -42,10 +48,19 @@
     "name": "Copaiba Balsam"
   },
   {
+    "name": "Copaiba Balsam Oil"
+  },
+  {
     "name": "Coriander Seed Oil"
   },
   {
+    "name": "Cumin Seed Oil"
+  },
+  {
     "name": "Cypress Oil"
+  },
+  {
+    "name": "Davana Oil"
   },
   {
     "name": "Elemi Oil"
@@ -63,6 +78,12 @@
     "name": "Evernia Furfuracea Absolute (Treemoss)"
   },
   {
+    "name": "Fennel Sweet Oil"
+  },
+  {
+    "name": "Fir Balsam Absolute"
+  },
+  {
     "name": "Frankincense (Olibanum) Oil"
   },
   {
@@ -75,7 +96,13 @@
     "name": "German Chamomile Oil"
   },
   {
+    "name": "Ginger Oil"
+  },
+  {
     "name": "Grapefruit Pink Oil"
+  },
+  {
+    "name": "Grapefruit White Oil"
   },
   {
     "name": "Guaiacwood Oil"
@@ -156,6 +183,9 @@
     "name": "Nutmeg Oil"
   },
   {
+    "name": "Oakmoss Resinoid Low Atranol"
+  },
+  {
     "name": "Opoponax (Sweet Myrrh) Oil"
   },
   {
@@ -187,6 +217,9 @@
   },
   {
     "name": "Rose Absolute (Bulgarian)"
+  },
+  {
+    "name": "Rose Absolute (Moroccan)"
   },
   {
     "name": "Rose Otto (Turkish)"
@@ -246,10 +279,46 @@
     "name": "Ylang Ylang Complete"
   },
   {
+    "name": "Oakmoss Absolute Low Atranol"
+  },
+  {
+    "name": "Black Pepper Oil"
+  },
+  {
+    "name": "Cardamom Oil"
+  },
+  {
+    "name": "Caraway Oil"
+  },
+  {
+    "name": "Lemon Verbena Oil"
+  },
+  {
+    "name": "Tea Tree Oil"
+  },
+  {
+    "name": "Pimento Berry Oil"
+  },
+  {
+    "name": "Acetanisole"
+  },
+  {
+    "name": "Acetophenone"
+  },
+  {
     "name": "Acetyl Cedrene"
   },
   {
     "name": "Acetyl Pyrazine 10%"
+  },
+  {
+    "name": "Acetyl Vanillin"
+  },
+  {
+    "name": "Aldehyde C-6 (Hexanal)"
+  },
+  {
+    "name": "Aldehyde C-7 (Heptanal)"
   },
   {
     "name": "Aldehyde C-8 (Octanal)"
@@ -261,10 +330,10 @@
     "name": "Aldehyde C-10 (Decanal)"
   },
   {
-    "name": "Aldehyde C-11 (Undecylenic)"
+    "name": "Aldehyde C-11 (Undecanal)"
   },
   {
-    "name": "Aldehyde C-11 (Undecanal)"
+    "name": "Aldehyde C-11 (Undecylenic)"
   },
   {
     "name": "Aldehyde C-12 Lauric"
@@ -315,16 +384,37 @@
     "name": "Bacdanol"
   },
   {
-    "name": "Benzaldehyde"
+    "name": "Benzaldehyde",
+    "casNumber": "100-52-7",
+    "ifraLimits": {
+      "4": 0.25,
+      "5A": 0.064,
+      "5B": 0.064,
+      "9": 0.49
+    }
   },
   {
     "name": "Benzyl Acetate"
   },
   {
-    "name": "Benzyl Alcohol"
+    "name": "Benzyl Alcohol",
+    "casNumber": "100-51-6",
+    "ifraLimits": {
+      "4": 2.5,
+      "5A": 0.64,
+      "5B": 0.17,
+      "9": 2.2
+    }
   },
   {
-    "name": "Benzyl Benzoate"
+    "name": "Benzyl Benzoate",
+    "casNumber": "120-51-4",
+    "ifraLimits": {
+      "4": 4.8,
+      "5A": 4.3,
+      "5B": 0.21,
+      "9": 1.9
+    }
   },
   {
     "name": "Benzyl Cinnamate"
@@ -333,13 +423,27 @@
     "name": "Benzyl Formate"
   },
   {
-    "name": "Benzyl Salicylate"
+    "name": "Benzyl Salicylate",
+    "casNumber": "118-58-1",
+    "ifraLimits": {
+      "4": 7.3,
+      "5A": 1.9,
+      "5B": 1.9,
+      "9": 14.0
+    }
   },
   {
     "name": "Beta-Caryophyllene"
   },
   {
-    "name": "Beta-Damascone"
+    "name": "Beta-Damascone",
+    "casNumber": "23726-91-2",
+    "ifraLimits": {
+      "4": 0.043,
+      "5A": 0.011,
+      "5B": 0.011,
+      "9": 0.084
+    }
   },
   {
     "name": "Beta-Damascenone"
@@ -354,10 +458,10 @@
     "name": "Calone"
   },
   {
-    "name": "Cedarwood Terpenes"
+    "name": "Cedramber"
   },
   {
-    "name": "Cedramber"
+    "name": "Cedarwood Terpenes"
   },
   {
     "name": "Cedryl Acetate"
@@ -375,13 +479,34 @@
     "name": "Cinnamyl Acetate"
   },
   {
-    "name": "Citral"
+    "name": "Citral",
+    "casNumber": "5392-40-5",
+    "ifraLimits": {
+      "4": 0.6,
+      "5A": 0.15,
+      "5B": 0.15,
+      "9": 1.2
+    }
   },
   {
-    "name": "Citronellal"
+    "name": "Citronellal",
+    "casNumber": "106-23-0",
+    "ifraLimits": {
+      "4": 0.49,
+      "5A": 0.33,
+      "5B": 0.051,
+      "9": 1.4
+    }
   },
   {
-    "name": "Citronellol"
+    "name": "Citronellol",
+    "casNumber": "106-22-9",
+    "ifraLimits": {
+      "4": 12.0,
+      "5A": 3.2,
+      "5B": 3.2,
+      "9": 24.0
+    }
   },
   {
     "name": "Citronellyl Acetate"
@@ -390,7 +515,22 @@
     "name": "Civetone (Synth)"
   },
   {
-    "name": "Coumarin"
+    "name": "Clonal"
+  },
+  {
+    "name": "Cis-3-Hexenol"
+  },
+  {
+    "name": "Cis-3-Hexenyl Acetate"
+  },
+  {
+    "name": "Cis-3-Hexenyl Formate"
+  },
+  {
+    "name": "Cis-3-Hexenyl Propionate"
+  },
+  {
+    "name": "Cyclamal"
   },
   {
     "name": "Cyclamen Aldehyde"
@@ -405,13 +545,22 @@
     "name": "Dihydromyrcenol"
   },
   {
-    "name": "Dimethyl Benzyl Carbinyl Butyrate (DMBBC)"
+    "name": "Dimetol"
   },
   {
-    "name": "Ethyl Acetoacetate"
+    "name": "DMBBC (Dimethyl Benzyl Carbinyl Butyrate)"
   },
   {
     "name": "Ethyl 2-Methylbutyrate"
+  },
+  {
+    "name": "Ethyl Acetate"
+  },
+  {
+    "name": "Ethyl Linalool"
+  },
+  {
+    "name": "Ethyl Linalyl Acetate"
   },
   {
     "name": "Ethyl Maltol"
@@ -423,7 +572,14 @@
     "name": "Eucalyptol (1,8-Cineole)"
   },
   {
-    "name": "Eugenol"
+    "name": "Eugenol",
+    "casNumber": "97-53-0",
+    "ifraLimits": {
+      "4": 2.5,
+      "5A": 0.64,
+      "5B": 0.64,
+      "9": 4.9
+    }
   },
   {
     "name": "Evernyl (Veramoss)"
@@ -453,16 +609,26 @@
     "name": "Galaxolide"
   },
   {
-    "name": "Gamma-Undecalactone (Peach)"
+    "name": "Gamma-Decalactone"
   },
   {
     "name": "Gamma-Nonalactone (Coconut)"
   },
   {
-    "name": "Gamma-Decalactone"
+    "name": "Gamma-Octalactone"
   },
   {
-    "name": "Geraniol"
+    "name": "Gamma-Undecalactone (Peach)"
+  },
+  {
+    "name": "Geraniol",
+    "casNumber": "106-24-1",
+    "ifraLimits": {
+      "4": 4.7,
+      "5A": 1.2,
+      "5B": 1.2,
+      "9": 9.2
+    }
   },
   {
     "name": "Geranyl Acetate"
@@ -495,10 +661,7 @@
     "name": "Indole"
   },
   {
-    "name": "Isoamyl Acetate"
-  },
-  {
-    "name": "Isobutavan"
+    "name": "Iso Bornyl Cyclohexanol"
   },
   {
     "name": "Iso E Super"
@@ -507,16 +670,29 @@
     "name": "Iso E Super Plus"
   },
   {
+    "name": "Isoamyl Acetate"
+  },
+  {
+    "name": "Isoamyl Butyrate"
+  },
+  {
     "name": "Isoamyl Salicylate"
   },
   {
     "name": "Isobornyl Acetate"
   },
   {
-    "name": "Isolongifolanone"
+    "name": "Isobutavan"
   },
   {
-    "name": "Iso Eugenol"
+    "name": "Isoeugenol",
+    "casNumber": "97-54-1",
+    "ifraLimits": {
+      "4": 0.11,
+      "5A": 0.027,
+      "5B": 0.027,
+      "9": 0.21
+    }
   },
   {
     "name": "Isoraldeine 70"
@@ -549,10 +725,12 @@
     "name": "Lilial (BMHCA) [banned]"
   },
   {
-    "name": "Limonene"
+    "name": "Limonene",
+    "casNumber": "138-86-3"
   },
   {
-    "name": "Linalool"
+    "name": "Linalool",
+    "casNumber": "78-70-6"
   },
   {
     "name": "Linalyl Acetate"
@@ -564,10 +742,16 @@
     "name": "Maltol"
   },
   {
+    "name": "Methyl 2-Octynoate [restricted]"
+  },
+  {
     "name": "Methyl Anthranilate"
   },
   {
     "name": "Methyl Benzoate"
+  },
+  {
+    "name": "Methyl Cedryl Ketone"
   },
   {
     "name": "Methyl Dihydro Jasmonate (Hedione)"
@@ -588,16 +772,25 @@
     "name": "Methyl Salicylate"
   },
   {
-    "name": "Methyl 2-Octynoate [restricted]"
+    "name": "Methyl Vanillate"
   },
   {
     "name": "Muscone (Synth)"
+  },
+  {
+    "name": "Neobutenone"
   },
   {
     "name": "Nerolidol"
   },
   {
     "name": "Nerol"
+  },
+  {
+    "name": "Nonadienal (Cucumber)"
+  },
+  {
+    "name": "Nopyl Acetate"
   },
   {
     "name": "Octyl Aldehyde (Caprylic)"
@@ -624,16 +817,28 @@
     "name": "Phenethyl Alcohol"
   },
   {
+    "name": "Phenyl Acetaldehyde Dimethyl Acetal"
+  },
+  {
     "name": "Phenyl Ethyl Acetate"
   },
   {
     "name": "Phenyl Ethyl Dimethyl Carbinol"
   },
   {
-    "name": "Phenyl Acetaldehyde Dimethyl Acetal"
+    "name": "Phenyl Hexanol"
   },
   {
-    "name": "Phenyl Hexanol"
+    "name": "Phenoxyethanol"
+  },
+  {
+    "name": "Prenyl Acetate"
+  },
+  {
+    "name": "Prenyl Alcohol"
+  },
+  {
+    "name": "Propylidene Phthalide"
   },
   {
     "name": "Raspberry Ketone (Para)"
@@ -654,10 +859,10 @@
     "name": "Sclareolide"
   },
   {
-    "name": "Styrallyl Acetate"
+    "name": "Styralyl Acetate"
   },
   {
-    "name": "Styralyl Alcohol"
+    "name": "Styrallyl Alcohol"
   },
   {
     "name": "Suederal"
@@ -670,6 +875,9 @@
   },
   {
     "name": "Terpinyl Acetate"
+  },
+  {
+    "name": "Terpinyl Formate"
   },
   {
     "name": "Tetrahydrolinalool"
@@ -702,31 +910,43 @@
     "name": "Z11-Undecenyl Nitrile"
   },
   {
-    "name": "Habanolide"
+    "name": "Ambrofix"
+  },
+  {
+    "name": "Belambre"
   },
   {
     "name": "Cashmeran"
   },
   {
-    "name": "Galaxolide 50 DEP"
+    "name": "Neopral"
   },
   {
-    "name": "Musk Ketone [nitro musk]"
+    "name": "Piconia"
   },
   {
-    "name": "Musk Xylene [nitro musk]"
+    "name": "Zingerone"
   },
   {
-    "name": "Tonalide (AHTN)"
+    "name": "Okumal"
   },
   {
-    "name": "Phantolide"
+    "name": "Ebanol"
   },
   {
-    "name": "Celestolide"
+    "name": "Isoamyl Tiglate"
+  },
+  {
+    "name": "Aldehyde C-13 (Citrus)"
+  },
+  {
+    "name": "Fixolide (Galaxolide)"
   },
   {
     "name": "Helvetolide"
+  },
+  {
+    "name": "Habanolide"
   },
   {
     "name": "Romandolide"
@@ -735,19 +955,46 @@
     "name": "Velvione"
   },
   {
-    "name": "Sivilox"
+    "name": "Sivetal"
+  },
+  {
+    "name": "Phantolide"
+  },
+  {
+    "name": "Celestolide"
+  },
+  {
+    "name": "Tonquitone"
+  },
+  {
+    "name": "Musk Ketone [nitro]"
+  },
+  {
+    "name": "Musk Xylene [nitro]"
+  },
+  {
+    "name": "AHTN (Tonalide)"
+  },
+  {
+    "name": "HHCB (Galaxolide)"
+  },
+  {
+    "name": "Galaxolide 50 DEP"
+  },
+  {
+    "name": "Galaxolide 50 IPM"
+  },
+  {
+    "name": "Heliotropine Musk Accord"
+  },
+  {
+    "name": "White Musk Accord"
   },
   {
     "name": "Acetoin"
   },
   {
     "name": "Aconitic Acid Triethyl Ester"
-  },
-  {
-    "name": "Aldehyde C-6 (Hexanal)"
-  },
-  {
-    "name": "Aldehyde C-7 (Heptanal)"
   },
   {
     "name": "Alpha Ionone"
@@ -783,9 +1030,6 @@
     "name": "Carvacrol"
   },
   {
-    "name": "Anethole Trans"
-  },
-  {
     "name": "Estragole (Methyl Chavicol)"
   },
   {
@@ -796,9 +1040,6 @@
   },
   {
     "name": "Thymol"
-  },
-  {
-    "name": "Ocenol"
   },
   {
     "name": "Ocimene"
@@ -825,28 +1066,10 @@
     "name": "Citral Dimethyl Acetal"
   },
   {
-    "name": "Cis-3-Hexenol"
-  },
-  {
-    "name": "Cis-3-Hexenyl Acetate"
-  },
-  {
-    "name": "Cis-3-Hexenyl Formate"
-  },
-  {
-    "name": "Cis-3-Hexenyl Propionate"
-  },
-  {
     "name": "Cis-Jasmone"
   },
   {
     "name": "Dimethyl Octenone (Doremox)"
-  },
-  {
-    "name": "Ethyl Linalool"
-  },
-  {
-    "name": "Ethyl Linalyl Acetate"
   },
   {
     "name": "Ethyl 3-Methylthiopropionate"
@@ -864,25 +1087,13 @@
     "name": "Furaneol (Strawberry Furanone)"
   },
   {
-    "name": "Gamma-Octalactone"
-  },
-  {
-    "name": "Isoamyl Butyrate"
+    "name": "Isoamyl Propionate"
   },
   {
     "name": "Isopulegol"
   },
   {
-    "name": "Iso Bornyl Cyclohexanol"
-  },
-  {
-    "name": "Lactone C-14 (Peach)"
-  },
-  {
     "name": "Laevo-Carvone"
-  },
-  {
-    "name": "Methyl Cedryl Ketone"
   },
   {
     "name": "Methyl Heptine Carbonate"
@@ -897,39 +1108,138 @@
     "name": "Methyl Phenyl Carbinyl Acetate"
   },
   {
-    "name": "Nonadienal (Cucumber)"
+    "name": "Neryl Acetate"
   },
   {
-    "name": "Nopyl Acetate"
+    "name": "Octyl Acetate"
   },
   {
-    "name": "Oranger Crystals"
+    "name": "Pentyl Acetate"
   },
   {
-    "name": "Phenoxyethanol"
+    "name": "Nonadienol (Cucumber Alcohol)"
   },
   {
-    "name": "Prenyl Acetate"
-  },
-  {
-    "name": "Prenyl Alcohol"
-  },
-  {
-    "name": "Propylidene Phthalide"
-  },
-  {
-    "name": "Rose Ketones (Damascenone/Damascones mix)"
-  },
-  {
-    "name": "Sclareol"
-  },
-  {
-    "name": "Terpinyl Formate"
-  },
-  {
-    "name": "Triethyl Citrate"
+    "name": "2,6-Nonadienal (Cucumber Aldehyde)"
   },
   {
     "name": "Undecalactone"
+  },
+  {
+    "name": "cis-3-Hexenyl Tiglate"
+  },
+  {
+    "name": "cis-3-Hexenyl Isobutyrate"
+  },
+  {
+    "name": "Aldehyde C-11 (Violet)"
+  },
+  {
+    "name": "Ambrette Seed CO2"
+  },
+  {
+    "name": "Basil Oil"
+  },
+  {
+    "name": "Bay Leaf Oil"
+  },
+  {
+    "name": "Carrot Seed Oil"
+  },
+  {
+    "name": "Cedarwood Fraction"
+  },
+  {
+    "name": "Clove Bud Oil"
+  },
+  {
+    "name": "Clove Leaf Oil"
+  },
+  {
+    "name": "Coriander Leaf Oil"
+  },
+  {
+    "name": "Cumin Aldehyde"
+  },
+  {
+    "name": "Dihydro Terpineol"
+  },
+  {
+    "name": "Dodecalactone"
+  },
+  {
+    "name": "Elderflower CO2"
+  },
+  {
+    "name": "Fir Needle Oil"
+  },
+  {
+    "name": "Guaiene (Isomers)"
+  },
+  {
+    "name": "Guaiacol"
+  },
+  {
+    "name": "Gurjun Balsam"
+  },
+  {
+    "name": "Hyacinth Base"
+  },
+  {
+    "name": "Hyraceum Tincture"
+  },
+  {
+    "name": "Immortelle Absolute"
+  },
+  {
+    "name": "Jatamansi Oil"
+  },
+  {
+    "name": "Kewda/Ruh Kewra"
+  },
+  {
+    "name": "Lapsang Tea Tincture"
+  },
+  {
+    "name": "Lovage Root Oil"
+  },
+  {
+    "name": "Mandarin Leaf (Petitgrain) Oil"
+  },
+  {
+    "name": "Mate Absolute"
+  },
+  {
+    "name": "Methyl Thymyl Ether"
+  },
+  {
+    "name": "Nutmeg Absolute"
+  },
+  {
+    "name": "Osmanthus Absolute"
+  },
+  {
+    "name": "Peach Lactone Base"
+  },
+  {
+    "name": "Pimento Leaf Oil"
+  },
+  {
+    "name": "Seaweed Absolute"
+  },
+  {
+    "name": "Tobacco Absolute"
+  },
+  {
+    "name": "Violet Leaf Absolute"
+  },
+  {
+    "name": "Yuzu Oil"
+  },
+  {
+    "name": "Kaffir Lime Leaf Oil"
+  },
+  {
+    "name": "Blackcurrant Bud Absolute"
   }
 ]
