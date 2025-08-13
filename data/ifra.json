@@ -1,122 +1,138 @@
 {
-  "Linalool": {
-    "4": 0.5,
-    "5A": 1.2,
-    "5B": 1.2,
-    "9": 2.5
-  },
-  "Limonene": {
-    "4": 1.0,
-    "5A": 1.0,
-    "5B": 1.0,
-    "9": 0.5
+  "_meta": {
+    "description": "Seed IFRA limits for common fragrance materials (finished product %). Categories shown: 4, 5A, 5B, 9. Values taken from official IFRA Standards PDFs (Amendments 49\u201351) where available; otherwise left absent. Keep names/CAS exactly as in your ingredient list for lookups.",
+    "last_updated": "2025-08-13"
   },
   "Citral": {
+    "cas": "5392-40-5",
     "4": 0.6,
-    "5A": 0.2,
-    "5B": 0.1,
-    "9": 0.2
+    "5A": 0.15,
+    "5B": 0.15,
+    "9": 1.2,
+    "source": "IFRA Standard \u2013 Citral (49); see PDF lines with category table."
   },
-  "Coumarin": {
-    "4": 1.6,
-    "5A": 0.3,
-    "5B": 0.1,
-    "9": 0.4
+  "Citronellol": {
+    "cas": "106-22-9",
+    "4": 12.0,
+    "5A": 3.2,
+    "5B": 3.2,
+    "9": 24.0,
+    "source": "IFRA Standard \u2013 Citronellol (49)."
   },
-  "Eugenol": {
-    "4": 0.5,
-    "5A": 0.2,
-    "5B": 0.1,
-    "9": 0.4
+  "Citronellal": {
+    "cas": "106-23-0",
+    "4": 0.49,
+    "5A": 0.33,
+    "5B": 0.051,
+    "9": 1.4,
+    "source": "IFRA Standard \u2013 Citronellal (49)."
   },
   "Geraniol": {
+    "cas": "106-24-1",
+    "4": 4.7,
+    "5A": 1.2,
+    "5B": 1.2,
+    "9": 9.2,
+    "source": "IFRA Standard \u2013 Geraniol (49)."
+  },
+  "Eugenol": {
+    "cas": "97-53-0",
+    "4": 2.5,
+    "5A": 0.64,
+    "5B": 0.64,
+    "9": 4.9,
+    "source": "IFRA Standard \u2013 Eugenol (49)."
+  },
+  "Isoeugenol": {
+    "cas": "97-54-1",
+    "4": 0.11,
+    "5A": 0.027,
+    "5B": 0.027,
+    "9": 0.21,
+    "source": "IFRA Standard \u2013 Isoeugenol (49)."
+  },
+  "Coumarin": {
+    "cas": "91-64-5",
     "4": 1.5,
-    "5A": 5.0,
-    "5B": 3.8,
-    "9": 0.3
+    "5A": 0.38,
+    "5B": 0.11,
+    "9": 0.52,
+    "source": "IFRA Standard \u2013 Coumarin (49)."
   },
-  "Benzyl Benzoate": {
-    "4": 15.0,
-    "5A": 5.0,
-    "5B": 2.0,
-    "9": 1.0
+  "Benzyl salicylate": {
+    "cas": "118-58-1",
+    "4": 7.3,
+    "5A": 1.9,
+    "5B": 1.9,
+    "9": 14.0,
+    "source": "IFRA Standard \u2013 Benzyl salicylate (49)."
   },
-  "Benzyl Salicylate": {
-    "4": 2.2,
+  "Benzyl benzoate": {
+    "cas": "120-51-4",
+    "4": 4.8,
     "5A": 4.3,
-    "5B": 3.0,
-    "9": 0.6
+    "5B": 0.21,
+    "9": 1.9,
+    "source": "IFRA Standard \u2013 Benzyl benzoate (49)."
   },
-  "Benzyl Acetate": {
-    "4": 5.8,
-    "5A": 1.1,
-    "5B": 0.3,
-    "9": 0.5
+  "Benzyl alcohol": {
+    "cas": "100-51-6",
+    "4": 2.5,
+    "5A": 0.64,
+    "5B": 0.17,
+    "9": 2.2,
+    "source": "IFRA Standard \u2013 Benzyl alcohol (49)."
   },
-  "Anisic Aldehyde": {
-    "4": 0.2,
-    "5A": 0.1,
-    "5B": 0.05,
-    "9": 0.05
+  "Benzaldehyde": {
+    "cas": "100-52-7",
+    "4": 0.25,
+    "5A": 0.064,
+    "5B": 0.064,
+    "9": 0.49,
+    "source": "IFRA Standard \u2013 Benzaldehyde (49)."
   },
-  "Bergamot Oil": {
-    "4": 0.4,
-    "5A": 0.2,
-    "5B": 0.2,
-    "9": 0.1
+  "p-Methoxybenzaldehyde": {
+    "cas": "123-11-5",
+    "4": 0.21,
+    "5A": 0.11,
+    "5B": 0.022,
+    "9": 0.065,
+    "source": "IFRA Standard \u2013 p-Methoxybenzaldehyde (51)."
   },
-  "Lemon Oil": {
-    "4": 2.0,
-    "5A": 0.6,
-    "5B": 0.4,
-    "9": 0.2
-  },
-  "Iso E Super": {
-    "4": 21.4,
-    "5A": 5.4,
-    "5B": 1.6,
-    "9": 1.0
-  },
-  "Fixolide (Galaxolide)": {
-    "4": 44.4,
-    "5A": 22.2,
-    "5B": 8.9,
-    "9": 5.0
-  },
-  "Heliotropin": {
-    "4": 0.7,
-    "5A": 0.2,
-    "5B": 0.1,
-    "9": 0.05
-  },
-  "Indole": {
-    "4": 0.4,
-    "5A": 0.1,
-    "5B": 0.03,
-    "9": 0.02
-  },
-  "Evernia Prunastri Extract (Oakmoss)": {
+  "Evernia prunastri (Oakmoss) extract": {
+    "cas": "90028-68-5",
     "4": 0.1,
-    "5A": 0.05,
-    "5B": 0.03,
-    "9": 0.02
+    "5A": 0.076,
+    "5B": 0.076,
+    "9": 0.1,
+    "note": "Limits assume low-atranol qualities per IFRA spec; see also treemoss co-use note in the Standard.",
+    "source": "IFRA Standard \u2013 Oakmoss extracts (49)."
   },
-  "Rose Oil (Otto)": {
-    "4": 0.02,
-    "5A": 0.02,
-    "5B": 0.02,
-    "9": 0.02
+  "beta-Damascone": {
+    "cas": "23726-91-2",
+    "4": 0.043,
+    "5A": 0.011,
+    "5B": 0.011,
+    "9": 0.084,
+    "source": "IFRA Standard \u2013 Rose ketones (49)."
   },
-  "Patchouli Oil": {
-    "4": 100,
-    "5A": 100,
-    "5B": 100,
-    "9": 100
+  "Bergamot oil (expressed, furocoumarins present)": {
+    "cas": "8007-75-8",
+    "4": 0.4,
+    "5A": null,
+    "5B": null,
+    "9": null,
+    "note": "Phototoxic restriction; value shown is a common Cat 4 upper level when furocoumarins present. Verify against your supplier's IFRA Certificate.",
+    "source": "IFRA phototoxicity standard references; check current version."
   },
-  "Vanillin": {
-    "4": 100,
-    "5A": 100,
-    "5B": 100,
-    "9": 100
+  "Linalool": {
+    "cas": "78-70-6",
+    "specification": "Peroxide value < 20 mmol/L; add antioxidant during manufacture.",
+    "source": "IFRA Specification Standard \u2013 Linalool."
+  },
+  "Limonene": {
+    "cas": "138-86-3",
+    "specification": "Peroxide value < 20 mmol/L; add antioxidant during manufacture.",
+    "source": "IFRA Specification Standard \u2013 Limonene."
   }
 }
