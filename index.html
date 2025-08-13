@@ -47,7 +47,7 @@
         <button id="clearAll" class="danger">Clear</button>
       </div>
 
-      <!-- NEW: Batch Scaling Helper -->
+      <!-- Batch Scaling Helper -->
       <section class="card batch-helper">
         <div class="row wrap">
           <strong>Batch scaling helper</strong>
@@ -59,7 +59,7 @@
           <button id="batchExportBtn" class="secondary">Export Batch CSV</button>
         </div>
         <div class="row">
-          <small>Oil volume = finished volume × dosage. We assume uniform density to approximate grams.</small>
+          <small>Oil volume = finished volume × dosage. Uses a single density to approximate grams.</small>
         </div>
         <div class="table-wrap">
           <table id="batchTable">
@@ -120,7 +120,7 @@
       </section>
     </section>
 
-    <!-- PRO MODE (placeholder to keep structure consistent) -->
+    <!-- PRO MODE -->
     <section id="proSection" class="panel" hidden>
       <h2>Pro (Batch/Volume, Density, Cost)</h2>
       <div class="row wrap">
@@ -175,9 +175,16 @@
         </table>
       </div>
       <button id="proAdd">+ Add Ingredient</button>
+
       <div class="cards">
-        <div id="noteSummary" class="card"><h4>Note Balance (by weight)</h4><div id="noteSummaryText">—</div></div>
-        <div id="ifraStatus" class="card"><h4>IFRA Compliance</h4><div id="ifraStatusText">Choose category & enter weights.</div></div>
+        <div id="noteSummary" class="card">
+          <h4>Note Balance (by weight)</h4>
+          <div id="noteSummaryText">—</div>
+        </div>
+        <div id="ifraStatus" class="card">
+          <h4>IFRA Compliance</h4>
+          <div id="ifraStatusText">Choose category & enter weights.</div>
+        </div>
         <div id="priceHelper" class="card">
           <h4>Price per 10g Helper</h4>
           <div class="row">
