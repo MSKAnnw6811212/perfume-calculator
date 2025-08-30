@@ -1,4 +1,4 @@
-/* Compact app with IFRA51 CAS engine + fallback + EU overlay */
+/* Compact app with IFRA51 CAS engine + fallback + EU overlay (Auto-calc helper enabled) */
 const $$=s=>document.querySelector(s), $$$=s=>document.querySelectorAll(s);
 
 const S={mode:'simple', list:[], ifraFallback:{}, ifra51:{}, syn:{}, reg:{}, version:null, regSW:null};
@@ -171,6 +171,18 @@ function p_calc(){
     tv+=v; tc+=cost; const note=tr.querySelector('.p-note').value; if(noteW[note]!=null) noteW[note]+=w;
   });
   $$('#proTotalVol').textContent=tv.toFixed(2); $$('#proTotalWt').textContent=tw.toFixed(2); $$('#proTotalCost').textContent=tc.toFixed(2);
+
+  // --- Auto-fill "Price per 10g" helper from totals (new) ---
+  const hc = document.getElementById('helperCost');   // total cost €
+  const hw = document.getElementById('helperWeight'); // total weight g
+  const hr = document.getElementById('helperResult'); // display span
+  if (hc && hw && hr) {
+    hc.value = tc.toFixed(2);
+    hw.value = tw.toFixed(2);
+    hr.textContent = tw > 0 ? `€${(tc / tw * 10).toFixed(2)} per 10g` : '€0.00 per 10g';
+  }
+  // ----------------------------------------------------------
+
   let txt=[]; for(const k in noteW){ const pct=tw>0?(noteW[k]/tw*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } $$('#noteSummaryText').textContent=txt.join(' | ');
   p_ifra();
 }
