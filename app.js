@@ -24,11 +24,29 @@ function renderMode(){
 
 /* ----------------- Update banner + SW ----------------- */
 function showUpdate(){ const b = $$('#updateBanner'); if(b) b.hidden = false; }
+
 function setupRefresh(){
-  const btn = $$('#refreshBtn');
+  const btn = document.getElementById('refreshBtn');
   if(!btn) return;
   btn.onclick = async () => {
-    if(S.regSW?.waiting) S.regSW.waiting.postMessage({type:'SKIP_WAITING'});
+    // Reload once the new SW takes control
+    let reloaded = false;
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (reloaded) return;
+        reloaded = true;
+        window.location.reload();
+      });
+    }
+    try{
+      if (S.regSW?.waiting) S.regSW.waiting.postMessage({ type: 'SKIP_WAITING' });
+      if (navigator.serviceWorker?.controller) navigator.serviceWorker.controller.postMessage({ type:'SKIP_WAITING' });
+      await S.regSW?.update?.();
+    }catch(e){ console.warn('refresh/skip error', e); }
+  };
+}
+
+);
     await Promise.all([
       'version.json',
       'data/ingredients.json','data/ifra.json',
