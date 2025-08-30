@@ -1,7 +1,4 @@
 {
-  "_meta": {
-    "note": "Simple overlays for legal bans; here we flag EU Cosmetics Annex II prohibitions."
-  },
   "EU_COSMETICS": {
     "80-54-6": "prohibited",
     "31906-04-4": "prohibited",
