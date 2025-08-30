@@ -3,14 +3,14 @@ const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(
 
 const S = {
   mode: 'simple',
-  list: [],          // ingredients.json
-  ifraFallback: {},  // ifra.json
-  ifra51: {},        // CAS -> {type, limits|spec, name}
-  syn: {},           // name -> CAS
-  reg: {},           // overlays (EU ban, etc)
+  list: [],
+  ifraFallback: {},
+  ifra51: {},
+  syn: {},
+  reg: {},
   version: null,
   regSW: null,
-  acList: []         // autocomplete source (synonym keys + IFRA51 names)
+  acList: []
 };
 
 async function j(u){ const r = await fetch(u, {cache: 'no-store'}); if(!r.ok) throw new Error(u); return r.json(); }
@@ -22,14 +22,12 @@ function renderMode(){
   $$$('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === S.mode));
 }
 
-/* ----------------- Update banner + SW ----------------- */
 function showUpdate(){ const b = $$('#updateBanner'); if(b) b.hidden = false; }
 
 function setupRefresh(){
   const btn = document.getElementById('refreshBtn');
   if(!btn) return;
   btn.onclick = async () => {
-    // Reload once the new SW takes control
     let reloaded = false;
     if (navigator.serviceWorker) {
       navigator.serviceWorker.addEventListener('controllerchange', () => {
@@ -43,18 +41,17 @@ function setupRefresh(){
       if (navigator.serviceWorker?.controller) navigator.serviceWorker.controller.postMessage({ type:'SKIP_WAITING' });
       await S.regSW?.update?.();
     }catch(e){ console.warn('refresh/skip error', e); }
-  };
-}
-
-);
-    await Promise.all([
-      'version.json',
-      'data/ingredients.json','data/ifra.json',
-      'data/ifra-51.json','data/synonyms.json','data/regulatory.json'
-    ].map(p => fetch(p,{cache:'reload'})));
+    try{
+      await Promise.all([
+        'version.json',
+        'data/ingredients.json','data/ifra.json',
+        'data/ifra-51.json','data/synonyms.json','data/regulatory.json'
+      ].map(p => fetch(p,{cache:'reload'})));
+    }catch(e){}
     location.reload();
   };
 }
+
 function registerSW(){
   if(!('serviceWorker' in navigator)) return;
   window.addEventListener('load', async () => {
@@ -72,11 +69,11 @@ function registerSW(){
   });
 }
 
-/* ----------------- Theme ----------------- */
 function setupTheme(){
   const sv = localStorage.getItem('pc_theme');
   if(sv) document.documentElement.setAttribute('data-theme', sv);
-  $$('#themeToggle').onclick = () => {
+  const btn = $$('#themeToggle');
+  if(btn) btn.onclick = () => {
     const c = document.documentElement.getAttribute('data-theme') || 'light';
     const n = c === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', n);
@@ -84,7 +81,6 @@ function setupTheme(){
   };
 }
 
-/* ----------------- Name ↔ CAS & IFRA lookup ----------------- */
 function nameToCAS(name){
   if(!name) return null;
   const n = name.trim().toLowerCase();
@@ -120,7 +116,6 @@ function resolveIFRA({name, category, finishedPct}){
   return {cas, status, limit, spec, source};
 }
 
-/* ----------------- SIMPLE MODE ----------------- */
 function s_row(d={name:'',pct:0}){
   const tr = document.createElement('tr');
   const nameTd = document.createElement('td');
@@ -146,7 +141,6 @@ function s_row(d={name:'',pct:0}){
   tr.appendChild(rmTd);
   $$('#tableBody').appendChild(tr);
 
-  // attach autocomplete
   const input = nameTd.querySelector('input[list]');
   const list = nameTd.querySelector('.ac-list');
   bindAutocomplete(input, list);
@@ -240,7 +234,6 @@ function s_bind(){
   function s_pop(sel=''){ const s=$$('#savedRecipes'); const all=JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } s_pop();
 }
 
-/* ----------------- Autocomplete ----------------- */
 function buildACList(){
   const namesFromIFRA = Object.values(S.ifra51||{}).map(v => v?.name).filter(Boolean);
   const synKeys = Object.keys(S.syn||{});
@@ -278,19 +271,18 @@ function bindAutocomplete(input, listEl){
   document.addEventListener('click', (e)=>{ if(!listEl.contains(e.target) && e.target!==input){ listEl.hidden=true; } });
 }
 
-/* ----------------- PRO MODE (unchanged except totals auto-fill) ----------------- */
 function p_row(d={}){
   const tr=document.createElement('tr');
-  tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList"></td>
+  tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
     <td><input type="number" class="p-vol" step="0.01" value="${d.vol??0}"></td>
     <td><input type="number" class="p-den" step="0.01" value="${d.den??0.85}"></td>
     <td><input type="number" class="p-wt" step="0.01" value="${d.wt??0}"></td>
     <td><input type="number" class="p-price" step="0.01" value="${d.price??0}"></td>
     <td class="p-cost">0.00</td><td class="p-pct">0.00 %</td>
     <td><select class="p-note"><option>N/A</option><option>Top</option><option>Middle</option><option>Base</option></select></td>
-    <td><input type="text" class="p-supplier"></td>
-    <td><input type="text" class="p-cas"></td>
-    <td><textarea class="p-notes"></textarea></td>
+    <td><input type="text" class="p-supplier" value="${d.supplier??''}"></td>
+    <td><input type="text" class="p-cas" value="${d.cas??''}"></td>
+    <td><textarea class="p-notes">${d.notes??''}</textarea></td>
     <td class="p-del">❌</td>`;
   $$('#proBody').appendChild(tr);
 }
@@ -305,12 +297,8 @@ function p_calc(){
     tv+=v; tc+=cost; const note=tr.querySelector('.p-note').value; if(noteW[note]!=null) noteW[note]+=w;
   });
   $$('#proTotalVol').textContent=tv.toFixed(2); $$('#proTotalWt').textContent=tw.toFixed(2); $$('#proTotalCost').textContent=tc.toFixed(2);
-
-  // Auto-fill price helper from totals
   const hc=$$('#helperCost'), hw=$$('#helperWeight'), hr=$$('#helperResult');
   if(hc && hw && hr){ hc.value=tc.toFixed(2); hw.value=tw.toFixed(2); hr.textContent = tw>0 ? `€${(tc/tw*10).toFixed(2)} per 10g` : '€0.00 per 10g'; }
-
-  // Note balance
   let txt=[]; for(const k in noteW){ const pct=tw>0?(noteW[k]/tw*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } $$('#noteSummaryText').textContent=txt.join(' | ');
   p_ifra();
 }
@@ -324,7 +312,7 @@ function p_ifra(){
     else if(r.limit!=null && pct>r.limit) bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
   });
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
-  if(bad.length){ wrap.style.borderColor='var(--danger)'; st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`; }
+  if(bad.length){ wrap.style.borderColor='var(--fail)'; st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`; }
   else { wrap.style.borderColor='var(--ok)'; st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`; }
 }
 function p_bind(){
@@ -363,7 +351,6 @@ function p_bind(){
   function p_pop(sel=''){ const s=$$('#proSaved'); const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } p_pop();
 }
 
-/* ----------------- Data load ----------------- */
 async function loadData(){
   try{
     const [ings, ifra, ver, ifra51, syn, reg] = await Promise.all([
@@ -375,24 +362,19 @@ async function loadData(){
       j('data/regulatory.json').catch(()=>({})),
     ]);
     S.list=ings||[]; S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
-
-    // Populate datalist (kept) from ingredients.json
     const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
-
-    // Build autocomplete list from synonyms + IFRA51 names
     buildACList();
-
     if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded (version: ${S.version||'n/a'})`;
     const prev=localStorage.getItem('pc_data_version'); if(S.version && prev && prev!==S.version) showUpdate(); if(S.version) localStorage.setItem('pc_data_version',S.version);
   }catch(e){ console.error(e); if($$('#dataStatus')) $$('#dataStatus').textContent='Failed to load data.'; }
 }
 
-/* ----------------- Global + Init ----------------- */
 function bindGlobal(){ $$('#modeSimple').onclick=()=>setMode('simple'); $$('#modePro').onclick=()=>setMode('pro'); }
 
 function init(){
   setMode(localStorage.getItem('pc_mode')||'simple'); setupTheme(); setupRefresh(); bindGlobal();
   s_row(); s_bind(); p_bind(); p_row();
-  loadData(); // registerSW(); // temporarily disabled to bypass old caches
+  loadData();
+  // registerSW(); // keep disabled during debugging
 }
 document.addEventListener('DOMContentLoaded', init);
