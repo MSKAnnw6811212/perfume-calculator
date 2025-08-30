@@ -116,6 +116,7 @@ function resolveIFRA({name, category, finishedPct}){
   return {cas, status, limit, spec, source};
 }
 
+// --- START: Simple Mode Functions ---
 function s_row(d={name:'',pct:0}){
   const tr = document.createElement('tr');
   const nameTd = document.createElement('td');
@@ -180,6 +181,67 @@ function s_update(){
   });
   $$('#totalConcentrate').textContent = tConc.toFixed(3);
   $$('#totalFinished').textContent = tFin.toFixed(3);
+  s_batch_calc(); // Auto-update batch helper
+}
+
+function getBatchData() {
+  const targetVol = parseFloat($$('#batchVolume').value) || 0;
+  const density = parseFloat($$('#batchDensity').value) || 0;
+  const dosage = parseFloat($$('#dosage').value) || 0;
+  const concentrateVol = targetVol * (dosage / 100);
+  const concentrateWt = concentrateVol * density;
+  const rows = s_rows();
+
+  const results = rows.map(r => {
+    const pct = r.pct || 0;
+    return {
+      name: r.name,
+      pct: pct,
+      oilVol: concentrateVol * (pct / 100),
+      weight: concentrateWt * (pct / 100)
+    };
+  });
+  return results;
+}
+
+function s_batch_calc() {
+  const results = getBatchData();
+  const body = $$('#batchBody');
+  body.innerHTML = '';
+
+  let totalPct = 0, totalVol = 0, totalWt = 0;
+  results.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.name || '<em>Unnamed</em>'}</td>
+      <td>${r.pct.toFixed(3)}</td>
+      <td>${r.oilVol.toFixed(3)}</td>
+      <td>${r.weight.toFixed(3)}</td>
+    `;
+    body.appendChild(tr);
+    totalPct += r.pct;
+    totalVol += r.oilVol;
+    totalWt += r.weight;
+  });
+
+  $$('#batchPctTotal').textContent = totalPct.toFixed(3);
+  $$('#batchVolTotal').textContent = totalVol.toFixed(3);
+  $$('#batchWtTotal').textContent = totalWt.toFixed(3);
+}
+
+function s_batch_export() {
+  const results = getBatchData();
+  const lines = [['Ingredient', '% in concentrate', 'Oil volume (ml)', 'Weight (g)'].join(',')];
+  results.forEach(r => {
+    lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct, r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
+  });
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'batch-export.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function s_bind(){
@@ -190,6 +252,12 @@ function s_bind(){
   $$('#tableBody').addEventListener('input', s_update);
   $$('#dosage').addEventListener('input', s_update);
 
+  // Batch helper bindings
+  $$('#batchCalcBtn').onclick = s_batch_calc;
+  $$('#batchExportBtn').onclick = s_batch_export;
+  ['#batchVolume', '#batchDensity'].forEach(id => $$(id).addEventListener('input', s_batch_calc));
+
+  // Recipe save/load/etc
   $$('#saveRecipe').onclick = () => {
     const n = $$('#recipeName').value.trim(); if(!n) return alert('Name?');
     const rows = s_rows().map(r=>({name:r.name,pct:r.pct}));
@@ -233,6 +301,8 @@ function s_bind(){
 
   function s_pop(sel=''){ const s=$$('#savedRecipes'); const all=JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } s_pop();
 }
+// --- END: Simple Mode Functions ---
+
 
 function buildACList(){
   const namesFromIFRA = Object.values(S.ifra51||{}).map(v => v?.name).filter(Boolean);
@@ -271,6 +341,7 @@ function bindAutocomplete(input, listEl){
   document.addEventListener('click', (e)=>{ if(!listEl.contains(e.target) && e.target!==input){ listEl.hidden=true; } });
 }
 
+// --- START: Pro Mode Functions ---
 function p_row(d={}){
   const tr=document.createElement('tr');
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
@@ -350,6 +421,8 @@ function p_bind(){
   };
   function p_pop(sel=''){ const s=$$('#proSaved'); const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } p_pop();
 }
+// --- END: Pro Mode Functions ---
+
 
 async function loadData(){
   try{
@@ -372,8 +445,12 @@ async function loadData(){
 function bindGlobal(){ $$('#modeSimple').onclick=()=>setMode('simple'); $$('#modePro').onclick=()=>setMode('pro'); }
 
 function init(){
-  setMode(localStorage.getItem('pc_mode')||'simple'); setupTheme(); setupRefresh(); bindGlobal();
-  s_row(); s_bind(); p_bind(); p_row();
+  setMode(localStorage.getItem('pc_mode')||'simple');
+  setupTheme();
+  setupRefresh();
+  bindGlobal();
+  s_row(); s_bind();
+  p_row(); p_bind();
   loadData();
   // registerSW(); // keep disabled during debugging
 }
