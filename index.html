@@ -6,8 +6,21 @@
   <title>Perfume Calculator</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#ffffff">
-  <!-- Critical: use RELATIVE paths (no leading slash) -->
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=simple-fix-1">
+  <script>
+  (async () => {
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const r of regs) { try { await r.unregister(); } catch {} }
+      }
+      if (window.caches) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch (e) {}
+  })();
+  </script>
 </head>
 <body>
   <header class="app-header">
@@ -18,7 +31,6 @@
     </nav>
     <div class="header-actions">
       <button id="themeToggle">🌓 Theme</button>
-      <button id="installBtn" class="secondary" hidden>Install</button>
     </div>
   </header>
 
@@ -28,7 +40,7 @@
   </div>
 
   <main>
-    <section id="simpleSection" class="panel" hidden>
+    <section id="simpleSection" class="panel">
       <h2>Simple</h2>
       <div class="row">
         <label>Dosage in finished product (%)</label>
@@ -84,7 +96,7 @@
       </section>
     </section>
 
-    <section id="proSection" class="panel" hidden>
+    <section id="proSection" class="panel">
       <h2>Pro</h2>
       <div class="row wrap">
         <label>Target Volume (ml)</label><input type="number" id="targetVolume" value="100">
@@ -128,7 +140,7 @@
   </main>
 
   <footer class="app-footer"><small>PWA demo • replace data/ files for production</small></footer>
-  <!-- Critical: relative path -->
-  <script src="./app.js"></script>
+
+  <script defer src="./app.js?v=simple-fix-1"></script>
 </body>
 </html>

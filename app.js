@@ -393,6 +393,6 @@ function bindGlobal(){ $$('#modeSimple').onclick=()=>setMode('simple'); $$('#mod
 function init(){
   setMode(localStorage.getItem('pc_mode')||'simple'); setupTheme(); setupRefresh(); bindGlobal();
   s_row(); s_bind(); p_bind(); p_row();
-  loadData(); registerSW();
+  loadData(); // registerSW(); // temporarily disabled to bypass old caches
 }
 document.addEventListener('DOMContentLoaded', init);
