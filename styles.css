@@ -31,3 +31,7 @@ th,td{border-bottom:1px solid var(--border);padding:8px;text-align:left} thead t
 .spec-help::after{content: attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:140%;white-space:nowrap;pointer-events:none;background:var(--bg);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.12);opacity:0;transition:opacity .15s ease}
 .spec-help::before{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:130%;border:6px solid transparent;border-top-color:var(--border);opacity:0;transition:opacity .15s ease}
 .spec-help:hover::after,.spec-help:hover::before{opacity:1}
+
+
+/* Ensure [hidden] truly hides elements */
+[hidden]{ display:none !important; }

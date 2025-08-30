@@ -6,7 +6,7 @@
   <title>Perfume Calculator</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="./styles.css?v=simple-fix-1">
+  <link rel="stylesheet" href="./styles.css?v=toggle-fix">
   <script>
   (async () => {
     try {
@@ -96,7 +96,7 @@
       </section>
     </section>
 
-    <section id="proSection" class="panel">
+    <section id="proSection" class="panel" hidden>
       <h2>Pro</h2>
       <div class="row wrap">
         <label>Target Volume (ml)</label><input type="number" id="targetVolume" value="100">
@@ -141,6 +141,6 @@
 
   <footer class="app-footer"><small>PWA demo • replace data/ files for production</small></footer>
 
-  <script defer src="./app.js?v=simple-fix-1"></script>
+  <script defer src="./app.js?v=toggle-fix"></script>
 </body>
 </html>
