@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfume Calculator</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff" id="theme-color-meta">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Critical: use RELATIVE paths (no leading slash) -->
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <header class="app-header">
@@ -127,6 +128,7 @@
   </main>
 
   <footer class="app-footer"><small>PWA demo • replace data/ files for production</small></footer>
-  <script src="app.js"></script>
+  <!-- Critical: relative path -->
+  <script src="./app.js"></script>
 </body>
 </html>
