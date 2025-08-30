@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfume Calculator</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="./styles.css?v=onetap-toggle-theme-fix">
+  <script>
+  // One-time self-fix: clear old SW & caches (no DevTools)
+  (async () => {
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const r of regs) { try { await r.unregister(); } catch(e){} }
+      }
+      if (window.caches) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch(e) {}
+  })();
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>Perfume Calculator</h1>
+    <nav class="modes">
+      <button id="modeSimple" class="tab-btn" data-mode="simple">Simple</button>
+      <button id="modePro" class="tab-btn" data-mode="pro">Pro</button>
+    </nav>
+    <div class="header-actions">
+      <button id="themeToggle">🌓 Theme</button>
+    </div>
+  </header>
+
+  <div id="updateBanner" class="update-banner" hidden>
+    <span>Update available</span>
+    <button id="refreshBtn">Refresh</button>
+  </div>
+
+  <main>
+    <section id="simpleSection" class="panel">
+      <h2>Simple</h2>
+      <div class="row">
+        <label>Dosage in finished product (%)</label>
+        <input type="number" id="dosage" min="0" max="100" step="0.1" value="20">
+      </div>
+
+      <div class="row wrap">
+        <button id="addRow">+ Add ingredient</button>
+        <input type="text" id="recipeName" placeholder="Recipe name">
+        <button id="saveRecipe">Save</button>
+        <select id="savedRecipes"></select>
+        <button id="loadRecipe" class="secondary">Load</button>
+        <button id="deleteRecipe" class="danger">Delete</button>
+        <button id="exportCsv" class="secondary">Export CSV</button>
+        <button id="printBtn" class="secondary">Print</button>
+        <button id="clearAll" class="danger">Clear</button>
+      </div>
+
+      <section class="card batch-helper">
+        <div class="row wrap">
+          <strong>Batch scaling helper</strong>
+          <label>Target finished volume (ml)</label>
+          <input type="number" id="batchVolume" value="1000">
+          <label>Assumed concentrate density (g/ml)</label>
+          <input type="number" id="batchDensity" value="0.85" step="0.01">
+          <button id="batchCalcBtn" class="secondary">Calculate</button>
+          <button id="batchExportBtn" class="secondary">Export Batch CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table id="batchTable">
+            <thead><tr><th>Ingredient</th><th>% in concentrate</th><th>Oil volume (ml)</th><th>Weight (g)</th></tr></thead>
+            <tbody id="batchBody"></tbody>
+            <tfoot><tr><td><strong>Totals</strong></td><td id="batchPctTotal"></td><td id="batchVolTotal"></td><td id="batchWtTotal"></td></tr></tfoot>
+          </table>
+        </div>
+      </section>
+
+      <div class="row"><small id="dataStatus">Loading data…</small></div>
+
+      <section class="table-wrap">
+        <table id="ingredientsTable">
+          <thead>
+            <tr>
+              <th>#</th><th>Ingredient</th><th>% in concentrate</th><th>Finished %</th>
+              <th>IFRA 4</th><th>IFRA 5A</th><th>IFRA 5B</th><th>IFRA 9</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot>
+            <tr><td colspan="2">Totals</td><td id="totalConcentrate">0</td><td id="totalFinished">0</td><td colspan="4"></td><td></td></tr>
+          </tfoot>
+        </table>
+      </section>
+    </section>
+
+    <section id="proSection" class="panel" hidden>
+      <h2>Pro</h2>
+      <div class="row wrap">
+        <label>Target Volume (ml)</label><input type="number" id="targetVolume" value="100">
+        <label>IFRA Category</label>
+        <select id="ifraCategory">
+          <option value="4">4 – Fine Fragrance</option>
+          <option value="5A">5A – Body Lotion</option>
+          <option value="5B">5B – Face Cream</option>
+          <option value="9">9 – Soap</option>
+        </select>
+        <button id="proSave">Save</button><select id="proSaved"></select>
+        <button id="proLoad" class="secondary">Load</button><button id="proDelete" class="danger">Delete</button>
+        <button id="proNew" class="secondary">New</button><button id="proExport" class="secondary">Export CSV</button>
+        <button id="proPrint" class="secondary">Print</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="proTable">
+          <thead>
+            <tr>
+              <th>Ingredient</th><th>Volume (ml)</th><th>Density (g/ml)</th><th>Weight (g)</th><th>Price/10g (€)</th><th>Cost (€)</th><th>Formula %</th><th>Note</th><th>Supplier</th><th>CAS</th><th>Notes</th><th>Del</th>
+            </tr>
+          </thead>
+          <tbody id="proBody"></tbody>
+          <tfoot>
+            <tr><td><strong>Totals</strong></td><td id="proTotalVol"></td><td>-</td><td id="proTotalWt"></td><td>-</td><td id="proTotalCost"></td><td id="proTotalPct">100.00 %</td><td colspan="5"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <button id="proAdd">+ Add Ingredient</button>
+
+      <div class="cards">
+        <div id="noteSummary" class="card"><h4>Note Balance</h4><div id="noteSummaryText">—</div></div>
+        <div id="ifraStatus" class="card"><h4>IFRA Compliance</h4><div id="ifraStatusText">Enter rows to evaluate.</div></div>
+        <div id="priceHelper" class="card"><h4>Price per 10g</h4><div class="row"><label>Total Cost (€)</label><input type="number" id="helperCost"><label>Total Weight (g)</label><input type="number" id="helperWeight"><strong>Result: <span id="helperResult">€0.00 per 10g</span></strong></div></div>
+      </div>
+    </section>
+
+    <datalist id="ingredientList"></datalist>
+  </main>
+
+  <footer class="app-footer"><small>PWA demo • replace data/ files for production</small></footer>
+
+  <script defer src="./app.js?v=onetap-toggle-theme-fix"></script>
+
+  <!-- Overlay script to guarantee Simple/Pro toggle + Theme works even if main JS fails -->
+  <script>
+  (function(){
+    const $ = id => document.getElementById(id);
+    function show(mode){
+      const simple = $('simpleSection'), pro = $('proSection');
+      if (!simple || !pro) return;
+      if (mode === 'pro'){ pro.hidden = false; simple.hidden = true; localStorage.setItem('mode','pro'); }
+      else { simple.hidden = false; pro.hidden = true; localStorage.setItem('mode','simple'); }
+    }
+    function initTabs(){
+      const m = localStorage.getItem('mode') || 'simple';
+      show(m);
+      const ms = $('modeSimple'), mp = $('modePro');
+      if (ms) ms.onclick = () => show('simple');
+      if (mp) mp.onclick = () => show('pro');
+    }
+    function initTheme(){
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      if (saved) root.setAttribute('data-theme', saved);
+      const btn = $('themeToggle');
+      if (btn) btn.onclick = () => {
+        const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', cur);
+        localStorage.setItem('theme', cur);
+      };
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      initTabs();
+      initTheme();
+    });
+  })();
+  </script>
+</body>
+</html>
