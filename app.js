@@ -230,8 +230,6 @@ function updatePriceHelper(cost, weight){
 
 function bindPro(){
   $$('#proAdd').onclick = () => addProRow();
-  $$('#proSave').onclick = saveFormula;
-  $$('#proLoad').onclick = loadFormula;
   ['helperCost', 'helperWeight'].forEach(id => {
     $$(`#${id}`).oninput = () => {
       const cost = parseFloat($$('#helperCost').value) || 0;
@@ -239,6 +237,9 @@ function bindPro(){
       updatePriceHelper(cost, weight);
     };
   });
+  // ADDED LINES FOR SAVE/LOAD BUTTONS
+  $$('#proSave').onclick = saveFormula;
+  $$('#proLoad').onclick = loadFormula;
 }
 
 // --- Autocomplete ---
@@ -352,12 +353,11 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-
 // --- Save & Load Formula Functions ---
 function saveFormula() {
   const rows = Array.from($$$('#proBody tr')).map(row => ({
     name: row.querySelector('.ing-name').value,
-    weight: row.querySelector('.ing-wt').value,
+    weight: row.querySelector('.ing-t').value,
     cost: row.querySelector('.ing-cost').value,
   }));
   if (rows.length === 0) {
