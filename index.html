@@ -35,44 +35,134 @@
   </header>
 
   <div id="updateBanner" class="update-banner" hidden>
-    <p>A new version is available! <button id="refreshBtn">Refresh</button></p>
+    <span>Update available</span>
+    <button id="refreshBtn">Refresh</button>
   </div>
 
   <main>
-    <section id="simpleSection" hidden>
-      <h2>Simple Mode (Drops)</h2>
-      <div class="row">
-        <label>Total Drops in Blend:</label>
-        <input type="number" id="simpleTotal" value="100" />
-      </div>
-      <div id="simpleRows">
-        <div class="simple-row">
-          <input type="text" class="simple-name" placeholder="Ingredient Name" />
-          <input type="number" class="simple-drops" placeholder="Drops" />
-          <span class="simple-pct">— %</span>
-          <button class="simple-del secondary">×</button>
-        </div>
-      </div>
-      <button id="simpleAdd">+ Add</button>
-    </section>
+    <section id="simpleSection" class="panel">
+      <h2>Simple</h2>
 
-    <section id="proSection" hidden>
-      <h2>Pro Mode (Weight & Cost)</h2>
-      <div class="table-wrap">
-        <table>
+      <div class="row">
+        <label for="dosage">Dosage in finished product (%)</label>
+        <input type="number" id="dosage" min="0" max="100" step="0.1" value="20" />
+      </div>
+
+      <div class="row wrap">
+        <button id="addRow">+ Add ingredient</button>
+        <input type="text" id="recipeName" placeholder="Recipe name" />
+        <button id="saveRecipe">Save</button>
+        <select id="savedRecipes"></select>
+        <button id="loadRecipe" class="secondary">Load</button>
+        <button id="deleteRecipe" class="danger">Delete</button>
+        <button id="exportCsv" class="secondary">Export CSV</button>
+        <button id="printBtn" class="secondary">Print</button>
+        <button id="clearAll" class="danger">Clear</button>
+      </div>
+
+      <section class="card batch-helper">
+        <div class="row wrap">
+          <strong>Batch scaling helper</strong>
+          <label>Target finished volume (ml)</label>
+          <input type="number" id="batchVolume" value="1000" />
+          <label>Assumed concentrate density (g/ml)</label>
+          <input type="number" id="batchDensity" value="0.85" step="0.01" />
+          <button id="batchCalcBtn" class="secondary">Calculate</button>
+          <button id="batchExportBtn" class="secondary">Export Batch CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table id="batchTable">
+            <thead>
+              <tr>
+                <th>Ingredient</th>
+                <th>% in concentrate</th>
+                <th>Oil volume (ml)</th>
+                <th>Weight (g)</th>
+              </tr>
+            </thead>
+            <tbody id="batchBody"></tbody>
+            <tfoot>
+              <tr>
+                <td><strong>Totals</strong></td>
+                <td id="batchPctTotal"></td>
+                <td id="batchVolTotal"></td>
+                <td id="batchWtTotal"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <div class="row">
+        <small id="dataStatus">Loading data…</small>
+      </div>
+
+      <section class="table-wrap">
+        <table id="ingredientsTable">
           <thead>
             <tr>
-              <th>Material</th>
-              <th>Vol (drop)</th>
-              <th>d (g/mL)</th>
+              <th>#</th>
+              <th>Ingredient</th>
+              <th>% in concentrate</th>
+              <th>Finished %</th>
+              <th>IFRA 4</th>
+              <th>IFRA 5A</th>
+              <th>IFRA 5B</th>
+              <th>IFRA 9</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Totals</td>
+              <td id="totalConcentrate">0</td>
+              <td id="totalFinished">0</td>
+              <td colspan="4"></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+    </section>
+
+    <section id="proSection" class="panel" hidden>
+      <h2>Pro</h2>
+
+      <div class="row wrap">
+        <label>Target Volume (ml)</label>
+        <input type="number" id="targetVolume" value="100" />
+        <label>IFRA Category</label>
+        <select id="ifraCategory">
+          <option value="4">4 – Fine Fragrance</option>
+          <option value="5A">5A – Body Lotion</option>
+          <option value="5B">5B – Face Cream</option>
+          <option value="9">9 – Soap</option>
+        </select>
+        <button id="proSave">Save</button>
+        <select id="proSaved"></select>
+        <button id="proLoad" class="secondary">Load</button>
+        <button id="proDelete" class="danger">Delete</button>
+        <button id="proNew" class="secondary">New</button>
+        <button id="proExport" class="secondary">Export CSV</button>
+        <button id="proPrint" class="secondary">Print</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="proTable">
+          <thead>
+            <tr>
+              <th>Ingredient</th>
+              <th>Volume (ml)</th>
+              <th>Density (g/ml)</th>
               <th>Weight (g)</th>
-              <th>Cost (€/g)</th>
+              <th>Price/10g (€)</th>
               <th>Cost (€)</th>
-              <th>Conc. (%)</th>
+              <th>Formula %</th>
               <th>Note</th>
-              <th>Source</th>
-              <th>IFRA (%)</th>
-              <th>Status</th>
+              <th>Supplier</th>
+              <th>CAS</th>
+              <th>Notes</th>
               <th>Del</th>
             </tr>
           </thead>
