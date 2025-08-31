@@ -237,8 +237,6 @@ function bindPro(){
       updatePriceHelper(cost, weight);
     };
   });
-  $$('#proSave').onclick = saveFormula;
-  $$('#proLoad').onclick = loadFormula;
 }
 
 // --- Autocomplete ---
@@ -263,7 +261,7 @@ function setupAutocomplete(input) {
     const matches = S.acList.filter(item => item.includes(val)).slice(0, 10);
     matches.forEach(match => {
       const div = document.createElement('div');
-      div.textContent = findIngredient(match)?.name || match;
+      div.textContent = findIngredient(.name || match;
       div.onclick = () => {
         input.value = div.textContent;
         acList.innerHTML = '';
@@ -351,31 +349,3 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-
-// --- Save & Load Formula Functions ---
-function saveFormula() {
-  const rows = Array.from($$$('#proBody tr')).map(row => ({
-    name: row.querySelector('.ing-name').value,
-    weight: row.querySelector('.ing-wt').value, // TYPO CORRECTED HERE
-    cost: row.querySelector('.ing-cost').value,
-  }));
-  if (rows.length === 0) {
-    alert('Cannot save an empty formula.');
-    return;
-  }
-  localStorage.setItem('savedFormula', JSON.stringify(rows));
-  alert('Formula saved successfully!');
-}
-
-function loadFormula() {
-  const saved = localStorage.getItem('savedFormula');
-  if (!saved) {
-    alert('No saved formula found.');
-    return;
-  }
-  const rows = JSON.parse(saved);
-  $$$('#proBody').innerHTML = ''; // Clear existing rows
-  rows.forEach(rowData => addProRow(rowData.name, rowData.weight, rowData.cost));
-  calculatePro();
-  alert('Formula loaded!');
-}
