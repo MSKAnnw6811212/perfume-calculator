@@ -237,7 +237,6 @@ function bindPro(){
       updatePriceHelper(cost, weight);
     };
   });
-  // ADDED LINES FOR SAVE/LOAD BUTTONS
   $$('#proSave').onclick = saveFormula;
   $$('#proLoad').onclick = loadFormula;
 }
@@ -357,7 +356,7 @@ document.addEventListener('DOMContentLoaded', init);
 function saveFormula() {
   const rows = Array.from($$$('#proBody tr')).map(row => ({
     name: row.querySelector('.ing-name').value,
-    weight: row.querySelector('.ing-t').value,
+    weight: row.querySelector('.ing-wt').value, // TYPO CORRECTED HERE
     cost: row.querySelector('.ing-cost').value,
   }));
   if (rows.length === 0) {
