@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perfume Calculator</title>
-  <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="stylesheet" href="./styles.css?v=final-fix-1" />
+  <title>Pixel & Pour - Artisan Perfume Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=branding-1" />
   <script>
   (async () => {
     try {
@@ -24,7 +25,10 @@
 </head>
 <body>
   <header class="app-header">
-    <h1>Perfume Calculator</h1>
+    <div class="logo-container">
+      <img src="./Pixel & Pour Logo.png" alt="Pixel & Pour Logo" class="logo-image">
+      <h1>Pixel & Pour</h1>
+    </div>
     <nav class="modes">
       <button id="modeSimple" class="tab-btn" data-mode="simple">Simple</button>
       <button id="modePro" class="tab-btn" data-mode="pro">Pro</button>
@@ -41,7 +45,7 @@
 
   <main>
     <section id="simpleSection" class="panel">
-      <h2>Simple</h2>
+      <h2>Simple Calculator</h2>
 
       <div class="row">
         <label for="dosage">Dosage in finished product (%)</label>
@@ -127,7 +131,7 @@
     </section>
 
     <section id="proSection" class="panel" hidden>
-      <h2>Pro</h2>
+      <h2>Artisan Pro Calculator</h2>
 
       <div class="row wrap">
         <label>Target Volume (ml)</label>
@@ -213,6 +217,7 @@
     <small>PWA demo • replace data/ files for production</small>
   </footer>
 
-  <script defer src="./app.js?v=final-fix-1"></script>
+  <script src="./app.js?v=branding-1"></script>
 </body>
 </html>
+
