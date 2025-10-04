@@ -194,9 +194,11 @@ function getBatchData() {
 
   const results = rows.map(r => {
     const pct = r.pct || 0;
+    const totalConcentratePct = rows.reduce((acc, row) => acc + (row.pct || 0), 0);
+    const normalizedPct = totalConcentratePct > 0 ? (pct / totalConcentratePct) * 100 : 0;
     return {
       name: r.name,
-      pct: pct,
+      pct: r.pct, // Use original percentage for display
       oilVol: concentrateVol * (pct / 100),
       weight: concentrateWt * (pct / 100)
     };
@@ -233,7 +235,7 @@ function s_batch_export() {
   const results = getBatchData();
   const lines = [['Ingredient', '% in concentrate', 'Oil volume (ml)', 'Weight (g)'].join(',')];
   results.forEach(r => {
-    lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct, r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
+    lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct.toFixed(3), r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
   });
   const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
@@ -373,6 +375,7 @@ function p_calc(){
   let txt=[]; for(const k in noteW){ const pct=tw>0?(noteW[k]/tw*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } $$('#noteSummaryText').textContent=txt.join(' | ');
   p_ifra();
 }
+
 function p_ifra(){
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
   rows.forEach(tr=>{
@@ -383,9 +386,15 @@ function p_ifra(){
     else if(r.limit!=null && pct>r.limit) bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
   });
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
-  if(bad.length){ wrap.style.borderColor='var(--fail)'; st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`; }
-  else { wrap.style.borderColor='var(--ok)'; st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`; }
+  if(bad.length){
+    wrap.classList.add('non-compliant-card');
+    st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  } else {
+    wrap.classList.remove('non-compliant-card');
+    st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
+  }
 }
+
 function p_bind(){
   $$('#proAdd').onclick=()=>{ p_row(); p_calc(); };
   $$('#proBody').addEventListener('input', e=>{
@@ -409,7 +418,7 @@ function p_bind(){
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
   };
   $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); };
-  $$('#proDelete').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
+  $$('#deleteRecipe').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
   $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   $$('#proPrint').onclick=()=>window.print();
   $$('#proExport').onclick=()=>{
@@ -455,3 +464,4 @@ function init(){
   // registerSW(); // keep disabled during debugging
 }
 document.addEventListener('DOMContentLoaded', init);
+
