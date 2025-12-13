@@ -380,7 +380,7 @@ function p_calc(){
 
 function p_ifra(){
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
-  const warn=[]; // Added warning array
+  const warn=[]; 
   
   rows.forEach(tr=>{
     const name=(tr.querySelector('.p-name').value||'').trim();
@@ -393,30 +393,38 @@ function p_ifra(){
       if(pct > r.limit) {
           bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
       } else if(r.limit > 0 && (pct/r.limit) > 0.8) {
-          // Warning logic: within 80% of limit
           warn.push({name,msg:`${pct.toFixed(2)}% (~${Math.round(pct/r.limit*100)}% of limit)`});
       }
     }
   });
 
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
-  // Reset classes/styles first
+  
+  // RESET STYLES (Important to clear old colors)
   wrap.classList.remove('non-compliant-card');
   wrap.style.borderColor = '';
   wrap.style.backgroundColor = '';
   wrap.style.color = '';
 
   if(bad.length){
-    wrap.style.borderColor='var(--fail)';
+    // FAIL STATE - High Visibility Red (Bootstrap 'Danger' colors)
+    wrap.style.borderColor='#f5c6cb';
+    wrap.style.backgroundColor='#f8d7da'; 
+    wrap.style.color='#721c24'; 
     st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  
   } else if(warn.length){
-    // Warn state - High visibility
-    wrap.style.borderColor='var(--warn)';
-    wrap.style.backgroundColor='#fff8e1'; // Light yellow background
-    wrap.style.color='#5a3e02'; // Darker text for readability
+    // WARN STATE - High Visibility Yellow (Bootstrap 'Warning' colors)
+    wrap.style.borderColor='#ffeeba';
+    wrap.style.backgroundColor='#fff3cd'; 
+    wrap.style.color='#856404'; 
     st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  
   } else {
-    wrap.style.borderColor='var(--ok)';
+    // OK STATE - High Visibility Green (Bootstrap 'Success' colors)
+    wrap.style.borderColor='#c3e6cb';
+    wrap.style.backgroundColor='#d4edda'; 
+    wrap.style.color='#155724'; 
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
   }
 }
