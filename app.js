@@ -409,22 +409,22 @@ function p_ifra(){
   if(bad.length){
     // FAIL STATE - BOLD RED FILL
     wrap.style.borderColor='#ebccd1';
-    wrap.style.backgroundColor='#f2dede'; 
-    wrap.style.color='#a94442'; 
+    wrap.style.backgroundColor='#f8d7da'; 
+    wrap.style.color='#721c24'; 
     st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   
   } else if(warn.length){
     // WARN STATE - BOLD YELLOW FILL
     wrap.style.borderColor='#faebcc';
-    wrap.style.backgroundColor='#fcf8e3'; 
-    wrap.style.color='#8a6d3b'; 
+    wrap.style.backgroundColor='#fff3cd'; 
+    wrap.style.color='#856404'; 
     st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   
   } else {
     // OK STATE - BOLD GREEN FILL
-    wrap.style.borderColor='#d6e9c6';
-    wrap.style.backgroundColor='#dff0d8'; 
-    wrap.style.color='#3c763d'; 
+    wrap.style.borderColor='#c3e6cb';
+    wrap.style.backgroundColor='#d4edda'; 
+    wrap.style.color='#155724'; 
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
   }
 }
