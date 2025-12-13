@@ -400,31 +400,31 @@ function p_ifra(){
 
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
   
-  // RESET STYLES (Important to clear old colors)
+  // RESET STYLES
   wrap.classList.remove('non-compliant-card');
   wrap.style.borderColor = '';
   wrap.style.backgroundColor = '';
   wrap.style.color = '';
 
   if(bad.length){
-    // FAIL STATE - Light Red Background
-    wrap.style.borderColor='var(--fail)';
-    wrap.style.backgroundColor='#ffebee'; // Light Red
-    wrap.style.color='#b71c1c'; // Dark Red
+    // FAIL STATE - BOLD RED FILL
+    wrap.style.borderColor='#ebccd1';
+    wrap.style.backgroundColor='#f8d7da'; 
+    wrap.style.color='#721c24'; 
     st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   
   } else if(warn.length){
-    // WARN STATE - Light Yellow Background
-    wrap.style.borderColor='var(--warn)';
-    wrap.style.backgroundColor='#fff8e1'; // Light Yellow
-    wrap.style.color='#5a3e02'; // Dark Yellow/Brown
+    // WARN STATE - BOLD YELLOW FILL
+    wrap.style.borderColor='#faebcc';
+    wrap.style.backgroundColor='#fff3cd'; 
+    wrap.style.color='#856404'; 
     st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   
   } else {
-    // OK STATE - Light Green Background
-    wrap.style.borderColor='var(--ok)';
-    wrap.style.backgroundColor='#e8f5e9'; // Light Green
-    wrap.style.color='#1b5e20'; // Dark Green
+    // OK STATE - BOLD GREEN FILL
+    wrap.style.borderColor='#c3e6cb';
+    wrap.style.backgroundColor='#d4edda'; 
+    wrap.style.color='#155724'; 
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
   }
 }
