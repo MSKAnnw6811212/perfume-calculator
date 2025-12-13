@@ -237,7 +237,8 @@ function s_batch_export() {
   results.forEach(r => {
     lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct.toFixed(3), r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
   });
-  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  // FIX: Add BOM for Excel compatibility
+  const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -295,7 +296,8 @@ function s_bind(){
       });
       lines.push([i+1, `"${r.name.replace(/"/g,'""')}"`, r.pct, dosage, fin.toFixed(3), ...vals].join(','));
     });
-    const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+    // FIX: Add BOM for Excel compatibility
+    const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
   };
   $$('#printBtn').onclick = () => window.print();
@@ -378,19 +380,51 @@ function p_calc(){
 
 function p_ifra(){
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
+  const warn=[]; 
+  
   rows.forEach(tr=>{
     const name=(tr.querySelector('.p-name').value||'').trim();
     const pct=parseFloat(tr.querySelector('.p-pct').textContent)||0;
     const r=resolveIFRA({name,category:cat,finishedPct:pct});
-    if(r.status==='eu-ban') bad.push({name,msg:'EU PROHIBITED'});
-    else if(r.limit!=null && pct>r.limit) bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
+    
+    if(r.status==='eu-ban') {
+        bad.push({name,msg:'EU PROHIBITED'});
+    } else if(r.limit!=null){
+      if(pct > r.limit) {
+          bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
+      } else if(r.limit > 0 && (pct/r.limit) > 0.8) {
+          warn.push({name,msg:`${pct.toFixed(2)}% (~${Math.round(pct/r.limit*100)}% of limit)`});
+      }
+    }
   });
+
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
+  
+  // RESET STYLES (Important to clear old colors)
+  wrap.classList.remove('non-compliant-card');
+  wrap.style.borderColor = '';
+  wrap.style.backgroundColor = '';
+  wrap.style.color = '';
+
   if(bad.length){
-    wrap.classList.add('non-compliant-card');
-    st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+    // FAIL STATE - Light Red Background
+    wrap.style.borderColor='var(--fail)';
+    wrap.style.backgroundColor='#ffebee'; // Light Red
+    wrap.style.color='#b71c1c'; // Dark Red
+    st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  
+  } else if(warn.length){
+    // WARN STATE - Light Yellow Background
+    wrap.style.borderColor='var(--warn)';
+    wrap.style.backgroundColor='#fff8e1'; // Light Yellow
+    wrap.style.color='#5a3e02'; // Dark Yellow/Brown
+    st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  
   } else {
-    wrap.classList.remove('non-compliant-card');
+    // OK STATE - Light Green Background
+    wrap.style.borderColor='var(--ok)';
+    wrap.style.backgroundColor='#e8f5e9'; // Light Green
+    wrap.style.color='#1b5e20'; // Dark Green
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
   }
 }
@@ -421,13 +455,52 @@ function p_bind(){
   $$('#deleteRecipe').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
   $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   $$('#proPrint').onclick=()=>window.print();
+  
+  // UPDATED PRO EXPORT
   $$('#proExport').onclick=()=>{
-    const rows=p_rows().map(tr=>({ name:tr.querySelector('.p-name').value||'', vol:+tr.querySelector('.p-vol').value||0, den:+tr.querySelector('.p-den').value||0, wt:+tr.querySelector('.p-wt').value||0, price:+tr.querySelector('.p-price').value||0, note:tr.querySelector('.p-note').value||'N/A', supplier:tr.querySelector('.p-supplier').value||'', cas:tr.querySelector('.p-cas').value||'', notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') }));
+    const rows=p_rows().map(tr=>({ 
+        name:tr.querySelector('.p-name').value||'', 
+        vol:parseFloat(tr.querySelector('.p-vol').value)||0, 
+        den:parseFloat(tr.querySelector('.p-den').value)||0, 
+        wt:parseFloat(tr.querySelector('.p-wt').value)||0, 
+        price:parseFloat(tr.querySelector('.p-price').value)||0, 
+        note:tr.querySelector('.p-note').value||'N/A', 
+        supplier:tr.querySelector('.p-supplier').value||'', 
+        cas:tr.querySelector('.p-cas').value||'', 
+        notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
+    }));
+    
     const tw=rows.reduce((a,b)=>a+(b.wt||0),0);
-    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Formula %','Note','Supplier','CAS','Notes'].join(',')];
-    rows.forEach(r=>{ const cost=(r.wt/10)*(r.price||0); const pct=tw>0?(r.wt/tw*100):0; lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(2),r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); });
-    const blob=new Blob([lines.join('\n')],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
+    
+    // Updated header to include Finished % and IFRA columns
+    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Formula %','Finished %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
+    
+    rows.forEach(r=>{ 
+        const cost=(r.wt/10)*(r.price||0); 
+        const pct=tw>0?(r.wt/tw*100):0; // Formula %
+        const fin=pct; // In Pro mode (assumed 100% conc), finished is same as formula
+        
+        // Calculate IFRA columns
+        const cats=['4','5A','5B','9'].map(cat=>{
+          const z=resolveIFRA({name:r.name,category:cat,finishedPct:fin});
+          if(z.status==='eu-ban') return 'EU PROHIBITED';
+          if(z.status==='spec')  return 'SPEC';
+          return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
+        });
+
+        lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(3),fin.toFixed(3),...cats,r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); 
+    });
+    
+    // FIX: Add BOM for Excel compatibility
+    const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
+    const url=URL.createObjectURL(blob); 
+    const a=document.createElement('a'); 
+    a.href=url; 
+    a.download='pro.csv'; 
+    a.click(); 
+    URL.revokeObjectURL(url);
   };
+  
   function p_pop(sel=''){ const s=$$('#proSaved'); const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } p_pop();
 }
 // --- END: Pro Mode Functions ---
@@ -464,4 +537,3 @@ function init(){
   // registerSW(); // keep disabled during debugging
 }
 document.addEventListener('DOMContentLoaded', init);
-
