@@ -237,7 +237,8 @@ function s_batch_export() {
   results.forEach(r => {
     lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct.toFixed(3), r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
   });
-  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  // FIX: Add BOM for Excel compatibility
+  const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -295,7 +296,8 @@ function s_bind(){
       });
       lines.push([i+1, `"${r.name.replace(/"/g,'""')}"`, r.pct, dosage, fin.toFixed(3), ...vals].join(','));
     });
-    const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+    // FIX: Add BOM for Excel compatibility
+    const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
   };
   $$('#printBtn').onclick = () => window.print();
@@ -398,17 +400,21 @@ function p_ifra(){
   });
 
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
-  // Reset classes
+  // Reset classes/styles first
   wrap.classList.remove('non-compliant-card');
-  wrap.style.borderColor = ''; 
+  wrap.style.borderColor = '';
+  wrap.style.backgroundColor = '';
+  wrap.style.color = '';
 
   if(bad.length){
     wrap.style.borderColor='var(--fail)';
     st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   } else if(warn.length){
-    // Warn state
+    // Warn state - High visibility
     wrap.style.borderColor='var(--warn)';
-    st.innerHTML=`<strong>⚠️ Near limits for Cat ${cat}</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+    wrap.style.backgroundColor='#fff8e1'; // Light yellow background
+    wrap.style.color='#5a3e02'; // Darker text for readability
+    st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   } else {
     wrap.style.borderColor='var(--ok)';
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
@@ -477,7 +483,8 @@ function p_bind(){
         lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(3),fin.toFixed(3),...cats,r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); 
     });
     
-    const blob=new Blob([lines.join('\n')],{type:'text/csv'}); 
+    // FIX: Add BOM for Excel compatibility
+    const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
     const url=URL.createObjectURL(blob); 
     const a=document.createElement('a'); 
     a.href=url; 
