@@ -378,19 +378,39 @@ function p_calc(){
 
 function p_ifra(){
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
+  const warn=[]; // Added warning array
+  
   rows.forEach(tr=>{
     const name=(tr.querySelector('.p-name').value||'').trim();
     const pct=parseFloat(tr.querySelector('.p-pct').textContent)||0;
     const r=resolveIFRA({name,category:cat,finishedPct:pct});
-    if(r.status==='eu-ban') bad.push({name,msg:'EU PROHIBITED'});
-    else if(r.limit!=null && pct>r.limit) bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
+    
+    if(r.status==='eu-ban') {
+        bad.push({name,msg:'EU PROHIBITED'});
+    } else if(r.limit!=null){
+      if(pct > r.limit) {
+          bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
+      } else if(r.limit > 0 && (pct/r.limit) > 0.8) {
+          // Warning logic: within 80% of limit
+          warn.push({name,msg:`${pct.toFixed(2)}% (~${Math.round(pct/r.limit*100)}% of limit)`});
+      }
+    }
   });
+
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
+  // Reset classes
+  wrap.classList.remove('non-compliant-card');
+  wrap.style.borderColor = ''; 
+
   if(bad.length){
-    wrap.classList.add('non-compliant-card');
-    st.innerHTML=`<strong>⚠ Non-compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+    wrap.style.borderColor='var(--fail)';
+    st.innerHTML=`<strong>❌ Not compliant for Cat ${cat}</strong><ul>`+bad.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
+  } else if(warn.length){
+    // Warn state
+    wrap.style.borderColor='var(--warn)';
+    st.innerHTML=`<strong>⚠️ Near limits for Cat ${cat}</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   } else {
-    wrap.classList.remove('non-compliant-card');
+    wrap.style.borderColor='var(--ok)';
     st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
   }
 }
@@ -421,13 +441,51 @@ function p_bind(){
   $$('#deleteRecipe').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
   $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   $$('#proPrint').onclick=()=>window.print();
+  
+  // UPDATED PRO EXPORT
   $$('#proExport').onclick=()=>{
-    const rows=p_rows().map(tr=>({ name:tr.querySelector('.p-name').value||'', vol:+tr.querySelector('.p-vol').value||0, den:+tr.querySelector('.p-den').value||0, wt:+tr.querySelector('.p-wt').value||0, price:+tr.querySelector('.p-price').value||0, note:tr.querySelector('.p-note').value||'N/A', supplier:tr.querySelector('.p-supplier').value||'', cas:tr.querySelector('.p-cas').value||'', notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') }));
+    const rows=p_rows().map(tr=>({ 
+        name:tr.querySelector('.p-name').value||'', 
+        vol:parseFloat(tr.querySelector('.p-vol').value)||0, 
+        den:parseFloat(tr.querySelector('.p-den').value)||0, 
+        wt:parseFloat(tr.querySelector('.p-wt').value)||0, 
+        price:parseFloat(tr.querySelector('.p-price').value)||0, 
+        note:tr.querySelector('.p-note').value||'N/A', 
+        supplier:tr.querySelector('.p-supplier').value||'', 
+        cas:tr.querySelector('.p-cas').value||'', 
+        notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
+    }));
+    
     const tw=rows.reduce((a,b)=>a+(b.wt||0),0);
-    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Formula %','Note','Supplier','CAS','Notes'].join(',')];
-    rows.forEach(r=>{ const cost=(r.wt/10)*(r.price||0); const pct=tw>0?(r.wt/tw*100):0; lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(2),r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); });
-    const blob=new Blob([lines.join('\n')],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
+    
+    // Updated header to include Finished % and IFRA columns
+    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Formula %','Finished %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
+    
+    rows.forEach(r=>{ 
+        const cost=(r.wt/10)*(r.price||0); 
+        const pct=tw>0?(r.wt/tw*100):0; // Formula %
+        const fin=pct; // In Pro mode (assumed 100% conc), finished is same as formula
+        
+        // Calculate IFRA columns
+        const cats=['4','5A','5B','9'].map(cat=>{
+          const z=resolveIFRA({name:r.name,category:cat,finishedPct:fin});
+          if(z.status==='eu-ban') return 'EU PROHIBITED';
+          if(z.status==='spec')  return 'SPEC';
+          return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
+        });
+
+        lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(3),fin.toFixed(3),...cats,r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); 
+    });
+    
+    const blob=new Blob([lines.join('\n')],{type:'text/csv'}); 
+    const url=URL.createObjectURL(blob); 
+    const a=document.createElement('a'); 
+    a.href=url; 
+    a.download='pro.csv'; 
+    a.click(); 
+    URL.revokeObjectURL(url);
   };
+  
   function p_pop(sel=''){ const s=$$('#proSaved'); const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } p_pop();
 }
 // --- END: Pro Mode Functions ---
@@ -464,4 +522,3 @@ function init(){
   // registerSW(); // keep disabled during debugging
 }
 document.addEventListener('DOMContentLoaded', init);
-
