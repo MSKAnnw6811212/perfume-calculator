@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=branding-3" />
+  <link rel="stylesheet" href="./styles.css?v=branding-4" />
   <script>
   (async () => {
     try {
@@ -164,7 +164,10 @@
               <th>Cost (€)</th>
               <th>Dilution %</th>
               <th>Solvent</th>
-              <th>Active %</th>
+              <th>
+                Active % 
+                <span class="spec-help" data-tip="The actual percentage of aromatic material in the total formula (excluding solvent). IFRA limits are checked against this value.">?</span>
+              </th>
               <th>Note</th>
               <th>Supplier</th>
               <th>CAS</th>
@@ -196,7 +199,10 @@
           <div id="noteSummaryText">—</div>
         </div>
         <div id="ifraStatus" class="card">
-          <h4>IFRA Compliance</h4>
+          <h4>
+            IFRA Compliance
+            <span class="spec-help" data-tip="Calculated using the 'Active %' of each ingredient against the official IFRA limits for the selected category.">?</span>
+          </h4>
           <div id="ifraStatusText">Enter rows to evaluate.</div>
         </div>
         <div id="priceHelper" class="card">
@@ -221,6 +227,6 @@
 
   <div id="toast-container"></div>
 
-  <script src="./app.js?v=branding-3"></script>
+  <script src="./app.js?v=branding-4"></script>
 </body>
 </html>
