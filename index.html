@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=branding-4" />
+  <link rel="stylesheet" href="./styles.css?v=branding-5" />
   <script>
   (async () => {
     try {
@@ -49,7 +49,7 @@
 
       <div class="row">
         <label for="dosage">Dosage in finished product (%)</label>
-        <input type="text" inputmode="decimal" id="dosage" value="20" placeholder="20" />
+        <input type="text" inputmode="decimal" id="dosage" value="20" placeholder="20" class="num-input" />
       </div>
 
       <div class="row wrap">
@@ -68,9 +68,9 @@
         <div class="row wrap">
           <strong>Batch scaling helper</strong>
           <label>Target finished volume (ml)</label>
-          <input type="text" inputmode="decimal" id="batchVolume" value="1000" />
+          <input type="text" inputmode="decimal" id="batchVolume" value="1000" class="num-input" />
           <label>Assumed concentrate density (g/ml)</label>
-          <input type="text" inputmode="decimal" id="batchDensity" value="0.85" />
+          <input type="text" inputmode="decimal" id="batchDensity" value="0.85" class="num-input" />
           <button id="batchCalcBtn" class="secondary">Calculate</button>
           <button id="batchExportBtn" class="secondary">Export Batch CSV</button>
         </div>
@@ -135,7 +135,7 @@
 
       <div class="row wrap">
         <label>Target Volume (ml)</label>
-        <input type="text" inputmode="decimal" id="targetVolume" value="100" />
+        <input type="text" inputmode="decimal" id="targetVolume" value="100" class="num-input" />
         <label>IFRA Category</label>
         <select id="ifraCategory">
           <option value="4">4 – Fine Fragrance</option>
@@ -227,6 +227,6 @@
 
   <div id="toast-container"></div>
 
-  <script src="./app.js?v=branding-4"></script>
+  <script src="./app.js?v=branding-5"></script>
 </body>
 </html>
