@@ -1,4 +1,4 @@
-/* App: Simple + Pro | Fixes: Dilution, Validation (F-2), Delete (F-3), Sticky Cols (R3), Toasts (R4), Auto-Data (Notes & Cache) */
+/* App: Simple + Pro | Robust Version 5 | Fixes: Syntax stability, Selectors */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
@@ -14,7 +14,7 @@ const S = {
   acList: []
 };
 
-// --- HELPER: Toast Feedback (Fixes R4) ---
+// --- HELPER: Toast Feedback ---
 function showToast(msg) {
   const c = $$('#toast-container');
   if(!c) return;
@@ -28,7 +28,7 @@ function showToast(msg) {
   }, 3000);
 }
 
-// --- HELPER: Parse numbers safely (Fixes F-2) ---
+// --- HELPER: Parse numbers safely ---
 function parseNum(val) {
   if (!val) return 0;
   // Replace comma with dot, remove non-numeric chars except . and -
@@ -40,13 +40,26 @@ function parseNum(val) {
 
 async function j(u){ 
   // Cache Buster: adds ?t=Date to force browser to always get new file
-  const r = await fetch(u + '?t=' + new Date().getTime(), {cache: 'no-store'}); 
-  if(!r.ok) throw new Error(u); 
-  return r.json(); 
+  try {
+    const r = await fetch(u + '?t=' + new Date().getTime(), {cache: 'no-store'}); 
+    if(!r.ok) throw new Error(u); 
+    return r.json();
+  } catch(e) {
+    console.warn("Failed to load:", u, e);
+    return {}; // Return empty object on fail so app doesn't crash
+  }
 }
 
-function setMode(m){ S.mode = m; localStorage.setItem('pc_mode', m); renderMode(); }
+function setMode(m){ 
+  try {
+    S.mode = m; 
+    localStorage.setItem('pc_mode', m); 
+    renderMode();
+  } catch(e) { console.error("setMode error", e); }
+}
+
 function renderMode(){
+  if(!$$('#simpleSection') || !$$('#proSection')) return;
   $$('#simpleSection').hidden = S.mode !== 'simple';
   $$('#proSection').hidden = S.mode !== 'pro';
   $$$('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === S.mode));
@@ -71,32 +84,8 @@ function setupRefresh(){
       if (navigator.serviceWorker?.controller) navigator.serviceWorker.controller.postMessage({ type:'SKIP_WAITING' });
       await S.regSW?.update?.();
     }catch(e){ console.warn('refresh/skip error', e); }
-    try{
-      await Promise.all([
-        'version.json',
-        'data/ingredients.json','data/ifra.json',
-        'data/ifra-51.json','data/synonyms.json','data/regulatory.json'
-      ].map(p => fetch(p,{cache:'reload'})));
-    }catch(e){}
-    location.reload();
+    window.location.reload();
   };
-}
-
-function registerSW(){
-  if(!('serviceWorker' in navigator)) return;
-  window.addEventListener('load', async () => {
-    try{
-      const reg = await navigator.serviceWorker.register('./sw.js');
-      S.regSW = reg;
-      reg.addEventListener('updatefound', () => {
-        const nw = reg.installing;
-        if(nw) nw.addEventListener('statechange', () => {
-          if(nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate();
-        });
-      });
-      if(reg.waiting) showUpdate();
-    }catch(e){ console.warn('SW register failed', e); }
-  });
 }
 
 function setupTheme(){
@@ -155,7 +144,8 @@ function s_row(d={name:'',pct:0}){
       <div class="ac-list" hidden></div>
     </div>`;
   const pctTd = document.createElement('td');
-  pctTd.innerHTML = `<input type="text" inputmode="decimal" placeholder="0" value="${d.pct??0}">`;
+  // Use simple class "num-input" selector
+  pctTd.innerHTML = `<input type="text" inputmode="decimal" class="num-input" placeholder="0" value="${d.pct??0}">`;
   const finTd = document.createElement('td'); finTd.className='finished'; finTd.textContent='0';
   const mkIfraCell = (c)=>{ const td=document.createElement('td'); td.className='ifra ifra-'+c; td.innerHTML='<span class="status">n/a</span>'; return td; };
   const idx = document.createElement('td'); idx.className='idx';
@@ -170,7 +160,8 @@ function s_row(d={name:'',pct:0}){
   tr.appendChild(finTd);
   ['4','5A','5B','9'].forEach(cat => tr.appendChild(mkIfraCell(cat)));
   tr.appendChild(rmTd);
-  $$('#tableBody').appendChild(tr);
+  
+  if($$('#tableBody')) $$('#tableBody').appendChild(tr);
 
   const input = nameTd.querySelector('input[list]');
   const list = nameTd.querySelector('.ac-list');
@@ -178,10 +169,11 @@ function s_row(d={name:'',pct:0}){
 }
 
 function s_rows(){ 
+  // More robust selector
   return Array.from($$$('#tableBody tr')).map(tr => ({
     tr, 
-    name: tr.querySelector('input[list]').value.trim(), 
-    pct: parseNum(tr.querySelector('input[inputmode="decimal"]').value)
+    name: tr.querySelector('input[list]') ? tr.querySelector('input[list]').value.trim() : '', 
+    pct: tr.querySelector('.num-input') ? parseNum(tr.querySelector('.num-input').value) : 0
   })); 
 }
 function s_renum(){ $$$('#tableBody .idx').forEach((td,i)=> td.textContent = i+1); }
@@ -197,10 +189,11 @@ function s_update(){
   s_rows().forEach(({tr,name,pct})=>{
     tConc += pct;
     const fin = s_fin(pct, dosage); tFin += fin;
-    tr.querySelector('.finished').textContent = fin.toFixed(3);
+    if(tr.querySelector('.finished')) tr.querySelector('.finished').textContent = fin.toFixed(3);
     ['4','5A','5B','9'].forEach(cat => {
       const r = resolveIFRA({name, category:cat, finishedPct:fin});
       const cell = tr.querySelector('.ifra-'+cat);
+      if(!cell) return;
       let html='';
       if(r.status==='eu-ban'){
         html = `<span class="status eu">EU PROHIBITED</span>`;
@@ -216,8 +209,8 @@ function s_update(){
       cell.innerHTML = html + casTxt;
     });
   });
-  $$('#totalConcentrate').textContent = tConc.toFixed(3);
-  $$('#totalFinished').textContent = tFin.toFixed(3);
+  if($$('#totalConcentrate')) $$('#totalConcentrate').textContent = tConc.toFixed(3);
+  if($$('#totalFinished')) $$('#totalFinished').textContent = tFin.toFixed(3);
   s_batch_calc(); 
 }
 
@@ -231,8 +224,6 @@ function getBatchData() {
 
   const results = rows.map(r => {
     const pct = r.pct || 0;
-    const totalConcentratePct = rows.reduce((acc, row) => acc + (row.pct || 0), 0);
-    const normalizedPct = totalConcentratePct > 0 ? (pct / totalConcentratePct) * 100 : 0;
     return {
       name: r.name,
       pct: r.pct, 
@@ -246,6 +237,7 @@ function getBatchData() {
 function s_batch_calc() {
   const results = getBatchData();
   const body = $$('#batchBody');
+  if(!body) return;
   body.innerHTML = '';
 
   let totalPct = 0, totalVol = 0, totalWt = 0;
@@ -263,9 +255,9 @@ function s_batch_calc() {
     totalWt += r.weight;
   });
 
-  $$('#batchPctTotal').textContent = totalPct.toFixed(3);
-  $$('#batchVolTotal').textContent = totalVol.toFixed(3);
-  $$('#batchWtTotal').textContent = totalWt.toFixed(3);
+  if($$('#batchPctTotal')) $$('#batchPctTotal').textContent = totalPct.toFixed(3);
+  if($$('#batchVolTotal')) $$('#batchVolTotal').textContent = totalVol.toFixed(3);
+  if($$('#batchWtTotal')) $$('#batchWtTotal').textContent = totalWt.toFixed(3);
 }
 
 function s_batch_export() {
@@ -285,18 +277,20 @@ function s_batch_export() {
 }
 
 function s_bind(){
-  $$('#addRow').onclick = () => { s_row(); s_renum(); s_update(); };
-  $$('#tableBody').addEventListener('click', e => {
+  if($$('#addRow')) $$('#addRow').onclick = () => { s_row(); s_renum(); s_update(); };
+  if($$('#tableBody')) $$('#tableBody').addEventListener('click', e => {
     if(e.target.classList.contains('rm')){ e.target.closest('tr').remove(); s_renum(); s_update(); }
   });
-  $$('#tableBody').addEventListener('input', s_update);
-  $$('#dosage').addEventListener('input', s_update);
+  if($$('#tableBody')) $$('#tableBody').addEventListener('input', s_update);
+  if($$('#dosage')) $$('#dosage').addEventListener('input', s_update);
 
-  $$('#batchCalcBtn').onclick = s_batch_calc;
-  $$('#batchExportBtn').onclick = s_batch_export;
-  ['#batchVolume', '#batchDensity'].forEach(id => $$(id).addEventListener('input', s_batch_calc));
+  if($$('#batchCalcBtn')) $$('#batchCalcBtn').onclick = s_batch_calc;
+  if($$('#batchExportBtn')) $$('#batchExportBtn').onclick = s_batch_export;
+  ['#batchVolume', '#batchDensity'].forEach(id => {
+    if($$(id)) $$(id).addEventListener('input', s_batch_calc);
+  });
 
-  $$('#saveRecipe').onclick = () => {
+  if($$('#saveRecipe')) $$('#saveRecipe').onclick = () => {
     const n = $$('#recipeName').value.trim(); if(!n) return alert('Name?');
     const rows = s_rows().map(r=>({name:r.name,pct:r.pct}));
     const dosage = parseNum($$('#dosage').value);
@@ -304,7 +298,7 @@ function s_bind(){
     all[n] = {dosage, rows}; localStorage.setItem('pc_recipes_v1', JSON.stringify(all)); s_pop(n);
     showToast(`Recipe "${n}" Saved`);
   };
-  $$('#loadRecipe').onclick = () => {
+  if($$('#loadRecipe')) $$('#loadRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
     if(!all[n]) return;
@@ -314,7 +308,7 @@ function s_bind(){
     showToast(`Recipe "${n}" Loaded`);
   };
   
-  $$('#deleteRecipe').onclick = () => {
+  if($$('#deleteRecipe')) $$('#deleteRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
     if(!n || !all[n]) return;
@@ -326,7 +320,7 @@ function s_bind(){
     showToast('Recipe Deleted');
   };
 
-  $$('#exportCsv').onclick = () => {
+  if($$('#exportCsv')) $$('#exportCsv').onclick = () => {
     const dosage = parseNum($$('#dosage').value); const rows = s_rows();
     const lines = [['#','Ingredient','% in concentrate','Dosage %','Finished %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9'].join(',')];
     rows.forEach((r,i)=>{
@@ -343,11 +337,12 @@ function s_bind(){
     const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
     showToast('CSV Exported');
   };
-  $$('#printBtn').onclick = () => window.print();
-  $$('#clearAll').onclick = () => { if(!confirm('Clear all rows?')) return; $$('#tableBody').innerHTML=''; s_row(); s_renum(); s_update(); };
+  if($$('#printBtn')) $$('#printBtn').onclick = () => window.print();
+  if($$('#clearAll')) $$('#clearAll').onclick = () => { if(!confirm('Clear all rows?')) return; $$('#tableBody').innerHTML=''; s_row(); s_renum(); s_update(); };
 
   function s_pop(sel=''){ 
     const s=$$('#savedRecipes'); 
+    if(!s) return;
     const all=JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}'); 
     s.innerHTML=''; 
     Object.keys(all).sort().forEach(k=>{ 
@@ -405,14 +400,15 @@ function p_row(d={}){
   const dil = d.dilution ?? 100;
   const solv = d.solvent ?? 'Ethanol';
 
+  // FIX F-2: Use classes p-vol, p-den, p-wt etc. and inputmode="decimal"
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
-    <td><input type="text" inputmode="decimal" class="p-vol" placeholder="0" value="${d.vol??0}"></td>
-    <td><input type="text" inputmode="decimal" class="p-den" placeholder="0.85" value="${d.den??0.85}"></td>
-    <td><input type="text" inputmode="decimal" class="p-wt" placeholder="0" value="${d.wt??0}"></td>
-    <td><input type="text" inputmode="decimal" class="p-price" placeholder="0" value="${d.price??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-vol num-input" placeholder="0" value="${d.vol??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-den num-input" placeholder="0.85" value="${d.den??0.85}"></td>
+    <td><input type="text" inputmode="decimal" class="p-wt num-input" placeholder="0" value="${d.wt??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-price num-input" placeholder="0" value="${d.price??0}"></td>
     <td class="p-cost">0.00</td>
     
-    <td><input type="text" inputmode="decimal" class="p-dil" placeholder="100" value="${dil}"></td>
+    <td><input type="text" inputmode="decimal" class="p-dil num-input" placeholder="100" value="${dil}"></td>
     <td>
       <select class="p-solv">
         <option ${solv==='Ethanol'?'selected':''}>Ethanol</option>
@@ -434,7 +430,8 @@ function p_row(d={}){
     <td><input type="text" class="p-cas" value="${d.cas??''}"></td>
     <td><textarea class="p-notes">${d.notes??''}</textarea></td>
     <td class="p-del">❌</td>`;
-  $$('#proBody').appendChild(tr);
+  
+  if($$('#proBody')) $$('#proBody').appendChild(tr);
 }
 function p_rows(){ return Array.from($$$('#proBody tr')); }
 
@@ -444,6 +441,7 @@ function p_calc(){
   let totalActiveWt = 0;
 
   rows.forEach(tr => {
+    // Robust selection by class
     totalWt += parseNum(tr.querySelector('.p-wt').value);
   });
 
@@ -455,12 +453,12 @@ function p_calc(){
     const dilution = parseNum(tr.querySelector('.p-dil').value);
 
     const cost = (wt / 10) * price;
-    tr.querySelector('.p-cost').textContent = cost.toFixed(2);
+    if(tr.querySelector('.p-cost')) tr.querySelector('.p-cost').textContent = cost.toFixed(2);
 
     const activeWt = wt * (dilution / 100);
     const activePct = totalWt > 0 ? (activeWt / totalWt * 100) : 0;
     
-    tr.querySelector('.p-active-pct').textContent = activePct.toFixed(3) + ' %';
+    if(tr.querySelector('.p-active-pct')) tr.querySelector('.p-active-pct').textContent = activePct.toFixed(3) + ' %';
     tr.dataset.activePct = activePct; 
 
     totalVol += vol;
@@ -468,11 +466,11 @@ function p_calc(){
     totalActiveWt += activeWt;
   });
 
-  $$('#proTotalVol').textContent = totalVol.toFixed(2);
-  $$('#proTotalWt').textContent = totalWt.toFixed(2);
-  $$('#proTotalCost').textContent = totalCost.toFixed(2);
+  if($$('#proTotalVol')) $$('#proTotalVol').textContent = totalVol.toFixed(2);
+  if($$('#proTotalWt')) $$('#proTotalWt').textContent = totalWt.toFixed(2);
+  if($$('#proTotalCost')) $$('#proTotalCost').textContent = totalCost.toFixed(2);
   
-  $$('#proTotalPct').textContent = totalWt > 0 
+  if($$('#proTotalPct')) $$('#proTotalPct').textContent = totalWt > 0 
     ? ((totalActiveWt / totalWt) * 100).toFixed(2) + '% (Active)' 
     : '0.00 %';
 
@@ -486,21 +484,26 @@ function p_calc(){
   const noteW={Top:0,Middle:0,Base:0,'N/A':0};
   rows.forEach(tr => {
     const w = parseNum(tr.querySelector('.p-wt').value);
-    const note = tr.querySelector('.p-note').value;
-    if(noteW[note]!=null) noteW[note]+=w;
+    const noteEl = tr.querySelector('.p-note');
+    if(noteEl){
+      const note = noteEl.value;
+      if(noteW[note]!=null) noteW[note]+=w;
+    }
   });
   let txt=[]; for(const k in noteW){ const pct=totalWt>0?(noteW[k]/totalWt*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } 
-  $$('#noteSummaryText').textContent=txt.join(' | ');
+  if($$('#noteSummaryText')) $$('#noteSummaryText').textContent=txt.join(' | ');
 
   p_ifra();
 }
 
 function p_ifra(){
+  if(!$$('#ifraCategory')) return;
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
   const warn=[]; 
   
   rows.forEach(tr=>{
-    const name=(tr.querySelector('.p-name').value||'').trim();
+    const nameEl = tr.querySelector('.p-name');
+    const name = nameEl ? nameEl.value.trim() : '';
     const activePct = parseFloat(tr.dataset.activePct) || 0;
     const r=resolveIFRA({name,category:cat,finishedPct:activePct});
     
@@ -516,6 +519,8 @@ function p_ifra(){
   });
 
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
+  if(!st || !wrap) return;
+  
   wrap.classList.remove('non-compliant-card');
   wrap.style.borderColor = '';
   wrap.style.backgroundColor = '';
@@ -533,3 +538,183 @@ function p_ifra(){
     st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   } else {
     wrap.style.borderColor='#c3e6cb';
+    wrap.style.backgroundColor='#d4edda'; 
+    wrap.style.color='#155724'; 
+    st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
+  }
+}
+
+function p_bind(){
+  if($$('#proAdd')) $$('#proAdd').onclick=()=>{ p_row(); p_calc(); };
+  if($$('#proBody')) $$('#proBody').addEventListener('input', e=>{
+    const tr=e.target.closest('tr'); if(!tr) return;
+    
+    // AUTO-FILL DATA (Fixing the Lookup Issue)
+    if(e.target.classList.contains('p-name')){
+      // Use case-insensitive search
+      const val = e.target.value.trim().toLowerCase();
+      // Safe check if S.list is loaded
+      const sel = (S.list||[]).find(i => (i.name||'').toLowerCase() === val);
+      if(sel){ 
+        if(tr.querySelector('.p-cas')) tr.querySelector('.p-cas').value = sel.casNumber||''; 
+        if(tr.querySelector('.p-price')) tr.querySelector('.p-price').value = sel.pricePer10g||0; 
+        if(tr.querySelector('.p-notes')) tr.querySelector('.p-notes').value = sel.notes||''; 
+        // Force the new density
+        if(tr.querySelector('.p-den')) tr.querySelector('.p-den').value = sel.density || 0.85; 
+        // Force the new Note
+        if(tr.querySelector('.p-note')) tr.querySelector('.p-note').value = sel.note || 'N/A';
+      }
+    }
+
+    if(e.target.classList.contains('p-vol')||e.target.classList.contains('p-den')){
+      const v=parseNum(tr.querySelector('.p-vol').value); 
+      const d=parseNum(tr.querySelector('.p-den').value); 
+      tr.querySelector('.p-wt').value=(v*d).toFixed(3);
+    } 
+    else if(e.target.classList.contains('p-wt')){
+      const d=parseNum(tr.querySelector('.p-den').value); 
+      if(d>0){ tr.querySelector('.p-vol').value=(parseNum(tr.querySelector('.p-wt').value)/d).toFixed(3); }
+    }
+    p_calc();
+  });
+  if($$('#proBody')) $$('#proBody').addEventListener('change', p_calc);
+  if($$('#proBody')) $$('#proBody').addEventListener('click', e=>{ if(e.target.classList.contains('p-del')){ e.target.closest('tr').remove(); p_calc(); } });
+  if($$('#ifraCategory')) $$('#ifraCategory').onchange=p_ifra;
+  
+  if($$('#proSave')) $$('#proSave').onclick=()=>{ const n=prompt('Recipe name?'); if(!n) return;
+    const rows=p_rows().map(tr=>({ 
+      name:tr.querySelector('.p-name').value||'', 
+      vol:parseNum(tr.querySelector('.p-vol').value), 
+      den:parseNum(tr.querySelector('.p-den').value), 
+      wt:parseNum(tr.querySelector('.p-wt').value), 
+      price:parseNum(tr.querySelector('.p-price').value), 
+      dilution:parseNum(tr.querySelector('.p-dil').value),
+      solvent:tr.querySelector('.p-solv').value||'Ethanol',
+      
+      note:tr.querySelector('.p-note').value||'N/A', 
+      supplier:tr.querySelector('.p-supplier').value||'', 
+      cas:tr.querySelector('.p-cas').value||'', 
+      notes:tr.querySelector('.p-notes').value||'' 
+    }));
+    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
+    showToast(`Recipe "${n}" Saved`);
+  };
+  
+  if($$('#proLoad')) $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); 
+    showToast(`Recipe "${n}" Loaded`);
+  };
+  
+  if($$('#proDelete')) $$('#proDelete').onclick=()=>{ 
+    const n=$$('#proSaved').value; 
+    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
+    if(!n||!all[n]) return; 
+    if(!confirm('Delete recipe?')) return; 
+    delete all[n]; 
+    localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); 
+    p_pop(); 
+    $$('#proBody').innerHTML=''; p_row(); p_calc();
+    showToast('Recipe Deleted');
+  };
+
+  if($$('#proNew')) $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
+  if($$('#proPrint')) $$('#proPrint').onclick=()=>window.print();
+  
+  if($$('#proExport')) $$('#proExport').onclick=()=>{
+    const rows=p_rows().map(tr=>({ 
+        name:tr.querySelector('.p-name').value||'', 
+        vol:parseNum(tr.querySelector('.p-vol').value), 
+        den:parseNum(tr.querySelector('.p-den').value), 
+        wt:parseNum(tr.querySelector('.p-wt').value), 
+        price:parseNum(tr.querySelector('.p-price').value), 
+        dilution:parseNum(tr.querySelector('.p-dil').value), 
+        solvent:tr.querySelector('.p-solv').value||'Ethanol',       
+        activePct:parseFloat(tr.dataset.activePct)||0,              
+        note:tr.querySelector('.p-note').value||'N/A', 
+        supplier:tr.querySelector('.p-supplier').value||'', 
+        cas:tr.querySelector('.p-cas').value||'', 
+        notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
+    }));
+    
+    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Dilution %','Solvent','Active %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
+    
+    rows.forEach(r=>{ 
+        const cost=(r.wt/10)*(r.price||0); 
+        const cats=['4','5A','5B','9'].map(cat=>{
+          const z=resolveIFRA({name:r.name,category:cat,finishedPct:r.activePct});
+          if(z.status==='eu-ban') return 'EU PROHIBITED';
+          if(z.status==='spec')  return 'SPEC';
+          return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
+        });
+
+        lines.push([
+          `"${r.name.replace(/"/g,'""')}"`,
+          r.vol,r.den,r.wt,
+          (r.price||0).toFixed(2),cost.toFixed(2),
+          r.dilution, r.solvent, r.activePct.toFixed(3),
+          ...cats,
+          r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`
+        ].join(',')); 
+    });
+    
+    const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
+    const url=URL.createObjectURL(blob); 
+    const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
+    showToast('Pro CSV Exported');
+  };
+  
+  function p_pop(sel=''){ 
+    const s=$$('#proSaved'); 
+    if(!s) return;
+    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
+    s.innerHTML=''; 
+    Object.keys(all).sort().forEach(k=>{ 
+      const o=document.createElement('option'); o.value=k; o.textContent=k; 
+      if(k===sel) o.selected=true; 
+      s.appendChild(o); 
+    });
+    if (sel && !all[sel]) s.value = '';
+  } 
+  p_pop();
+}
+// --- END: Pro Mode Functions ---
+
+
+async function loadData(){
+  try{
+    const [ings, ifra, ver, ifra51, syn, reg] = await Promise.all([
+      j('data/ingredients.json'),
+      j('data/ifra.json'),
+      j('version.json'),
+      j('data/ifra-51.json'),
+      j('data/synonyms.json'),
+      j('data/regulatory.json'),
+    ]);
+    S.list=ings||[]; S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
+    const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
+    buildACList();
+    if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded (version: ${S.version||'n/a'})`;
+    const prev=localStorage.getItem('pc_data_version'); if(S.version && prev && prev!==S.version) showUpdate(); if(S.version) localStorage.setItem('pc_data_version',S.version);
+  }catch(e){ console.error("LoadData Error", e); if($$('#dataStatus')) $$('#dataStatus').textContent='Failed to load data. Check console.'; }
+}
+
+function bindGlobal(){ 
+  if($$('#modeSimple')) $$('#modeSimple').onclick=()=>setMode('simple'); 
+  if($$('#modePro')) $$('#modePro').onclick=()=>setMode('pro'); 
+}
+
+function init(){
+  try {
+    setMode(localStorage.getItem('pc_mode')||'simple');
+    setupTheme();
+    setupRefresh();
+    bindGlobal();
+    s_row(); s_bind();
+    p_row(); p_bind();
+    loadData();
+    // registerSW(); // keep disabled during debugging
+  } catch(e) {
+    console.error("CRITICAL INIT ERROR:", e);
+    alert("App failed to initialize. Please clear cache and refresh.");
+  }
+}
+document.addEventListener('DOMContentLoaded', init);
