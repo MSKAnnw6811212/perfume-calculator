@@ -1,1245 +1,370 @@
 [
   {
-    "name": "Ambergris Tincture"
-  },
-  {
-    "name": "Amyris Oil"
-  },
-  {
-    "name": "Bergamot Oil"
-  },
-  {
-    "name": "Bergamot FCF Oil"
-  },
-  {
-    "name": "Blood Orange Oil"
-  },
-  {
-    "name": "Buchu Oil"
-  },
-  {
-    "name": "Cade Oil"
-  },
-  {
-    "name": "Cassia Oil"
-  },
-  {
-    "name": "Cedarwood Atlas Oil"
-  },
-  {
-    "name": "Cedarwood Himalayan Oil"
-  },
-  {
-    "name": "Cedarwood Texas Oil"
-  },
-  {
-    "name": "Cedarwood Virginia Oil"
-  },
-  {
-    "name": "Cistus Absolute"
-  },
-  {
-    "name": "Clary Sage Oil"
-  },
-  {
-    "name": "Clementine Oil"
-  },
-  {
-    "name": "Copaiba Balsam"
-  },
-  {
-    "name": "Copaiba Balsam Oil"
-  },
-  {
-    "name": "Coriander Seed Oil"
-  },
-  {
-    "name": "Cumin Seed Oil"
-  },
-  {
-    "name": "Cypress Oil"
-  },
-  {
-    "name": "Davana Oil"
-  },
-  {
-    "name": "Elemi Oil"
-  },
-  {
-    "name": "Eucalyptus Globulus Oil"
-  },
-  {
-    "name": "Eucalyptus Radiata Oil"
-  },
-  {
-    "name": "Evernia Prunastri Absolute (Oakmoss)"
-  },
-  {
-    "name": "Evernia Furfuracea Absolute (Treemoss)"
-  },
-  {
-    "name": "Fennel Sweet Oil"
-  },
-  {
-    "name": "Fir Balsam Absolute"
-  },
-  {
-    "name": "Frankincense (Olibanum) Oil"
-  },
-  {
-    "name": "Galbanum Oil"
-  },
-  {
-    "name": "Geranium Bourbon Oil"
-  },
-  {
-    "name": "German Chamomile Oil"
-  },
-  {
-    "name": "Ginger Oil"
-  },
-  {
-    "name": "Grapefruit Pink Oil"
-  },
-  {
-    "name": "Grapefruit White Oil"
-  },
-  {
-    "name": "Guaiacwood Oil"
-  },
-  {
-    "name": "Ho Wood Oil"
-  },
-  {
-    "name": "Hyssop Oil"
-  },
-  {
-    "name": "Jasmine Absolute"
-  },
-  {
-    "name": "Jasmine Sambac Absolute"
-  },
-  {
-    "name": "Juniper Berry Oil"
-  },
-  {
-    "name": "Labdanum Absolute"
-  },
-  {
-    "name": "Lavandin Grosso Oil"
-  },
-  {
-    "name": "Lavender Maillette Oil"
-  },
-  {
-    "name": "Lavender Population Oil"
-  },
-  {
-    "name": "Lavender Fine Oil"
-  },
-  {
-    "name": "Lemon Oil"
-  },
-  {
-    "name": "Lemongrass Oil"
-  },
-  {
-    "name": "Lime Distilled Oil"
-  },
-  {
-    "name": "Lime Expressed Oil"
-  },
-  {
-    "name": "Litsea Cubeba Oil"
-  },
-  {
-    "name": "Mandarin Green Oil"
-  },
-  {
-    "name": "Mandarin Red Oil"
-  },
-  {
-    "name": "Marjoram Sweet Oil"
-  },
-  {
-    "name": "Mimosa Absolute"
-  },
-  {
-    "name": "Muguet Accord"
-  },
-  {
-    "name": "Myrtle Oil"
-  },
-  {
-    "name": "Neroli Oil"
-  },
-  {
-    "name": "Neroli Petitgrain Co-Distill"
-  },
-  {
-    "name": "Niaouli Oil"
-  },
-  {
-    "name": "Nutmeg Oil"
-  },
-  {
-    "name": "Oakmoss Resinoid Low Atranol"
-  },
-  {
-    "name": "Opoponax (Sweet Myrrh) Oil"
-  },
-  {
-    "name": "Orange Bitter Oil"
-  },
-  {
-    "name": "Orange Sweet Oil"
-  },
-  {
-    "name": "Orris Concrete 15% Irones"
-  },
-  {
-    "name": "Patchouli Dark Oil"
-  },
-  {
-    "name": "Patchouli Light Oil"
-  },
-  {
-    "name": "Peppermint Oil"
-  },
-  {
-    "name": "Peru Balsam"
-  },
-  {
-    "name": "Petitgrain Bigarade Oil"
-  },
-  {
-    "name": "Pine Needle Oil"
-  },
-  {
-    "name": "Rose Absolute (Bulgarian)"
-  },
-  {
-    "name": "Rose Absolute (Moroccan)"
-  },
-  {
-    "name": "Rose Otto (Turkish)"
-  },
-  {
-    "name": "Rosemary ct. Verbenone Oil"
-  },
-  {
-    "name": "Rosemary ct. Cineole Oil"
-  },
-  {
-    "name": "Sage Dalmatian Oil"
-  },
-  {
-    "name": "Sandalwood Album Oil"
-  },
-  {
-    "name": "Sandalwood Spicatum Oil"
-  },
-  {
-    "name": "Spearmint Oil"
-  },
-  {
-    "name": "Styrax Resinoid"
-  },
-  {
-    "name": "Tagetes Oil"
-  },
-  {
-    "name": "Tangerine Oil"
-  },
-  {
-    "name": "Tolu Balsam"
-  },
-  {
-    "name": "Tonka Bean Absolute"
-  },
-  {
-    "name": "Turmeric Oil"
-  },
-  {
-    "name": "Valerian Oil"
-  },
-  {
-    "name": "Vanilla Absolute"
-  },
-  {
-    "name": "Vetiver Haiti Oil"
-  },
-  {
-    "name": "Vetiver Java Oil"
-  },
-  {
-    "name": "Ylang Ylang Extra"
-  },
-  {
-    "name": "Ylang Ylang Complete"
-  },
-  {
-    "name": "Oakmoss Absolute Low Atranol"
-  },
-  {
-    "name": "Black Pepper Oil"
-  },
-  {
-    "name": "Cardamom Oil"
-  },
-  {
-    "name": "Caraway Oil"
-  },
-  {
-    "name": "Lemon Verbena Oil"
-  },
-  {
-    "name": "Tea Tree Oil"
-  },
-  {
-    "name": "Pimento Berry Oil"
-  },
-  {
-    "name": "Acetanisole"
-  },
-  {
-    "name": "Acetophenone"
-  },
-  {
-    "name": "Acetyl Cedrene"
-  },
-  {
-    "name": "Acetyl Pyrazine 10%"
-  },
-  {
-    "name": "Acetyl Vanillin"
-  },
-  {
-    "name": "Aldehyde C-6 (Hexanal)"
-  },
-  {
-    "name": "Aldehyde C-7 (Heptanal)"
-  },
-  {
-    "name": "Aldehyde C-8 (Octanal)"
-  },
-  {
-    "name": "Aldehyde C-9 (Nonanal)"
-  },
-  {
-    "name": "Aldehyde C-10 (Decanal)"
-  },
-  {
-    "name": "Aldehyde C-11 (Undecanal)"
-  },
-  {
-    "name": "Aldehyde C-11 (Undecylenic)"
-  },
-  {
-    "name": "Aldehyde C-12 Lauric"
-  },
-  {
-    "name": "Aldehyde C-12 MNA"
-  },
-  {
-    "name": "Aldehyde C-12 Tert-Butyl"
-  },
-  {
-    "name": "Allyl Amyl Glycolate"
-  },
-  {
-    "name": "Ambrettolide"
-  },
-  {
-    "name": "Ambroxan"
-  },
-  {
-    "name": "Ambrinol"
-  },
-  {
-    "name": "Amyl Salicylate"
-  },
-  {
-    "name": "Anethole"
-  },
-  {
-    "name": "Anisaldehyde"
-  },
-  {
-    "name": "Anisic Aldehyde"
-  },
-  {
-    "name": "Anisyl Acetate"
-  },
-  {
-    "name": "Anisyl Alcohol"
-  },
-  {
-    "name": "Applelide"
-  },
-  {
-    "name": "Aurantial"
-  },
-  {
-    "name": "Bacdanol"
-  },
-  {
-    "name": "Benzaldehyde",
-    "casNumber": "100-52-7",
-    "ifraLimits": {
-      "4": 0.25,
-      "5A": 0.064,
-      "5B": 0.064,
-      "9": 0.49
-    }
-  },
-  {
-    "name": "Benzyl Acetate"
-  },
-  {
-    "name": "Benzyl Alcohol",
-    "casNumber": "100-51-6",
-    "ifraLimits": {
-      "4": 2.5,
-      "5A": 0.64,
-      "5B": 0.17,
-      "9": 2.2
-    }
-  },
-  {
-    "name": "Benzyl Benzoate",
-    "casNumber": "120-51-4",
-    "ifraLimits": {
-      "4": 4.8,
-      "5A": 4.3,
-      "5B": 0.21,
-      "9": 1.9
-    }
-  },
-  {
-    "name": "Benzyl Cinnamate"
-  },
-  {
-    "name": "Benzyl Formate"
-  },
-  {
-    "name": "Benzyl Salicylate",
-    "casNumber": "118-58-1",
-    "ifraLimits": {
-      "4": 7.3,
-      "5A": 1.9,
-      "5B": 1.9,
-      "9": 14.0
-    }
-  },
-  {
-    "name": "Beta-Caryophyllene"
-  },
-  {
-    "name": "Beta-Damascone",
-    "casNumber": "23726-91-2",
-    "ifraLimits": {
-      "4": 0.043,
-      "5A": 0.011,
-      "5B": 0.011,
-      "9": 0.084
-    }
-  },
-  {
-    "name": "Beta-Damascenone"
-  },
-  {
-    "name": "Boisamber"
-  },
-  {
-    "name": "Bourgeonal"
-  },
-  {
-    "name": "Calone"
-  },
-  {
-    "name": "Cedramber"
-  },
-  {
-    "name": "Cedarwood Terpenes"
-  },
-  {
-    "name": "Cedryl Acetate"
-  },
-  {
-    "name": "Cinnamic Alcohol"
-  },
-  {
-    "name": "Cinnamic Aldehyde"
-  },
-  {
-    "name": "Cinnamyl Alcohol"
-  },
-  {
-    "name": "Cinnamyl Acetate"
+    "name": "Ambergris Tincture",
+    "casNumber": "8038-65-1",
+    "density": 0.81,
+    "note": "Base",
+    "pricePer10g": 15.00,
+    "notes": "Animalic, marine, sweet"
+  },
+  {
+    "name": "Ambroxan",
+    "casNumber": "6790-58-5",
+    "density": 0.93,
+    "note": "Base",
+    "pricePer10g": 3.50,
+    "notes": "Amber, woody, dry, musk-like"
+  },
+  {
+    "name": "Amyris Oil",
+    "casNumber": "8015-65-4",
+    "density": 0.96,
+    "note": "Base",
+    "pricePer10g": 1.20,
+    "notes": "Woody, balsamic, faintly sweet"
+  },
+  {
+    "name": "Bergamot Oil",
+    "casNumber": "8007-75-8",
+    "density": 0.87,
+    "note": "Top",
+    "pricePer10g": 2.50,
+    "notes": "Citrus, floral, spicy, fresh"
+  },
+  {
+    "name": "Bergamot FCF Oil",
+    "casNumber": "68648-33-9",
+    "density": 0.87,
+    "note": "Top",
+    "pricePer10g": 2.80,
+    "notes": "Furocoumarin-free, safe citrus"
+  },
+  {
+    "name": "Black Pepper Oil",
+    "casNumber": "8006-82-4",
+    "density": 0.87,
+    "note": "Middle",
+    "pricePer10g": 3.00,
+    "notes": "Spicy, fresh, woody, terpency"
+  },
+  {
+    "name": "Blood Orange Oil",
+    "casNumber": "8008-57-9",
+    "density": 0.85,
+    "note": "Top",
+    "pricePer10g": 0.90,
+    "notes": "Sweet, juicy, citrus, aldehydic"
+  },
+  {
+    "name": "Cardamom Oil",
+    "casNumber": "8000-66-6",
+    "density": 0.93,
+    "note": "Middle",
+    "pricePer10g": 8.50,
+    "notes": "Spicy, balsamic, camphoraceous"
+  },
+  {
+    "name": "Cashmeran",
+    "casNumber": "33704-61-9",
+    "density": 0.96,
+    "note": "Base",
+    "pricePer10g": 4.00,
+    "notes": "Musk, woody, spicy, floral"
+  },
+  {
+    "name": "Cedarwood Atlas Oil",
+    "casNumber": "8023-85-6",
+    "density": 0.93,
+    "note": "Base",
+    "pricePer10g": 1.50,
+    "notes": "Woody, balsamic, sweet, warm"
+  },
+  {
+    "name": "Cedarwood Virginia Oil",
+    "casNumber": "8000-27-9",
+    "density": 0.95,
+    "note": "Base",
+    "pricePer10g": 1.10,
+    "notes": "Woody, pencil shavings, dry"
+  },
+  {
+    "name": "Cinnamic Aldehyde",
+    "casNumber": "104-55-2",
+    "density": 1.05,
+    "note": "Middle",
+    "pricePer10g": 0.80,
+    "notes": "Cinnamon, spicy, warm, sweet"
   },
   {
     "name": "Citral",
     "casNumber": "5392-40-5",
-    "ifraLimits": {
-      "4": 0.6,
-      "5A": 0.15,
-      "5B": 0.15,
-      "9": 1.2
-    }
-  },
-  {
-    "name": "Citronellal",
-    "casNumber": "106-23-0",
-    "ifraLimits": {
-      "4": 0.49,
-      "5A": 0.33,
-      "5B": 0.051,
-      "9": 1.4
-    }
+    "density": 0.89,
+    "note": "Top",
+    "pricePer10g": 1.50,
+    "notes": "Lemon, fresh, sharp, aldehydic"
   },
   {
     "name": "Citronellol",
     "casNumber": "106-22-9",
-    "ifraLimits": {
-      "4": 12.0,
-      "5A": 3.2,
-      "5B": 3.2,
-      "9": 24.0
-    }
+    "density": 0.86,
+    "note": "Middle",
+    "pricePer10g": 1.80,
+    "notes": "Rose, floral, fresh, waxy"
   },
   {
-    "name": "Citronellyl Acetate"
+    "name": "Clary Sage Oil",
+    "casNumber": "8016-63-5",
+    "density": 0.90,
+    "note": "Middle",
+    "pricePer10g": 3.20,
+    "notes": "Herbal, sweet, tea-like, ambery"
   },
   {
-    "name": "Civetone (Synth)"
+    "name": "Coumarin",
+    "casNumber": "91-64-5",
+    "density": 0.94,
+    "note": "Base",
+    "pricePer10g": 1.20,
+    "notes": "Sweet, hay, tonka, almond"
   },
   {
-    "name": "Clonal"
+    "name": "Dihydromyrcenol",
+    "casNumber": "18479-58-8",
+    "density": 0.83,
+    "note": "Top",
+    "pricePer10g": 0.90,
+    "notes": "Fresh, citrus, lime, lavender"
   },
   {
-    "name": "Cis-3-Hexenol"
-  },
-  {
-    "name": "Cis-3-Hexenyl Acetate"
-  },
-  {
-    "name": "Cis-3-Hexenyl Formate"
-  },
-  {
-    "name": "Cis-3-Hexenyl Propionate"
-  },
-  {
-    "name": "Cyclamal"
-  },
-  {
-    "name": "Cyclamen Aldehyde"
-  },
-  {
-    "name": "Delta-Damascone"
-  },
-  {
-    "name": "Dihydro Isojasmonate"
-  },
-  {
-    "name": "Dihydromyrcenol"
-  },
-  {
-    "name": "Dimetol"
-  },
-  {
-    "name": "DMBBC (Dimethyl Benzyl Carbinyl Butyrate)"
-  },
-  {
-    "name": "Ethyl 2-Methylbutyrate"
-  },
-  {
-    "name": "Ethyl Acetate"
-  },
-  {
-    "name": "Ethyl Linalool"
-  },
-  {
-    "name": "Ethyl Linalyl Acetate"
-  },
-  {
-    "name": "Ethyl Maltol"
-  },
-  {
-    "name": "Ethyl Vanillin"
-  },
-  {
-    "name": "Eucalyptol (1,8-Cineole)"
+    "name": "Ethylene Brassylate",
+    "casNumber": "105-95-3",
+    "density": 1.04,
+    "note": "Base",
+    "pricePer10g": 1.50,
+    "notes": "Musk, sweet, floral, powdery"
   },
   {
     "name": "Eugenol",
     "casNumber": "97-53-0",
-    "ifraLimits": {
-      "4": 2.5,
-      "5A": 0.64,
-      "5B": 0.64,
-      "9": 4.9
-    }
+    "density": 1.06,
+    "note": "Middle",
+    "pricePer10g": 1.80,
+    "notes": "Spicy, clove, warm, woody"
   },
   {
-    "name": "Evernyl (Veramoss)"
+    "name": "Evernia Prunastri (Oakmoss)",
+    "casNumber": "90028-68-5",
+    "density": 1.05,
+    "note": "Base",
+    "pricePer10g": 6.50,
+    "notes": "Earthy, mossy, woody, marine"
   },
   {
-    "name": "Exaltolide"
+    "name": "Frankincense (Olibanum) Oil",
+    "casNumber": "8016-36-2",
+    "density": 0.87,
+    "note": "Base",
+    "pricePer10g": 4.50,
+    "notes": "Resinous, balsamic, spicy, citrus"
   },
   {
-    "name": "Ethylene Brassylate"
-  },
-  {
-    "name": "Farnesol"
-  },
-  {
-    "name": "Floralozone"
-  },
-  {
-    "name": "Florhydral"
-  },
-  {
-    "name": "Florosa"
-  },
-  {
-    "name": "Fructone"
-  },
-  {
-    "name": "Galaxolide"
-  },
-  {
-    "name": "Gamma-Decalactone"
-  },
-  {
-    "name": "Gamma-Nonalactone (Coconut)"
-  },
-  {
-    "name": "Gamma-Octalactone"
-  },
-  {
-    "name": "Gamma-Undecalactone (Peach)"
+    "name": "Galaxolide 50 IPM",
+    "casNumber": "1222-05-5",
+    "density": 0.95,
+    "note": "Base",
+    "pricePer10g": 1.20,
+    "notes": "Musk, clean, floral, sweet"
   },
   {
     "name": "Geraniol",
     "casNumber": "106-24-1",
-    "ifraLimits": {
-      "4": 4.7,
-      "5A": 1.2,
-      "5B": 1.2,
-      "9": 9.2
-    }
+    "density": 0.88,
+    "note": "Middle",
+    "pricePer10g": 1.50,
+    "notes": "Rose, floral, sweet, citrus"
   },
   {
-    "name": "Geranyl Acetate"
+    "name": "Geranium Bourbon Oil",
+    "casNumber": "8000-46-2",
+    "density": 0.89,
+    "note": "Middle",
+    "pricePer10g": 5.00,
+    "notes": "Floral, green, rosy, minty"
   },
   {
-    "name": "Grapefruit Mercaptan 1%"
+    "name": "Hedione",
+    "casNumber": "24851-98-7",
+    "density": 1.00,
+    "note": "Middle",
+    "pricePer10g": 1.80,
+    "notes": "Fresh, jasmine, citrus, floral"
   },
   {
-    "name": "Helional"
+    "name": "Helional",
+    "casNumber": "1205-17-0",
+    "density": 1.05,
+    "note": "Middle",
+    "pricePer10g": 2.50,
+    "notes": "Green, floral, marine, melon"
   },
   {
-    "name": "Heliotropin (Piperonal)"
+    "name": "Iso E Super",
+    "casNumber": "54464-57-2",
+    "density": 0.96,
+    "note": "Base",
+    "pricePer10g": 1.50,
+    "notes": "Woody, amber, velvet, cedar"
   },
   {
-    "name": "Hercolyn D"
+    "name": "Jasmine Absolute",
+    "casNumber": "8022-96-6",
+    "density": 0.95,
+    "note": "Middle",
+    "pricePer10g": 25.00,
+    "notes": "Floral, rich, sweet, animalic"
   },
   {
-    "name": "Hexyl Cinnamal"
+    "name": "Labdanum Absolute",
+    "casNumber": "8016-26-0",
+    "density": 1.05,
+    "note": "Base",
+    "pricePer10g": 8.00,
+    "notes": "Amber, balsamic, sweet, leathery"
   },
   {
-    "name": "Hexyl Salicylate"
+    "name": "Lavender Oil",
+    "casNumber": "8000-28-0",
+    "density": 0.88,
+    "note": "Top",
+    "pricePer10g": 3.50,
+    "notes": "Floral, herbal, fresh, sweet"
   },
   {
-    "name": "Hydroxycitronellal"
-  },
-  {
-    "name": "Hydroxycitronellal Dimethyl Acetal"
-  },
-  {
-    "name": "Indole"
-  },
-  {
-    "name": "Iso Bornyl Cyclohexanol"
-  },
-  {
-    "name": "Iso E Super"
-  },
-  {
-    "name": "Iso E Super Plus"
-  },
-  {
-    "name": "Isoamyl Acetate"
-  },
-  {
-    "name": "Isoamyl Butyrate"
-  },
-  {
-    "name": "Isoamyl Salicylate"
-  },
-  {
-    "name": "Isobornyl Acetate"
-  },
-  {
-    "name": "Isobutavan"
-  },
-  {
-    "name": "Isoeugenol",
-    "casNumber": "97-54-1",
-    "ifraLimits": {
-      "4": 0.11,
-      "5A": 0.027,
-      "5B": 0.027,
-      "9": 0.21
-    }
-  },
-  {
-    "name": "Isoraldeine 70"
-  },
-  {
-    "name": "Jasmolactone"
-  },
-  {
-    "name": "Jasmone"
-  },
-  {
-    "name": "Kephalis"
-  },
-  {
-    "name": "Karanal"
-  },
-  {
-    "name": "Kumquat Mercaptan 1%"
-  },
-  {
-    "name": "Lactona C-18 (Coconut)"
-  },
-  {
-    "name": "Lavender Coumarin 50%"
-  },
-  {
-    "name": "Lemonile"
-  },
-  {
-    "name": "Lilial (BMHCA) [banned]"
-  },
-  {
-    "name": "Limonene",
-    "casNumber": "138-86-3"
+    "name": "Lemon Oil",
+    "casNumber": "8008-56-8",
+    "density": 0.85,
+    "note": "Top",
+    "pricePer10g": 1.00,
+    "notes": "Citrus, fresh, zest, sharp"
   },
   {
     "name": "Linalool",
-    "casNumber": "78-70-6"
-  },
-  {
-    "name": "Linalyl Acetate"
-  },
-  {
-    "name": "Lyral [banned]"
-  },
-  {
-    "name": "Maltol"
-  },
-  {
-    "name": "Methyl 2-Octynoate [restricted]"
-  },
-  {
-    "name": "Methyl Anthranilate"
-  },
-  {
-    "name": "Methyl Benzoate"
-  },
-  {
-    "name": "Methyl Cedryl Ketone"
-  },
-  {
-    "name": "Methyl Dihydro Jasmonate (Hedione)"
-  },
-  {
-    "name": "Methyl Ionone Alpha Iso"
-  },
-  {
-    "name": "Methyl Ionone Gamma"
-  },
-  {
-    "name": "Methyl Laitone 10%"
-  },
-  {
-    "name": "Methyl Pamplemousse"
-  },
-  {
-    "name": "Methyl Salicylate"
-  },
-  {
-    "name": "Methyl Vanillate"
-  },
-  {
-    "name": "Muscone (Synth)"
-  },
-  {
-    "name": "Neobutenone"
-  },
-  {
-    "name": "Nerolidol"
-  },
-  {
-    "name": "Nerol"
-  },
-  {
-    "name": "Nonadienal (Cucumber)"
-  },
-  {
-    "name": "Nopyl Acetate"
-  },
-  {
-    "name": "Octyl Aldehyde (Caprylic)"
-  },
-  {
-    "name": "Okoumal"
-  },
-  {
-    "name": "Orange Terpenes"
-  },
-  {
-    "name": "Orivone"
-  },
-  {
-    "name": "Osyrol"
-  },
-  {
-    "name": "Padma (Rosy Ketone)"
-  },
-  {
-    "name": "Peonile"
-  },
-  {
-    "name": "Phenethyl Alcohol"
-  },
-  {
-    "name": "Phenyl Acetaldehyde Dimethyl Acetal"
-  },
-  {
-    "name": "Phenyl Ethyl Acetate"
-  },
-  {
-    "name": "Phenyl Ethyl Dimethyl Carbinol"
-  },
-  {
-    "name": "Phenyl Hexanol"
-  },
-  {
-    "name": "Phenoxyethanol"
-  },
-  {
-    "name": "Prenyl Acetate"
-  },
-  {
-    "name": "Prenyl Alcohol"
-  },
-  {
-    "name": "Propylidene Phthalide"
-  },
-  {
-    "name": "Raspberry Ketone (Para)"
-  },
-  {
-    "name": "Rosalva"
-  },
-  {
-    "name": "Rose Oxide (cis/trans)"
-  },
-  {
-    "name": "Safranal"
-  },
-  {
-    "name": "Santalol (Synth)"
-  },
-  {
-    "name": "Sclareolide"
-  },
-  {
-    "name": "Styralyl Acetate"
-  },
-  {
-    "name": "Styrallyl Alcohol"
-  },
-  {
-    "name": "Suederal"
-  },
-  {
-    "name": "Sylvamber"
-  },
-  {
-    "name": "Terpineol Alpha"
-  },
-  {
-    "name": "Terpinyl Acetate"
-  },
-  {
-    "name": "Terpinyl Formate"
-  },
-  {
-    "name": "Tetrahydrolinalool"
-  },
-  {
-    "name": "Tonalide"
-  },
-  {
-    "name": "Triplal"
-  },
-  {
-    "name": "Undecavertol"
-  },
-  {
-    "name": "Undecylenic Aldehyde"
-  },
-  {
-    "name": "Vanillin"
-  },
-  {
-    "name": "Vertofix Coeur"
-  },
-  {
-    "name": "Vetikol Acetate"
-  },
-  {
-    "name": "Yara Yara"
-  },
-  {
-    "name": "Z11-Undecenyl Nitrile"
-  },
-  {
-    "name": "Ambrofix"
-  },
-  {
-    "name": "Belambre"
-  },
-  {
-    "name": "Cashmeran"
-  },
-  {
-    "name": "Neopral"
-  },
-  {
-    "name": "Piconia"
-  },
-  {
-    "name": "Zingerone"
-  },
-  {
-    "name": "Okumal"
-  },
-  {
-    "name": "Ebanol"
-  },
-  {
-    "name": "Isoamyl Tiglate"
-  },
-  {
-    "name": "Aldehyde C-13 (Citrus)"
-  },
-  {
-    "name": "Fixolide (Galaxolide)"
-  },
-  {
-    "name": "Helvetolide"
-  },
-  {
-    "name": "Habanolide"
-  },
-  {
-    "name": "Romandolide"
-  },
-  {
-    "name": "Velvione"
-  },
-  {
-    "name": "Sivetal"
-  },
-  {
-    "name": "Phantolide"
-  },
-  {
-    "name": "Celestolide"
-  },
-  {
-    "name": "Tonquitone"
-  },
-  {
-    "name": "Musk Ketone [nitro]"
-  },
-  {
-    "name": "Musk Xylene [nitro]"
-  },
-  {
-    "name": "AHTN (Tonalide)"
-  },
-  {
-    "name": "HHCB (Galaxolide)"
-  },
-  {
-    "name": "Galaxolide 50 DEP"
-  },
-  {
-    "name": "Galaxolide 50 IPM"
-  },
-  {
-    "name": "Heliotropine Musk Accord"
-  },
-  {
-    "name": "White Musk Accord"
-  },
-  {
-    "name": "Acetoin"
-  },
-  {
-    "name": "Aconitic Acid Triethyl Ester"
-  },
-  {
-    "name": "Alpha Ionone"
-  },
-  {
-    "name": "Alpha Pinene"
-  },
-  {
-    "name": "Beta Pinene"
-  },
-  {
-    "name": "Gamma Terpinene"
-  },
-  {
-    "name": "Delta-3-Carene"
-  },
-  {
-    "name": "Terpinolene"
-  },
-  {
-    "name": "Camphor"
-  },
-  {
-    "name": "Menthol"
-  },
-  {
-    "name": "Menthone"
-  },
-  {
-    "name": "Carvone"
-  },
-  {
-    "name": "Carvacrol"
-  },
-  {
-    "name": "Estragole (Methyl Chavicol)"
-  },
-  {
-    "name": "Safrole [restricted]"
-  },
-  {
-    "name": "Methyl Eugenol [restricted]"
-  },
-  {
-    "name": "Thymol"
-  },
-  {
-    "name": "Ocimene"
-  },
-  {
-    "name": "Myrcene"
-  },
-  {
-    "name": "Linalool Oxide"
-  },
-  {
-    "name": "Fenchone"
-  },
-  {
-    "name": "Bornyl Acetate"
-  },
-  {
-    "name": "Camphene"
-  },
-  {
-    "name": "Citronellyl Nitrile"
-  },
-  {
-    "name": "Citral Dimethyl Acetal"
-  },
-  {
-    "name": "Cis-Jasmone"
-  },
-  {
-    "name": "Dimethyl Octenone (Doremox)"
-  },
-  {
-    "name": "Ethyl 3-Methylthiopropionate"
-  },
-  {
-    "name": "Ethyl Butyrate"
-  },
-  {
-    "name": "Ethyl 3-Hydroxybutyrate"
-  },
-  {
-    "name": "Ethyl Vanillin Solution 50%"
-  },
-  {
-    "name": "Furaneol (Strawberry Furanone)"
-  },
-  {
-    "name": "Isoamyl Propionate"
-  },
-  {
-    "name": "Isopulegol"
-  },
-  {
-    "name": "Laevo-Carvone"
-  },
-  {
-    "name": "Methyl Heptine Carbonate"
-  },
-  {
-    "name": "Methyl Linalool"
-  },
-  {
-    "name": "Methyl Naphthyl Ketone"
-  },
-  {
-    "name": "Methyl Phenyl Carbinyl Acetate"
-  },
-  {
-    "name": "Neryl Acetate"
-  },
-  {
-    "name": "Octyl Acetate"
-  },
-  {
-    "name": "Pentyl Acetate"
-  },
-  {
-    "name": "Nonadienol (Cucumber Alcohol)"
-  },
-  {
-    "name": "2,6-Nonadienal (Cucumber Aldehyde)"
-  },
-  {
-    "name": "Undecalactone"
-  },
-  {
-    "name": "cis-3-Hexenyl Tiglate"
-  },
-  {
-    "name": "cis-3-Hexenyl Isobutyrate"
-  },
-  {
-    "name": "Aldehyde C-11 (Violet)"
-  },
-  {
-    "name": "Ambrette Seed CO2"
-  },
-  {
-    "name": "Basil Oil"
-  },
-  {
-    "name": "Bay Leaf Oil"
-  },
-  {
-    "name": "Carrot Seed Oil"
-  },
-  {
-    "name": "Cedarwood Fraction"
-  },
-  {
-    "name": "Clove Bud Oil"
-  },
-  {
-    "name": "Clove Leaf Oil"
-  },
-  {
-    "name": "Coriander Leaf Oil"
-  },
-  {
-    "name": "Cumin Aldehyde"
-  },
-  {
-    "name": "Dihydro Terpineol"
-  },
-  {
-    "name": "Dodecalactone"
-  },
-  {
-    "name": "Elderflower CO2"
-  },
-  {
-    "name": "Fir Needle Oil"
-  },
-  {
-    "name": "Guaiene (Isomers)"
-  },
-  {
-    "name": "Guaiacol"
-  },
-  {
-    "name": "Gurjun Balsam"
-  },
-  {
-    "name": "Hyacinth Base"
-  },
-  {
-    "name": "Hyraceum Tincture"
-  },
-  {
-    "name": "Immortelle Absolute"
-  },
-  {
-    "name": "Jatamansi Oil"
-  },
-  {
-    "name": "Kewda/Ruh Kewra"
-  },
-  {
-    "name": "Lapsang Tea Tincture"
-  },
-  {
-    "name": "Lovage Root Oil"
-  },
-  {
-    "name": "Mandarin Leaf (Petitgrain) Oil"
-  },
-  {
-    "name": "Mate Absolute"
-  },
-  {
-    "name": "Methyl Thymyl Ether"
-  },
-  {
-    "name": "Nutmeg Absolute"
-  },
-  {
-    "name": "Osmanthus Absolute"
-  },
-  {
-    "name": "Peach Lactone Base"
-  },
-  {
-    "name": "Pimento Leaf Oil"
-  },
-  {
-    "name": "Seaweed Absolute"
-  },
-  {
-    "name": "Tobacco Absolute"
-  },
-  {
-    "name": "Violet Leaf Absolute"
-  },
-  {
-    "name": "Yuzu Oil"
-  },
-  {
-    "name": "Kaffir Lime Leaf Oil"
-  },
-  {
-    "name": "Blackcurrant Bud Absolute"
+    "casNumber": "78-70-6",
+    "density": 0.86,
+    "note": "Top",
+    "pricePer10g": 1.10,
+    "notes": "Floral, fresh, woody, citrus"
+  },
+  {
+    "name": "Linalyl Acetate",
+    "casNumber": "115-95-7",
+    "density": 0.90,
+    "note": "Top",
+    "pricePer10g": 1.20,
+    "notes": "Floral, bergamot, fresh, sweet"
+  },
+  {
+    "name": "Mandarin Oil",
+    "casNumber": "8008-31-9",
+    "density": 0.85,
+    "note": "Top",
+    "pricePer10g": 2.20,
+    "notes": "Citrus, sweet, fruity, fresh"
+  },
+  {
+    "name": "Musk Ketone",
+    "casNumber": "81-14-1",
+    "density": 1.00,
+    "note": "Base",
+    "pricePer10g": 3.00,
+    "notes": "Musk, sweet, animalic, powdery"
+  },
+  {
+    "name": "Neroli Oil",
+    "casNumber": "8016-38-4",
+    "density": 0.87,
+    "note": "Middle",
+    "pricePer10g": 18.00,
+    "notes": "Floral, citrus, fresh, sweet"
+  },
+  {
+    "name": "Oakmoss Absolute",
+    "casNumber": "9000-50-4",
+    "density": 1.08,
+    "note": "Base",
+    "pricePer10g": 12.00,
+    "notes": "Earthy, woody, mossy, forest"
+  },
+  {
+    "name": "Orange Sweet Oil",
+    "casNumber": "8008-57-9",
+    "density": 0.84,
+    "note": "Top",
+    "pricePer10g": 0.60,
+    "notes": "Citrus, sweet, fresh, fruity"
+  },
+  {
+    "name": "Patchouli Oil",
+    "casNumber": "8014-09-3",
+    "density": 0.96,
+    "note": "Base",
+    "pricePer10g": 4.50,
+    "notes": "Woody, earthy, camphoraceous"
+  },
+  {
+    "name": "Peppermint Oil",
+    "casNumber": "8006-90-4",
+    "density": 0.90,
+    "note": "Top",
+    "pricePer10g": 2.50,
+    "notes": "Minty, fresh, cooling, herbal"
+  },
+  {
+    "name": "Phenethyl Alcohol",
+    "casNumber": "60-12-8",
+    "density": 1.02,
+    "note": "Middle",
+    "pricePer10g": 1.20,
+    "notes": "Floral, rose, honey, sweet"
+  },
+  {
+    "name": "Rose Absolute",
+    "casNumber": "8007-01-0",
+    "density": 0.98,
+    "note": "Middle",
+    "pricePer10g": 35.00,
+    "notes": "Floral, rose, sweet, rich"
+  },
+  {
+    "name": "Sandalwood Oil (Mysore)",
+    "casNumber": "8006-87-9",
+    "density": 0.97,
+    "note": "Base",
+    "pricePer10g": 45.00,
+    "notes": "Woody, creamy, milky, soft"
+  },
+  {
+    "name": "Vanillin",
+    "casNumber": "121-33-5",
+    "density": 1.06,
+    "note": "Base",
+    "pricePer10g": 1.50,
+    "notes": "Sweet, vanilla, creamy, powdery"
+  },
+  {
+    "name": "Vetiver Oil (Haiti)",
+    "casNumber": "8016-96-4",
+    "density": 0.99,
+    "note": "Base",
+    "pricePer10g": 6.00,
+    "notes": "Woody, earthy, smoky, rooty"
+  },
+  {
+    "name": "Ylang Ylang Oil",
+    "casNumber": "8006-81-3",
+    "density": 0.93,
+    "note": "Middle",
+    "pricePer10g": 5.50,
+    "notes": "Floral, sweet, fruity, balsamic"
   }
 ]
