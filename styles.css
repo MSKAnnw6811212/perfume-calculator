@@ -93,22 +93,14 @@ button:disabled{opacity:.6; cursor:not-allowed;}
 
 .card{border:1px solid var(--border); border-radius:12px; padding:12px; background:var(--card);}
 
-/* Tables - Sticky Columns Logic (Fixing R3) */
+/* Tables - Sticky Columns */
 .table-wrap{overflow-x:auto; position: relative;}
 table{width:100%; border-collapse:separate; border-spacing: 0; font-size:14px; font-family: var(--font-sans);}
 th,td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:middle; background: var(--card);}
 
-/* Sticky Headers */
 thead th{position:sticky; top:0; z-index:20; text-align:left; font-family: var(--font-serif); font-size: 16px; background: var(--card);}
-
-/* Sticky First Column */
-tbody td:first-child, thead th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 30; /* Higher than normal headers */
-  border-right: 2px solid var(--border); /* Visual separator */
-}
-thead th:first-child { z-index: 40; } /* Highest priority for top-left corner */
+tbody td:first-child, thead th:first-child { position: sticky; left: 0; z-index: 30; border-right: 2px solid var(--border); }
+thead th:first-child { z-index: 40; }
 
 tfoot td{font-weight:600; font-family: var(--font-serif);}
 
@@ -123,6 +115,7 @@ tfoot td{font-weight:600; font-family: var(--font-serif);}
 .src-note{color:var(--muted); font-style:italic; font-size:12px; margin-left:6px;}
 .cas-chip{display:inline-block; margin-left:6px; padding:2px 6px; border-radius:8px; border:1px dashed var(--border); font-size:12px; color:var(--muted);}
 
+/* Tooltips */
 .spec-help{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; border:1px solid var(--border); font-weight:700; cursor:default; margin-left:6px;}
 .spec-help[data-tip]{position:relative;}
 .spec-help[data-tip]:hover::after{content:attr(data-tip); position:absolute; left:50%; transform:translateX(-50%); bottom:130%; white-space:pre-wrap; max-width:320px; padding:8px 10px; border-radius:8px; background:var(--bg); color:var(--txt); border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.1); z-index: 100;}
@@ -136,7 +129,6 @@ tfoot td{font-weight:600; font-family: var(--font-serif);}
 
 .app-footer{text-align:center; color:var(--muted); font-size:12px; padding:20px 14px;}
 
-/* Compliance Pulse */
 @keyframes pulse-red {
   0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
   70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
@@ -145,17 +137,30 @@ tfoot td{font-weight:600; font-family: var(--font-serif);}
 .non-compliant-card { background-color: rgba(220, 38, 38, 0.05) !important; border-color: var(--fail) !important; animation: pulse-red 2s infinite; }
 [data-theme="dark"] .non-compliant-card { background-color: rgba(239, 68, 68, 0.1) !important; }
 
-/* Toast Notification (Fixing R4) */
-#toast-container {
-  position: fixed; bottom: 20px; right: 20px; z-index: 999;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.toast {
-  background: var(--brand-dark); color: var(--brand-cream);
-  padding: 12px 20px; border-radius: 8px; font-family: var(--font-sans);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  animation: slideIn 0.3s ease-out forwards;
-}
+#toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: var(--brand-dark); color: var(--brand-cream); padding: 12px 20px; border-radius: 8px; font-family: var(--font-sans); box-shadow: 0 4px 12px rgba(0,0,0,0.2); animation: slideIn 0.3s ease-out forwards; }
 [data-theme="dark"] .toast { background: var(--brand-cream); color: var(--brand-dark); }
 @keyframes slideIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes fadeOut { to { opacity: 0; } }
+
+/* PRINT STYLES (Fixing Report F-6) */
+@media print {
+  .app-header, .header-actions, .modes, #updateBanner, #toast-container, button, .app-footer, #proAdd, #addRow {
+    display: none !important;
+  }
+  body, .panel, .card {
+    background: #fff; color: #000; box-shadow: none; border: none; margin: 0; padding: 0;
+  }
+  .panel { margin-bottom: 20px; border-bottom: 2px solid #000; }
+  table { border: 1px solid #ddd; }
+  th, td { border: 1px solid #ddd; }
+  input, select, textarea {
+    border: none; background: transparent; padding: 0; width: auto; font-size: 12px;
+  }
+  /* Expand textareas for print */
+  textarea { height: auto; white-space: pre-wrap; }
+  /* Hide delete columns */
+  th:last-child, td:last-child { display: none; }
+  /* Ensure full width */
+  main { max-width: 100%; margin: 0; }
+}
