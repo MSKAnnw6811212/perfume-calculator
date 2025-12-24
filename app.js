@@ -1,5 +1,4 @@
-/* App (Simple + Pro) with: Autocomplete, SPEC tooltip, source tags */
-/* QA FIXES: F-1 (Dilution), F-2 (Input Validation), F-3 (Delete Logic) */
+/* App: Simple + Pro | Fixes: Dilution, Validation (F-2), Delete (F-3), Sticky Cols (R3), Toasts (R4) */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
@@ -15,12 +14,26 @@ const S = {
   acList: []
 };
 
+// --- HELPER: Toast Feedback (Fixes R4) ---
+function showToast(msg) {
+  const c = $$('#toast-container');
+  if(!c) return;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => {
+    t.style.animation = 'fadeOut 0.5s forwards';
+    setTimeout(() => t.remove(), 500);
+  }, 3000);
+}
+
 // --- HELPER: Parse numbers safely (Fixes F-2) ---
 // Handles commas (10,5 -> 10.5) and prevents negatives
 function parseNum(val) {
   if (!val) return 0;
   // Replace comma with dot for European inputs
-  const clean = String(val).replace(/,/g, '.');
+  const clean = String(val).replace(/,/g, '.').replace(/[^\d.-]/g, '');
   const num = parseFloat(clean);
   if (isNaN(num)) return 0;
   // Prevent negative values for physical quantities
@@ -134,13 +147,14 @@ function resolveIFRA({name, category, finishedPct}){
 function s_row(d={name:'',pct:0}){
   const tr = document.createElement('tr');
   const nameTd = document.createElement('td');
+  // Sticky column class handled by CSS
   nameTd.innerHTML = `<div class="ac-wrap">
       <input type="text" list="ingredientList" placeholder="Ingredient" value="${d.name||''}">
       <div class="ac-list" hidden></div>
     </div>`;
   const pctTd = document.createElement('td');
-  // Use step="any" to help browser allow decimals
-  pctTd.innerHTML = `<input type="number" step="any" value="${d.pct??0}">`;
+  // FIX F-2: Use type="text" inputmode="decimal" to allow commas
+  pctTd.innerHTML = `<input type="text" inputmode="decimal" placeholder="0" value="${d.pct??0}">`;
   const finTd = document.createElement('td'); finTd.className='finished'; finTd.textContent='0';
   const mkIfraCell = (c)=>{ const td=document.createElement('td'); td.className='ifra ifra-'+c; td.innerHTML='<span class="status">n/a</span>'; return td; };
   const idx = document.createElement('td'); idx.className='idx';
@@ -162,8 +176,14 @@ function s_row(d={name:'',pct:0}){
   bindAutocomplete(input, list);
 }
 
-// FIX: Use parseNum here
-function s_rows(){ return Array.from($$$('#tableBody tr')).map(tr => ({tr, name: tr.querySelector('input[list]').value.trim(), pct: parseNum(tr.querySelector('input[type=number]').value)})); }
+function s_rows(){ 
+  return Array.from($$$('#tableBody tr')).map(tr => ({
+    tr, 
+    name: tr.querySelector('input[list]').value.trim(), 
+    // FIX: Parse correctly
+    pct: parseNum(tr.querySelector('input[inputmode="decimal"]').value)
+  })); 
+}
 function s_renum(){ $$$('#tableBody .idx').forEach((td,i)=> td.textContent = i+1); }
 function s_fin(pct, dos){ return (pct*dos)/100; }
 
@@ -172,7 +192,6 @@ function badge(val, limit, cls, src){
   return `<span class="status ${cls}">${val.toFixed(3)} ≤ ${limit}% ${srcHtml}</span>`;
 }
 function s_update(){
-  // FIX: Use parseNum
   const dosage = parseNum($$('#dosage').value);
   let tConc=0, tFin=0;
   s_rows().forEach(({tr,name,pct})=>{
@@ -203,7 +222,6 @@ function s_update(){
 }
 
 function getBatchData() {
-  // FIX: Use parseNum
   const targetVol = parseNum($$('#batchVolume').value);
   const density = parseNum($$('#batchDensity').value);
   const dosage = parseNum($$('#dosage').value);
@@ -214,7 +232,6 @@ function getBatchData() {
   const results = rows.map(r => {
     const pct = r.pct || 0;
     const totalConcentratePct = rows.reduce((acc, row) => acc + (row.pct || 0), 0);
-    // Avoid division by zero
     const normalizedPct = totalConcentratePct > 0 ? (pct / totalConcentratePct) * 100 : 0;
     return {
       name: r.name,
@@ -264,6 +281,7 @@ function s_batch_export() {
   a.download = 'batch-export.csv';
   a.click();
   URL.revokeObjectURL(url);
+  showToast('Batch CSV Exported'); // FIX R4
 }
 
 function s_bind(){
@@ -284,6 +302,7 @@ function s_bind(){
     const dosage = parseNum($$('#dosage').value);
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
     all[n] = {dosage, rows}; localStorage.setItem('pc_recipes_v1', JSON.stringify(all)); s_pop(n);
+    showToast(`Recipe "${n}" Saved`); // FIX R4
   };
   $$('#loadRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
@@ -292,6 +311,7 @@ function s_bind(){
     $$('#tableBody').innerHTML='';
     (all[n].rows||[]).forEach(s_row); $$('#dosage').value = all[n].dosage||0;
     s_renum(); s_update();
+    showToast(`Recipe "${n}" Loaded`); // FIX R4
   };
   
   // FIX: Delete Button Logic (F-3)
@@ -302,9 +322,9 @@ function s_bind(){
     if(!confirm('Delete recipe?')) return;
     delete all[n]; 
     localStorage.setItem('pc_recipes_v1', JSON.stringify(all)); 
-    s_pop(); // Refresh dropdown
-    // Clear the inputs to show it's gone
+    s_pop(); 
     $$('#recipeName').value = ''; 
+    showToast('Recipe Deleted'); // FIX R4
   };
 
   $$('#exportCsv').onclick = () => {
@@ -322,6 +342,7 @@ function s_bind(){
     });
     const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
+    showToast('CSV Exported'); // FIX R4
   };
   $$('#printBtn').onclick = () => window.print();
   $$('#clearAll').onclick = () => { if(!confirm('Clear all rows?')) return; $$('#tableBody').innerHTML=''; s_row(); s_renum(); s_update(); };
@@ -335,7 +356,6 @@ function s_bind(){
       if(k===sel) o.selected=true; 
       s.appendChild(o); 
     }); 
-    // If we deleted the selected one, clear selection
     if (sel && !all[sel]) s.value = '';
   } 
   s_pop();
@@ -386,14 +406,15 @@ function p_row(d={}){
   const dil = d.dilution ?? 100;
   const solv = d.solvent ?? 'Ethanol';
 
+  // FIX F-2: Switched inputs to type="text" inputmode="decimal"
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
-    <td><input type="number" class="p-vol" step="any" value="${d.vol??0}"></td>
-    <td><input type="number" class="p-den" step="any" value="${d.den??0.85}"></td>
-    <td><input type="number" class="p-wt" step="any" value="${d.wt??0}"></td>
-    <td><input type="number" class="p-price" step="any" value="${d.price??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-vol" placeholder="0" value="${d.vol??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-den" placeholder="0.85" value="${d.den??0.85}"></td>
+    <td><input type="text" inputmode="decimal" class="p-wt" placeholder="0" value="${d.wt??0}"></td>
+    <td><input type="text" inputmode="decimal" class="p-price" placeholder="0" value="${d.price??0}"></td>
     <td class="p-cost">0.00</td>
     
-    <td><input type="number" class="p-dil" step="any" min="0" max="100" value="${dil}"></td>
+    <td><input type="text" inputmode="decimal" class="p-dil" placeholder="100" value="${dil}"></td>
     <td>
       <select class="p-solv">
         <option ${solv==='Ethanol'?'selected':''}>Ethanol</option>
@@ -431,7 +452,7 @@ function p_calc(){
 
   // 2. Process Rows
   rows.forEach(tr => {
-    // FIX: Use parseNum everywhere
+    // FIX F-2: Use parseNum everywhere on text inputs
     const vol = parseNum(tr.querySelector('.p-vol').value);
     const den = parseNum(tr.querySelector('.p-den').value);
     const wt  = parseNum(tr.querySelector('.p-wt').value);
@@ -569,9 +590,12 @@ function p_bind(){
       notes:tr.querySelector('.p-notes').value||'' 
     }));
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
+    showToast(`Recipe "${n}" Saved`); // FIX R4
   };
   
-  $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); };
+  $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); 
+    showToast(`Recipe "${n}" Loaded`); // FIX R4
+  };
   
   // FIX: Delete Button Logic (F-3)
   $$('#proDelete').onclick=()=>{ 
@@ -582,8 +606,8 @@ function p_bind(){
     delete all[n]; 
     localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); 
     p_pop(); 
-    // Clear inputs (optional but good for UX)
     $$('#proBody').innerHTML=''; p_row(); p_calc();
+    showToast('Recipe Deleted'); // FIX R4
   };
 
   $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
@@ -629,6 +653,7 @@ function p_bind(){
     const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
     const url=URL.createObjectURL(blob); 
     const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
+    showToast('Pro CSV Exported'); // FIX R4
   };
   
   function p_pop(sel=''){ 
