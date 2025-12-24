@@ -1,4 +1,5 @@
 /* App (Simple + Pro) with: Autocomplete (synonyms + IFRA51 names), SPEC tooltip, source tags */
+/* QA FIX: Added Dilution Support (Finding F-1) */
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
 const S = {
@@ -348,13 +349,34 @@ function bindAutocomplete(input, listEl){
 // --- START: Pro Mode Functions ---
 function p_row(d={}){
   const tr=document.createElement('tr');
+  // Default dilution to 100 if not set, default solvent Ethanol
+  const dil = d.dilution ?? 100;
+  const solv = d.solvent ?? 'Ethanol';
+
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
     <td><input type="number" class="p-vol" step="0.01" value="${d.vol??0}"></td>
     <td><input type="number" class="p-den" step="0.01" value="${d.den??0.85}"></td>
     <td><input type="number" class="p-wt" step="0.01" value="${d.wt??0}"></td>
     <td><input type="number" class="p-price" step="0.01" value="${d.price??0}"></td>
-    <td class="p-cost">0.00</td><td class="p-pct">0.00 %</td>
-    <td><select class="p-note"><option>N/A</option><option>Top</option><option>Middle</option><option>Base</option></select></td>
+    <td class="p-cost">0.00</td>
+    
+    <td><input type="number" class="p-dil" step="0.1" min="0" max="100" value="${dil}"></td>
+    <td>
+      <select class="p-solv">
+        <option ${solv==='Ethanol'?'selected':''}>Ethanol</option>
+        <option ${solv==='DPG'?'selected':''}>DPG</option>
+        <option ${solv==='IPM'?'selected':''}>IPM</option>
+        <option ${solv==='TEC'?'selected':''}>TEC</option>
+        <option ${solv==='None'?'selected':''}>None</option>
+      </select>
+    </td>
+    <td class="p-active-pct">0.00 %</td>
+    <td><select class="p-note">
+        <option ${d.note==='N/A'?'selected':''}>N/A</option>
+        <option ${d.note==='Top'?'selected':''}>Top</option>
+        <option ${d.note==='Middle'?'selected':''}>Middle</option>
+        <option ${d.note==='Base'?'selected':''}>Base</option>
+    </select></td>
     <td><input type="text" class="p-supplier" value="${d.supplier??''}"></td>
     <td><input type="text" class="p-cas" value="${d.cas??''}"></td>
     <td><textarea class="p-notes">${d.notes??''}</textarea></td>
@@ -362,19 +384,74 @@ function p_row(d={}){
   $$('#proBody').appendChild(tr);
 }
 function p_rows(){ return Array.from($$$('#proBody tr')); }
+
 function p_calc(){
-  const rows=p_rows(); let tw=0,tv=0,tc=0; const noteW={Top:0,Middle:0,Base:0,'N/A':0};
-  rows.forEach(tr=>{ tw+=parseFloat(tr.querySelector('.p-wt').value)||0; });
-  rows.forEach(tr=>{
-    const v=parseFloat(tr.querySelector('.p-vol').value)||0, d=parseFloat(tr.querySelector('.p-den').value)||0, w=parseFloat(tr.querySelector('.p-wt').value)||0, pr=parseFloat(tr.querySelector('.p-price').value)||0;
-    const cost=(w/10)*pr; tr.querySelector('.p-cost').textContent=cost.toFixed(2);
-    const pct=tw>0?(w/tw*100):0; tr.querySelector('.p-pct').textContent=pct.toFixed(2)+' %';
-    tv+=v; tc+=cost; const note=tr.querySelector('.p-note').value; if(noteW[note]!=null) noteW[note]+=w;
+  const rows = p_rows(); 
+  let totalWt = 0, totalVol = 0, totalCost = 0;
+  let totalActiveWt = 0; // Pure aromatic weight
+
+  // 1. Calculate Total Weight first (so we can get %s)
+  rows.forEach(tr => {
+    totalWt += parseFloat(tr.querySelector('.p-wt').value) || 0;
   });
-  $$('#proTotalVol').textContent=tv.toFixed(2); $$('#proTotalWt').textContent=tw.toFixed(2); $$('#proTotalCost').textContent=tc.toFixed(2);
+
+  // 2. Process Rows
+  rows.forEach(tr => {
+    const vol = parseFloat(tr.querySelector('.p-vol').value) || 0;
+    const den = parseFloat(tr.querySelector('.p-den').value) || 0;
+    const wt  = parseFloat(tr.querySelector('.p-wt').value) || 0;
+    const price = parseFloat(tr.querySelector('.p-price').value) || 0;
+    const dilution = parseFloat(tr.querySelector('.p-dil').value) || 100;
+
+    // Cost
+    const cost = (wt / 10) * price;
+    tr.querySelector('.p-cost').textContent = cost.toFixed(2);
+
+    // QA FIX: Active Weight Calculation
+    // If I have 10g of 10% solution, I have 1g active material.
+    const activeWt = wt * (dilution / 100);
+    
+    // QA FIX: Active % in Formula
+    // This is the "real" concentration used for IFRA
+    const activePct = totalWt > 0 ? (activeWt / totalWt * 100) : 0;
+    
+    tr.querySelector('.p-active-pct').textContent = activePct.toFixed(3) + ' %';
+    tr.dataset.activePct = activePct; // Store for p_ifra to read easily
+
+    totalVol += vol;
+    totalCost += cost;
+    totalActiveWt += activeWt;
+  });
+
+  // 3. Update Footer Totals
+  $$('#proTotalVol').textContent = totalVol.toFixed(2);
+  $$('#proTotalWt').textContent = totalWt.toFixed(2);
+  $$('#proTotalCost').textContent = totalCost.toFixed(2);
+  
+  // Display True Concentration (Total Active / Total Weight)
+  $$('#proTotalPct').textContent = totalWt > 0 
+    ? ((totalActiveWt / totalWt) * 100).toFixed(2) + '% (Active)' 
+    : '0.00 %';
+
+  // 4. Update Helper & Note Summary
   const hc=$$('#helperCost'), hw=$$('#helperWeight'), hr=$$('#helperResult');
-  if(hc && hw && hr){ hc.value=tc.toFixed(2); hw.value=tw.toFixed(2); hr.textContent = tw>0 ? `€${(tc/tw*10).toFixed(2)} per 10g` : '€0.00 per 10g'; }
-  let txt=[]; for(const k in noteW){ const pct=tw>0?(noteW[k]/tw*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } $$('#noteSummaryText').textContent=txt.join(' | ');
+  if(hc && hw && hr){ 
+    hc.value=totalCost.toFixed(2); 
+    hw.value=totalWt.toFixed(2); 
+    hr.textContent = totalWt>0 ? `€${(totalCost/totalWt*10).toFixed(2)} per 10g` : '€0.00 per 10g'; 
+  }
+  
+  // Note Balance (Simplified: based on TOTAL weight for now, effectively "Volume of bottle occupied")
+  // You could switch this to use activeWt if you only want to balance aromatics.
+  const noteW={Top:0,Middle:0,Base:0,'N/A':0};
+  rows.forEach(tr => {
+    const w = parseFloat(tr.querySelector('.p-wt').value) || 0;
+    const note = tr.querySelector('.p-note').value;
+    if(noteW[note]!=null) noteW[note]+=w;
+  });
+  let txt=[]; for(const k in noteW){ const pct=totalWt>0?(noteW[k]/totalWt*100).toFixed(1):'0.0'; txt.push(`${k}: ${pct}%`); } 
+  $$('#noteSummaryText').textContent=txt.join(' | ');
+
   p_ifra();
 }
 
@@ -384,16 +461,17 @@ function p_ifra(){
   
   rows.forEach(tr=>{
     const name=(tr.querySelector('.p-name').value||'').trim();
-    const pct=parseFloat(tr.querySelector('.p-pct').textContent)||0;
-    const r=resolveIFRA({name,category:cat,finishedPct:pct});
+    // QA FIX: Use the calculated ACTIVE percentage, not the raw weight percentage
+    const activePct = parseFloat(tr.dataset.activePct) || 0;
+    const r=resolveIFRA({name,category:cat,finishedPct:activePct});
     
     if(r.status==='eu-ban') {
         bad.push({name,msg:'EU PROHIBITED'});
     } else if(r.limit!=null){
-      if(pct > r.limit) {
-          bad.push({name,msg:`${pct.toFixed(2)}% > ${r.limit}%`});
-      } else if(r.limit > 0 && (pct/r.limit) > 0.8) {
-          warn.push({name,msg:`${pct.toFixed(2)}% (~${Math.round(pct/r.limit*100)}% of limit)`});
+      if(activePct > r.limit) {
+          bad.push({name,msg:`${activePct.toFixed(3)}% > ${r.limit}%`});
+      } else if(r.limit > 0 && (activePct/r.limit) > 0.8) {
+          warn.push({name,msg:`${activePct.toFixed(3)}% (~${Math.round(activePct/r.limit*100)}% of limit)`});
       }
     }
   });
@@ -437,9 +515,12 @@ function p_bind(){
       const sel=S.list.find(i=>i.name===e.target.value);
       if(sel){ tr.querySelector('.p-cas').value=sel.casNumber||''; tr.querySelector('.p-price').value=sel.pricePer10g||0; tr.querySelector('.p-notes').value=sel.notes||''; tr.querySelector('.p-den').value=sel.density||tr.querySelector('.p-den').value; }
     }
+    // Auto-calc weight from volume
     if(e.target.classList.contains('p-vol')||e.target.classList.contains('p-den')){
       const v=parseFloat(tr.querySelector('.p-vol').value)||0; const d=parseFloat(tr.querySelector('.p-den').value)||0; tr.querySelector('.p-wt').value=(v*d).toFixed(3);
-    } else if(e.target.classList.contains('p-wt')){
+    } 
+    // Auto-calc volume from weight
+    else if(e.target.classList.contains('p-wt')){
       const d=parseFloat(tr.querySelector('.p-den').value)||0; if(d>0){ tr.querySelector('.p-vol').value=(parseFloat(tr.querySelector('.p-wt').value)/d).toFixed(3); }
     }
     p_calc();
@@ -447,16 +528,33 @@ function p_bind(){
   $$('#proBody').addEventListener('change', p_calc);
   $$('#proBody').addEventListener('click', e=>{ if(e.target.classList.contains('p-del')){ e.target.closest('tr').remove(); p_calc(); } });
   $$('#ifraCategory').onchange=p_ifra;
+  
+  // SAVE RECIPE (UPDATED)
   $$('#proSave').onclick=()=>{ const n=prompt('Recipe name?'); if(!n) return;
-    const rows=p_rows().map(tr=>({ name:tr.querySelector('.p-name').value||'', vol:+tr.querySelector('.p-vol').value||0, den:+tr.querySelector('.p-den').value||0, wt:+tr.querySelector('.p-wt').value||0, price:+tr.querySelector('.p-price').value||0, note:tr.querySelector('.p-note').value||'N/A', supplier:tr.querySelector('.p-supplier').value||'', cas:tr.querySelector('.p-cas').value||'', notes:tr.querySelector('.p-notes').value||'' }));
+    const rows=p_rows().map(tr=>({ 
+      name:tr.querySelector('.p-name').value||'', 
+      vol:+tr.querySelector('.p-vol').value||0, 
+      den:+tr.querySelector('.p-den').value||0, 
+      wt:+tr.querySelector('.p-wt').value||0, 
+      price:+tr.querySelector('.p-price').value||0, 
+      // NEW FIELDS
+      dilution:+tr.querySelector('.p-dil').value||100,
+      solvent:tr.querySelector('.p-solv').value||'Ethanol',
+      
+      note:tr.querySelector('.p-note').value||'N/A', 
+      supplier:tr.querySelector('.p-supplier').value||'', 
+      cas:tr.querySelector('.p-cas').value||'', 
+      notes:tr.querySelector('.p-notes').value||'' 
+    }));
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
   };
+  
   $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); };
-  $$('#deleteRecipe').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
+  $$('#proDelete').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); if(!n||!all[n]) return; if(!confirm('Delete recipe?')) return; delete all[n]; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(); };
   $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   $$('#proPrint').onclick=()=>window.print();
   
-  // UPDATED PRO EXPORT
+  // EXPORT RECIPE (UPDATED)
   $$('#proExport').onclick=()=>{
     const rows=p_rows().map(tr=>({ 
         name:tr.querySelector('.p-name').value||'', 
@@ -464,41 +562,42 @@ function p_bind(){
         den:parseFloat(tr.querySelector('.p-den').value)||0, 
         wt:parseFloat(tr.querySelector('.p-wt').value)||0, 
         price:parseFloat(tr.querySelector('.p-price').value)||0, 
+        dilution:parseFloat(tr.querySelector('.p-dil').value)||100, // NEW
+        solvent:tr.querySelector('.p-solv').value||'Ethanol',       // NEW
+        activePct:parseFloat(tr.dataset.activePct)||0,              // NEW
         note:tr.querySelector('.p-note').value||'N/A', 
         supplier:tr.querySelector('.p-supplier').value||'', 
         cas:tr.querySelector('.p-cas').value||'', 
         notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
     }));
     
-    const tw=rows.reduce((a,b)=>a+(b.wt||0),0);
-    
-    // Updated header to include Finished % and IFRA columns
-    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Formula %','Finished %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
+    // Updated header
+    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Dilution %','Solvent','Active %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
     
     rows.forEach(r=>{ 
         const cost=(r.wt/10)*(r.price||0); 
-        const pct=tw>0?(r.wt/tw*100):0; // Formula %
-        const fin=pct; // In Pro mode (assumed 100% conc), finished is same as formula
         
-        // Calculate IFRA columns
+        // Calculate IFRA columns based on ACTIVE %
         const cats=['4','5A','5B','9'].map(cat=>{
-          const z=resolveIFRA({name:r.name,category:cat,finishedPct:fin});
+          const z=resolveIFRA({name:r.name,category:cat,finishedPct:r.activePct});
           if(z.status==='eu-ban') return 'EU PROHIBITED';
           if(z.status==='spec')  return 'SPEC';
           return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
         });
 
-        lines.push([`"${r.name.replace(/"/g,'""')}"`,r.vol,r.den,r.wt,(r.price||0).toFixed(2),cost.toFixed(2),pct.toFixed(3),fin.toFixed(3),...cats,r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`].join(',')); 
+        lines.push([
+          `"${r.name.replace(/"/g,'""')}"`,
+          r.vol,r.den,r.wt,
+          (r.price||0).toFixed(2),cost.toFixed(2),
+          r.dilution, r.solvent, r.activePct.toFixed(3),
+          ...cats,
+          r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`
+        ].join(',')); 
     });
     
-    // FIX: Add BOM for Excel compatibility
     const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
     const url=URL.createObjectURL(blob); 
-    const a=document.createElement('a'); 
-    a.href=url; 
-    a.download='pro.csv'; 
-    a.click(); 
-    URL.revokeObjectURL(url);
+    const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
   };
   
   function p_pop(sel=''){ const s=$$('#proSaved'); const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); s.innerHTML=''; Object.keys(all).sort().forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===sel) o.selected=true; s.appendChild(o); }); } p_pop();
