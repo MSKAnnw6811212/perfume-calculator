@@ -1,4 +1,4 @@
-/* App: Simple + Pro | Fixes: Dilution, Validation (F-2), Delete (F-3), Sticky Cols (R3), Toasts (R4) */
+/* App: Simple + Pro | Fixes: Dilution, Validation (F-2), Delete (F-3), Sticky Cols (R3), Toasts (R4), Auto-Data (Notes & Cache) */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
@@ -29,18 +29,21 @@ function showToast(msg) {
 }
 
 // --- HELPER: Parse numbers safely (Fixes F-2) ---
-// Handles commas (10,5 -> 10.5) and prevents negatives
 function parseNum(val) {
   if (!val) return 0;
-  // Replace comma with dot for European inputs
+  // Replace comma with dot, remove non-numeric chars except . and -
   const clean = String(val).replace(/,/g, '.').replace(/[^\d.-]/g, '');
   const num = parseFloat(clean);
   if (isNaN(num)) return 0;
-  // Prevent negative values for physical quantities
   return num < 0 ? 0 : num;
 }
 
-async function j(u){ const r = await fetch(u, {cache: 'no-store'}); if(!r.ok) throw new Error(u); return r.json(); }
+async function j(u){ 
+  // Cache Buster: adds ?t=Date to force browser to always get new file
+  const r = await fetch(u + '?t=' + new Date().getTime(), {cache: 'no-store'}); 
+  if(!r.ok) throw new Error(u); 
+  return r.json(); 
+}
 
 function setMode(m){ S.mode = m; localStorage.setItem('pc_mode', m); renderMode(); }
 function renderMode(){
@@ -147,13 +150,11 @@ function resolveIFRA({name, category, finishedPct}){
 function s_row(d={name:'',pct:0}){
   const tr = document.createElement('tr');
   const nameTd = document.createElement('td');
-  // Sticky column class handled by CSS
   nameTd.innerHTML = `<div class="ac-wrap">
       <input type="text" list="ingredientList" placeholder="Ingredient" value="${d.name||''}">
       <div class="ac-list" hidden></div>
     </div>`;
   const pctTd = document.createElement('td');
-  // FIX F-2: Use type="text" inputmode="decimal" to allow commas
   pctTd.innerHTML = `<input type="text" inputmode="decimal" placeholder="0" value="${d.pct??0}">`;
   const finTd = document.createElement('td'); finTd.className='finished'; finTd.textContent='0';
   const mkIfraCell = (c)=>{ const td=document.createElement('td'); td.className='ifra ifra-'+c; td.innerHTML='<span class="status">n/a</span>'; return td; };
@@ -180,7 +181,6 @@ function s_rows(){
   return Array.from($$$('#tableBody tr')).map(tr => ({
     tr, 
     name: tr.querySelector('input[list]').value.trim(), 
-    // FIX: Parse correctly
     pct: parseNum(tr.querySelector('input[inputmode="decimal"]').value)
   })); 
 }
@@ -281,7 +281,7 @@ function s_batch_export() {
   a.download = 'batch-export.csv';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('Batch CSV Exported'); // FIX R4
+  showToast('Batch CSV Exported'); 
 }
 
 function s_bind(){
@@ -302,7 +302,7 @@ function s_bind(){
     const dosage = parseNum($$('#dosage').value);
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
     all[n] = {dosage, rows}; localStorage.setItem('pc_recipes_v1', JSON.stringify(all)); s_pop(n);
-    showToast(`Recipe "${n}" Saved`); // FIX R4
+    showToast(`Recipe "${n}" Saved`);
   };
   $$('#loadRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
@@ -311,10 +311,9 @@ function s_bind(){
     $$('#tableBody').innerHTML='';
     (all[n].rows||[]).forEach(s_row); $$('#dosage').value = all[n].dosage||0;
     s_renum(); s_update();
-    showToast(`Recipe "${n}" Loaded`); // FIX R4
+    showToast(`Recipe "${n}" Loaded`);
   };
   
-  // FIX: Delete Button Logic (F-3)
   $$('#deleteRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
@@ -324,7 +323,7 @@ function s_bind(){
     localStorage.setItem('pc_recipes_v1', JSON.stringify(all)); 
     s_pop(); 
     $$('#recipeName').value = ''; 
-    showToast('Recipe Deleted'); // FIX R4
+    showToast('Recipe Deleted');
   };
 
   $$('#exportCsv').onclick = () => {
@@ -342,7 +341,7 @@ function s_bind(){
     });
     const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
-    showToast('CSV Exported'); // FIX R4
+    showToast('CSV Exported');
   };
   $$('#printBtn').onclick = () => window.print();
   $$('#clearAll').onclick = () => { if(!confirm('Clear all rows?')) return; $$('#tableBody').innerHTML=''; s_row(); s_renum(); s_update(); };
@@ -406,7 +405,6 @@ function p_row(d={}){
   const dil = d.dilution ?? 100;
   const solv = d.solvent ?? 'Ethanol';
 
-  // FIX F-2: Switched inputs to type="text" inputmode="decimal"
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
     <td><input type="text" inputmode="decimal" class="p-vol" placeholder="0" value="${d.vol??0}"></td>
     <td><input type="text" inputmode="decimal" class="p-den" placeholder="0.85" value="${d.den??0.85}"></td>
@@ -445,28 +443,21 @@ function p_calc(){
   let totalWt = 0, totalVol = 0, totalCost = 0;
   let totalActiveWt = 0;
 
-  // 1. Calculate Total Weight using parseNum
   rows.forEach(tr => {
     totalWt += parseNum(tr.querySelector('.p-wt').value);
   });
 
-  // 2. Process Rows
   rows.forEach(tr => {
-    // FIX F-2: Use parseNum everywhere on text inputs
     const vol = parseNum(tr.querySelector('.p-vol').value);
     const den = parseNum(tr.querySelector('.p-den').value);
     const wt  = parseNum(tr.querySelector('.p-wt').value);
     const price = parseNum(tr.querySelector('.p-price').value);
     const dilution = parseNum(tr.querySelector('.p-dil').value);
 
-    // Cost
     const cost = (wt / 10) * price;
     tr.querySelector('.p-cost').textContent = cost.toFixed(2);
 
-    // Active Weight Calculation
     const activeWt = wt * (dilution / 100);
-    
-    // Active % in Formula
     const activePct = totalWt > 0 ? (activeWt / totalWt * 100) : 0;
     
     tr.querySelector('.p-active-pct').textContent = activePct.toFixed(3) + ' %';
@@ -510,7 +501,6 @@ function p_ifra(){
   
   rows.forEach(tr=>{
     const name=(tr.querySelector('.p-name').value||'').trim();
-    // Use the calculated activePct
     const activePct = parseFloat(tr.dataset.activePct) || 0;
     const r=resolveIFRA({name,category:cat,finishedPct:activePct});
     
@@ -543,163 +533,3 @@ function p_ifra(){
     st.innerHTML=`<strong>⚠️ Caution: Near IFRA Limits (Cat ${cat})</strong><ul>`+warn.map(o=>`<li><b>${o.name}</b> — ${o.msg}</li>`).join('')+`</ul>`;
   } else {
     wrap.style.borderColor='#c3e6cb';
-    wrap.style.backgroundColor='#d4edda'; 
-    wrap.style.color='#155724'; 
-    st.innerHTML=`<strong>✅ Compliant for Cat ${cat}</strong>`;
-  }
-}
-
-function p_bind(){
-  $$('#proAdd').onclick=()=>{ p_row(); p_calc(); };
-  $$('#proBody').addEventListener('input', e=>{
-    const tr=e.target.closest('tr'); if(!tr) return;
-    if(e.target.classList.contains('p-name')){
-      const sel=S.list.find(i=>i.name===e.target.value);
-      if(sel){ tr.querySelector('.p-cas').value=sel.casNumber||''; tr.querySelector('.p-price').value=sel.pricePer10g||0; tr.querySelector('.p-notes').value=sel.notes||''; tr.querySelector('.p-den').value=sel.density||tr.querySelector('.p-den').value; }
-    }
-    // Auto-calc weight from volume
-    if(e.target.classList.contains('p-vol')||e.target.classList.contains('p-den')){
-      const v=parseNum(tr.querySelector('.p-vol').value); 
-      const d=parseNum(tr.querySelector('.p-den').value); 
-      tr.querySelector('.p-wt').value=(v*d).toFixed(3);
-    } 
-    // Auto-calc volume from weight
-    else if(e.target.classList.contains('p-wt')){
-      const d=parseNum(tr.querySelector('.p-den').value); 
-      if(d>0){ tr.querySelector('.p-vol').value=(parseNum(tr.querySelector('.p-wt').value)/d).toFixed(3); }
-    }
-    p_calc();
-  });
-  $$('#proBody').addEventListener('change', p_calc);
-  $$('#proBody').addEventListener('click', e=>{ if(e.target.classList.contains('p-del')){ e.target.closest('tr').remove(); p_calc(); } });
-  $$('#ifraCategory').onchange=p_ifra;
-  
-  $$('#proSave').onclick=()=>{ const n=prompt('Recipe name?'); if(!n) return;
-    const rows=p_rows().map(tr=>({ 
-      name:tr.querySelector('.p-name').value||'', 
-      vol:parseNum(tr.querySelector('.p-vol').value), 
-      den:parseNum(tr.querySelector('.p-den').value), 
-      wt:parseNum(tr.querySelector('.p-wt').value), 
-      price:parseNum(tr.querySelector('.p-price').value), 
-      dilution:parseNum(tr.querySelector('.p-dil').value),
-      solvent:tr.querySelector('.p-solv').value||'Ethanol',
-      
-      note:tr.querySelector('.p-note').value||'N/A', 
-      supplier:tr.querySelector('.p-supplier').value||'', 
-      cas:tr.querySelector('.p-cas').value||'', 
-      notes:tr.querySelector('.p-notes').value||'' 
-    }));
-    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
-    showToast(`Recipe "${n}" Saved`); // FIX R4
-  };
-  
-  $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); 
-    showToast(`Recipe "${n}" Loaded`); // FIX R4
-  };
-  
-  // FIX: Delete Button Logic (F-3)
-  $$('#proDelete').onclick=()=>{ 
-    const n=$$('#proSaved').value; 
-    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
-    if(!n||!all[n]) return; 
-    if(!confirm('Delete recipe?')) return; 
-    delete all[n]; 
-    localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); 
-    p_pop(); 
-    $$('#proBody').innerHTML=''; p_row(); p_calc();
-    showToast('Recipe Deleted'); // FIX R4
-  };
-
-  $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
-  $$('#proPrint').onclick=()=>window.print();
-  
-  $$('#proExport').onclick=()=>{
-    const rows=p_rows().map(tr=>({ 
-        name:tr.querySelector('.p-name').value||'', 
-        vol:parseNum(tr.querySelector('.p-vol').value), 
-        den:parseNum(tr.querySelector('.p-den').value), 
-        wt:parseNum(tr.querySelector('.p-wt').value), 
-        price:parseNum(tr.querySelector('.p-price').value), 
-        dilution:parseNum(tr.querySelector('.p-dil').value), 
-        solvent:tr.querySelector('.p-solv').value||'Ethanol',       
-        activePct:parseFloat(tr.dataset.activePct)||0,              
-        note:tr.querySelector('.p-note').value||'N/A', 
-        supplier:tr.querySelector('.p-supplier').value||'', 
-        cas:tr.querySelector('.p-cas').value||'', 
-        notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
-    }));
-    
-    const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Dilution %','Solvent','Active %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
-    
-    rows.forEach(r=>{ 
-        const cost=(r.wt/10)*(r.price||0); 
-        const cats=['4','5A','5B','9'].map(cat=>{
-          const z=resolveIFRA({name:r.name,category:cat,finishedPct:r.activePct});
-          if(z.status==='eu-ban') return 'EU PROHIBITED';
-          if(z.status==='spec')  return 'SPEC';
-          return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
-        });
-
-        lines.push([
-          `"${r.name.replace(/"/g,'""')}"`,
-          r.vol,r.den,r.wt,
-          (r.price||0).toFixed(2),cost.toFixed(2),
-          r.dilution, r.solvent, r.activePct.toFixed(3),
-          ...cats,
-          r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`
-        ].join(',')); 
-    });
-    
-    const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
-    const url=URL.createObjectURL(blob); 
-    const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
-    showToast('Pro CSV Exported'); // FIX R4
-  };
-  
-  function p_pop(sel=''){ 
-    const s=$$('#proSaved'); 
-    const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
-    s.innerHTML=''; 
-    Object.keys(all).sort().forEach(k=>{ 
-      const o=document.createElement('option'); o.value=k; o.textContent=k; 
-      if(k===sel) o.selected=true; 
-      s.appendChild(o); 
-    });
-    if (sel && !all[sel]) s.value = '';
-  } 
-  p_pop();
-}
-// --- END: Pro Mode Functions ---
-
-
-async function loadData(){
-  try{
-    const [ings, ifra, ver, ifra51, syn, reg] = await Promise.all([
-      j('data/ingredients.json'),
-      j('data/ifra.json').catch(()=>({})),
-      j('version.json').catch(()=>({})),
-      j('data/ifra-51.json').catch(()=>({})),
-      j('data/synonyms.json').catch(()=>({})),
-      j('data/regulatory.json').catch(()=>({})),
-    ]);
-    S.list=ings||[]; S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
-    const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
-    buildACList();
-    if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded (version: ${S.version||'n/a'})`;
-    const prev=localStorage.getItem('pc_data_version'); if(S.version && prev && prev!==S.version) showUpdate(); if(S.version) localStorage.setItem('pc_data_version',S.version);
-  }catch(e){ console.error(e); if($$('#dataStatus')) $$('#dataStatus').textContent='Failed to load data.'; }
-}
-
-function bindGlobal(){ $$('#modeSimple').onclick=()=>setMode('simple'); $$('#modePro').onclick=()=>setMode('pro'); }
-
-function init(){
-  setMode(localStorage.getItem('pc_mode')||'simple');
-  setupTheme();
-  setupRefresh();
-  bindGlobal();
-  s_row(); s_bind();
-  p_row(); p_bind();
-  loadData();
-  // registerSW(); // keep disabled during debugging
-}
-document.addEventListener('DOMContentLoaded', init);
