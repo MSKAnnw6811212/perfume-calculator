@@ -2,25 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Professional Artisan Perfume Calculator. Formulate, check IFRA limits, and manage recipes offline.">
+  <meta name="theme-color" content="#ffffff">
+  
   <title>Pixel & Pour - Artisan Perfume Calculator</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=branding-5" />
+  
+  <link rel="stylesheet" href="./styles.css?v=branding-6" />
+
   <script>
-  (async () => {
-    try {
-      if ('serviceWorker' in navigator) {
-        const regs = await navigator.serviceWorker.getRegistrations();
-        for (const r of regs) { try { await r.unregister(); } catch (e) {} }
-      }
-      if (window.caches) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map(k => caches.delete(k)));
-      }
-    } catch (e) {}
-  })();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+             // Optional: Check for updates
+             reg.onupdatefound = () => {
+               const installingWorker = reg.installing;
+               installingWorker.onstatechange = () => {
+                 if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                   // New update available
+                   const banner = document.getElementById('updateBanner');
+                   if(banner) banner.hidden = false;
+                 }
+               };
+             };
+          })
+          .catch(err => console.log('SW registration failed: ', err));
+      });
+    }
   </script>
 </head>
 <body>
@@ -29,12 +47,12 @@
       <img src="./Pixel & Pour Logo.png" alt="Pixel & Pour Logo" class="logo-image">
       <h1>Pixel & Pour</h1>
     </div>
-    <nav class="modes">
-      <button id="modeSimple" class="tab-btn" data-mode="simple">Simple</button>
-      <button id="modePro" class="tab-btn" data-mode="pro">Pro</button>
+    <nav class="modes" aria-label="Calculator Modes">
+      <button id="modeSimple" class="tab-btn" data-mode="simple" aria-pressed="true">Simple</button>
+      <button id="modePro" class="tab-btn" data-mode="pro" aria-pressed="false">Pro</button>
     </nav>
     <div class="header-actions">
-      <button id="themeToggle" class="secondary">🌓 Theme</button>
+      <button id="themeToggle" class="secondary" aria-label="Toggle Dark Mode">🌓 Theme</button>
     </div>
   </header>
 
@@ -52,11 +70,13 @@
         <input type="text" inputmode="decimal" id="dosage" value="20" placeholder="20" class="num-input" />
       </div>
 
-      <div class="row wrap">
+      <div class="row wrap buttons-row">
         <button id="addRow">+ Add ingredient</button>
-        <input type="text" id="recipeName" placeholder="Recipe name" />
+        <div class="input-group">
+            <input type="text" id="recipeName" placeholder="Recipe name" aria-label="Recipe Name" />
+        </div>
         <button id="saveRecipe">Save</button>
-        <select id="savedRecipes"></select>
+        <select id="savedRecipes" aria-label="Load Saved Recipe"></select>
         <button id="loadRecipe" class="secondary">Load</button>
         <button id="deleteRecipe" class="danger">Delete</button>
         <button id="exportCsv" class="secondary">Export CSV</button>
@@ -64,13 +84,18 @@
         <button id="clearAll" class="danger">Clear</button>
       </div>
 
-      <section class="card batch-helper">
+      <section class="card batch-helper" aria-labelledby="batchHeader">
+        <h3 id="batchHeader" class="sr-only">Batch Helper</h3>
         <div class="row wrap">
           <strong>Batch scaling helper</strong>
-          <label>Target finished volume (ml)</label>
-          <input type="text" inputmode="decimal" id="batchVolume" value="1000" class="num-input" />
-          <label>Assumed concentrate density (g/ml)</label>
-          <input type="text" inputmode="decimal" id="batchDensity" value="0.85" class="num-input" />
+          <div class="input-group">
+              <label for="batchVolume">Target Vol (ml)</label>
+              <input type="text" inputmode="decimal" id="batchVolume" value="1000" class="num-input" />
+          </div>
+          <div class="input-group">
+              <label for="batchDensity">Density (g/ml)</label>
+              <input type="text" inputmode="decimal" id="batchDensity" value="0.85" class="num-input" />
+          </div>
           <button id="batchCalcBtn" class="secondary">Calculate</button>
           <button id="batchExportBtn" class="secondary">Export Batch CSV</button>
         </div>
@@ -133,18 +158,22 @@
     <section id="proSection" class="panel" hidden>
       <h2>Artisan Pro Calculator</h2>
 
-      <div class="row wrap">
-        <label>Target Volume (ml)</label>
-        <input type="text" inputmode="decimal" id="targetVolume" value="100" class="num-input" />
-        <label>IFRA Category</label>
-        <select id="ifraCategory">
-          <option value="4">4 – Fine Fragrance</option>
-          <option value="5A">5A – Body Lotion</option>
-          <option value="5B">5B – Face Cream</option>
-          <option value="9">9 – Soap</option>
-        </select>
+      <div class="row wrap buttons-row">
+        <div class="input-group">
+            <label for="targetVolume">Target Volume (ml)</label>
+            <input type="text" inputmode="decimal" id="targetVolume" value="100" class="num-input" />
+        </div>
+        <div class="input-group">
+            <label for="ifraCategory">IFRA Category</label>
+            <select id="ifraCategory">
+              <option value="4">4 – Fine Fragrance</option>
+              <option value="5A">5A – Body Lotion</option>
+              <option value="5B">5B – Face Cream</option>
+              <option value="9">9 – Soap</option>
+            </select>
+        </div>
         <button id="proSave">Save</button>
-        <select id="proSaved"></select>
+        <select id="proSaved" aria-label="Saved Pro Recipes"></select>
         <button id="proLoad" class="secondary">Load</button>
         <button id="proDelete" class="danger">Delete</button>
         <button id="proNew" class="secondary">New</button>
@@ -166,7 +195,7 @@
               <th>Solvent</th>
               <th>
                 Active % 
-                <span class="spec-help" data-tip="The actual percentage of aromatic material in the total formula (excluding solvent). IFRA limits are checked against this value.">?</span>
+                <span class="spec-help" title="The actual percentage of aromatic material in the total formula (excluding solvent). IFRA limits are checked against this value.">?</span>
               </th>
               <th>Note</th>
               <th>Supplier</th>
@@ -191,7 +220,7 @@
         </table>
       </div>
 
-      <button id="proAdd">+ Add Ingredient</button>
+      <button id="proAdd" class="primary-action">+ Add Ingredient</button>
 
       <div class="cards">
         <div id="noteSummary" class="card">
@@ -201,17 +230,21 @@
         <div id="ifraStatus" class="card">
           <h4>
             IFRA Compliance
-            <span class="spec-help" data-tip="Calculated using the 'Active %' of each ingredient against the official IFRA limits for the selected category.">?</span>
+            <span class="spec-help" title="Calculated using the 'Active %' of each ingredient against the official IFRA limits for the selected category.">?</span>
           </h4>
           <div id="ifraStatusText">Enter rows to evaluate.</div>
         </div>
         <div id="priceHelper" class="card">
           <h4>Price per 10g</h4>
           <div class="row">
-            <label>Total Cost (€)</label>
-            <input type="number" id="helperCost" />
-            <label>Total Weight (g)</label>
-            <input type="number" id="helperWeight" />
+            <div class="input-group">
+                <label for="helperCost">Total Cost (€)</label>
+                <input type="number" id="helperCost" />
+            </div>
+            <div class="input-group">
+                <label for="helperWeight">Total Weight (g)</label>
+                <input type="number" id="helperWeight" />
+            </div>
             <strong>Result: <span id="helperResult">€0.00 per 10g</span></strong>
           </div>
         </div>
@@ -222,11 +255,11 @@
   </main>
 
   <footer class="app-footer">
-    <small>PWA demo • replace data/ files for production</small>
+    <small>Pixel & Pour PWA • Version 1.0.0</small>
   </footer>
 
   <div id="toast-container"></div>
 
-  <script src="./app.js?v=branding-5"></script>
+  <script src="./app.js?v=branding-6"></script>
 </body>
 </html>
