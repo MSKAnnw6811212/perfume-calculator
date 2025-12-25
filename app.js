@@ -1,10 +1,11 @@
-/* App: Simple + Pro | Robust Version 5 | Fixes: Syntax stability, Selectors */
+/* App: Simple + Pro | Robust Version 6 | Fixes: Performance (Map), CSV Helper, Readability */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
 const S = {
   mode: 'simple',
   list: [],
+  ingMap: new Map(), // Optimization: Fast lookup map
   ifraFallback: {},
   ifra51: {},
   syn: {},
@@ -38,7 +39,8 @@ function parseNum(val) {
   return num < 0 ? 0 : num;
 }
 
-async function j(u){ 
+// --- HELPER: Fetch JSON (Renamed from j() for clarity) ---
+async function fetchJSON(u){ 
   // Cache Buster: adds ?t=Date to force browser to always get new file
   try {
     const r = await fetch(u + '?t=' + new Date().getTime(), {cache: 'no-store'}); 
@@ -48,6 +50,19 @@ async function j(u){
     console.warn("Failed to load:", u, e);
     return {}; // Return empty object on fail so app doesn't crash
   }
+}
+
+// --- HELPER: Download CSV (DRY: Don't Repeat Yourself) ---
+function downloadCSV(filename, content) {
+    const blob = new Blob(['\uFEFF' + content], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 function setMode(m){ 
@@ -103,13 +118,22 @@ function setupTheme(){
 function nameToCAS(name){
   if(!name) return null;
   const n = name.trim().toLowerCase();
+  
+  // 1. Check Synonyms
   if(S.syn[n]) return String(S.syn[n]);
-  const ing = S.list.find(i => (i.name||'').toLowerCase() === n);
+  
+  // 2. Check Map (Instant lookup - O(1) performance)
+  const ing = S.ingMap.get(n); 
   if(ing?.casNumber) return String(ing.casNumber);
+
+  // 3. Regex Fallback
   const n2 = n.replace(/\s*\(.*?\)\s*/g,' ').trim();
   if(S.syn[n2]) return String(S.syn[n2]);
-  const ing2 = S.list.find(i => (i.name||'').toLowerCase() === n2);
+  
+  // 4. Check Map again for cleaned name
+  const ing2 = S.ingMap.get(n2);
   if(ing2?.casNumber) return String(ing2.casNumber);
+  
   return null;
 }
 
@@ -127,7 +151,8 @@ function resolveIFRA({name, category, finishedPct}){
       if(lim != null){ limit = Number(lim); status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
     }
   } else {
-    const ing = S.list.find(i => (i.name||'').toLowerCase() === (name||'').toLowerCase());
+    // Fallback: Check direct name if CAS failed
+    const ing = S.ingMap.get((name||'').toLowerCase()); // Optimized lookup
     const lim = (ing?.ifraLimits?.[category] ?? S.ifraFallback[name]?.[category]);
     if(lim != null){ limit = Number(lim); source = ing ? 'ING' : 'FALLBACK'; status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
   }
@@ -160,7 +185,7 @@ function s_row(d={name:'',pct:0}){
   tr.appendChild(finTd);
   ['4','5A','5B','9'].forEach(cat => tr.appendChild(mkIfraCell(cat)));
   tr.appendChild(rmTd);
-  
+   
   if($$('#tableBody')) $$('#tableBody').appendChild(tr);
 
   const input = nameTd.querySelector('input[list]');
@@ -266,13 +291,7 @@ function s_batch_export() {
   results.forEach(r => {
     lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct.toFixed(3), r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
   });
-  const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'batch-export.csv';
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadCSV('batch-export.csv', lines.join('\n'));
   showToast('Batch CSV Exported'); 
 }
 
@@ -307,7 +326,7 @@ function s_bind(){
     s_renum(); s_update();
     showToast(`Recipe "${n}" Loaded`);
   };
-  
+   
   if($$('#deleteRecipe')) $$('#deleteRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
@@ -333,8 +352,7 @@ function s_bind(){
       });
       lines.push([i+1, `"${r.name.replace(/"/g,'""')}"`, r.pct, dosage, fin.toFixed(3), ...vals].join(','));
     });
-    const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='simple.csv'; a.click(); URL.revokeObjectURL(url);
+    downloadCSV('simple.csv', lines.join('\n'));
     showToast('CSV Exported');
   };
   if($$('#printBtn')) $$('#printBtn').onclick = () => window.print();
@@ -407,7 +425,7 @@ function p_row(d={}){
     <td><input type="text" inputmode="decimal" class="p-wt num-input" placeholder="0" value="${d.wt??0}"></td>
     <td><input type="text" inputmode="decimal" class="p-price num-input" placeholder="0" value="${d.price??0}"></td>
     <td class="p-cost">0.00</td>
-    
+     
     <td><input type="text" inputmode="decimal" class="p-dil num-input" placeholder="100" value="${dil}"></td>
     <td>
       <select class="p-solv">
@@ -430,7 +448,7 @@ function p_row(d={}){
     <td><input type="text" class="p-cas" value="${d.cas??''}"></td>
     <td><textarea class="p-notes">${d.notes??''}</textarea></td>
     <td class="p-del">❌</td>`;
-  
+   
   if($$('#proBody')) $$('#proBody').appendChild(tr);
 }
 function p_rows(){ return Array.from($$$('#proBody tr')); }
@@ -457,7 +475,7 @@ function p_calc(){
 
     const activeWt = wt * (dilution / 100);
     const activePct = totalWt > 0 ? (activeWt / totalWt * 100) : 0;
-    
+     
     if(tr.querySelector('.p-active-pct')) tr.querySelector('.p-active-pct').textContent = activePct.toFixed(3) + ' %';
     tr.dataset.activePct = activePct; 
 
@@ -469,7 +487,7 @@ function p_calc(){
   if($$('#proTotalVol')) $$('#proTotalVol').textContent = totalVol.toFixed(2);
   if($$('#proTotalWt')) $$('#proTotalWt').textContent = totalWt.toFixed(2);
   if($$('#proTotalCost')) $$('#proTotalCost').textContent = totalCost.toFixed(2);
-  
+   
   if($$('#proTotalPct')) $$('#proTotalPct').textContent = totalWt > 0 
     ? ((totalActiveWt / totalWt) * 100).toFixed(2) + '% (Active)' 
     : '0.00 %';
@@ -480,7 +498,7 @@ function p_calc(){
     hw.value=totalWt.toFixed(2); 
     hr.textContent = totalWt>0 ? `€${(totalCost/totalWt*10).toFixed(2)} per 10g` : '€0.00 per 10g'; 
   }
-  
+   
   const noteW={Top:0,Middle:0,Base:0,'N/A':0};
   rows.forEach(tr => {
     const w = parseNum(tr.querySelector('.p-wt').value);
@@ -500,7 +518,7 @@ function p_ifra(){
   if(!$$('#ifraCategory')) return;
   const cat=$$('#ifraCategory').value; const rows=p_rows(); const bad=[];
   const warn=[]; 
-  
+   
   rows.forEach(tr=>{
     const nameEl = tr.querySelector('.p-name');
     const name = nameEl ? nameEl.value.trim() : '';
@@ -520,7 +538,7 @@ function p_ifra(){
 
   const st=$$('#ifraStatusText'), wrap=$$('#ifraStatus');
   if(!st || !wrap) return;
-  
+   
   wrap.classList.remove('non-compliant-card');
   wrap.style.borderColor = '';
   wrap.style.backgroundColor = '';
@@ -551,10 +569,11 @@ function p_bind(){
     
     // AUTO-FILL DATA (Fixing the Lookup Issue)
     if(e.target.classList.contains('p-name')){
-      // Use case-insensitive search
+      // Use case-insensitive search via Map if possible, or fall back to find
       const val = e.target.value.trim().toLowerCase();
-      // Safe check if S.list is loaded
-      const sel = (S.list||[]).find(i => (i.name||'').toLowerCase() === val);
+      // Optimized lookup
+      const sel = S.ingMap.get(val);
+      
       if(sel){ 
         if(tr.querySelector('.p-cas')) tr.querySelector('.p-cas').value = sel.casNumber||''; 
         if(tr.querySelector('.p-price')) tr.querySelector('.p-price').value = sel.pricePer10g||0; 
@@ -580,7 +599,7 @@ function p_bind(){
   if($$('#proBody')) $$('#proBody').addEventListener('change', p_calc);
   if($$('#proBody')) $$('#proBody').addEventListener('click', e=>{ if(e.target.classList.contains('p-del')){ e.target.closest('tr').remove(); p_calc(); } });
   if($$('#ifraCategory')) $$('#ifraCategory').onchange=p_ifra;
-  
+   
   if($$('#proSave')) $$('#proSave').onclick=()=>{ const n=prompt('Recipe name?'); if(!n) return;
     const rows=p_rows().map(tr=>({ 
       name:tr.querySelector('.p-name').value||'', 
@@ -599,11 +618,11 @@ function p_bind(){
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); all[n]= {cat: $$('#ifraCategory').value, rows}; localStorage.setItem('pc_pro_recipes_v1', JSON.stringify(all)); p_pop(n);
     showToast(`Recipe "${n}" Saved`);
   };
-  
+   
   if($$('#proLoad')) $$('#proLoad').onclick=()=>{ const n=$$('#proSaved').value; const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); const rec=all[n]; if(!rec) return alert('Not found'); $$('#proBody').innerHTML=''; (rec.rows||[]).forEach(r=>p_row(r)); p_calc(); 
     showToast(`Recipe "${n}" Loaded`);
   };
-  
+   
   if($$('#proDelete')) $$('#proDelete').onclick=()=>{ 
     const n=$$('#proSaved').value; 
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
@@ -618,7 +637,7 @@ function p_bind(){
 
   if($$('#proNew')) $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   if($$('#proPrint')) $$('#proPrint').onclick=()=>window.print();
-  
+   
   if($$('#proExport')) $$('#proExport').onclick=()=>{
     const rows=p_rows().map(tr=>({ 
         name:tr.querySelector('.p-name').value||'', 
@@ -627,8 +646,8 @@ function p_bind(){
         wt:parseNum(tr.querySelector('.p-wt').value), 
         price:parseNum(tr.querySelector('.p-price').value), 
         dilution:parseNum(tr.querySelector('.p-dil').value), 
-        solvent:tr.querySelector('.p-solv').value||'Ethanol',       
-        activePct:parseFloat(tr.dataset.activePct)||0,              
+        solvent:tr.querySelector('.p-solv').value||'Ethanol',        
+        activePct:parseFloat(tr.dataset.activePct)||0,               
         note:tr.querySelector('.p-note').value||'N/A', 
         supplier:tr.querySelector('.p-supplier').value||'', 
         cas:tr.querySelector('.p-cas').value||'', 
@@ -656,12 +675,10 @@ function p_bind(){
         ].join(',')); 
     });
     
-    const blob=new Blob(['\uFEFF' + lines.join('\n')],{type:'text/csv;charset=utf-8'}); 
-    const url=URL.createObjectURL(blob); 
-    const a=document.createElement('a'); a.href=url; a.download='pro.csv'; a.click(); URL.revokeObjectURL(url);
+    downloadCSV('pro.csv', lines.join('\n'));
     showToast('Pro CSV Exported');
   };
-  
+   
   function p_pop(sel=''){ 
     const s=$$('#proSaved'); 
     if(!s) return;
@@ -682,14 +699,21 @@ function p_bind(){
 async function loadData(){
   try{
     const [ings, ifra, ver, ifra51, syn, reg] = await Promise.all([
-      j('data/ingredients.json'),
-      j('data/ifra.json'),
-      j('version.json'),
-      j('data/ifra-51.json'),
-      j('data/synonyms.json'),
-      j('data/regulatory.json'),
+      fetchJSON('data/ingredients.json'),
+      fetchJSON('data/ifra.json'),
+      fetchJSON('version.json'),
+      fetchJSON('data/ifra-51.json'),
+      fetchJSON('data/synonyms.json'),
+      fetchJSON('data/regulatory.json'),
     ]);
     S.list=ings||[]; S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
+    
+    // OPTIMIZATION: Build Map for fast lookups
+    S.ingMap = new Map();
+    (S.list||[]).forEach(o=>{ 
+      if(o.name) S.ingMap.set(o.name.toLowerCase(), o);
+    });
+
     const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
     buildACList();
     if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded (version: ${S.version||'n/a'})`;
