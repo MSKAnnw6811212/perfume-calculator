@@ -1,370 +1,86 @@
 [
-  {
-    "name": "Ambergris Tincture",
-    "casNumber": "8038-65-1",
-    "density": 0.81,
-    "note": "Base",
-    "pricePer10g": 15.00,
-    "notes": "Animalic, marine, sweet"
-  },
-  {
-    "name": "Ambroxan",
-    "casNumber": "6790-58-5",
-    "density": 0.93,
-    "note": "Base",
-    "pricePer10g": 3.50,
-    "notes": "Amber, woody, dry, musk-like"
-  },
-  {
-    "name": "Amyris Oil",
-    "casNumber": "8015-65-4",
-    "density": 0.96,
-    "note": "Base",
-    "pricePer10g": 1.20,
-    "notes": "Woody, balsamic, faintly sweet"
-  },
-  {
-    "name": "Bergamot Oil",
-    "casNumber": "8007-75-8",
-    "density": 0.87,
-    "note": "Top",
-    "pricePer10g": 2.50,
-    "notes": "Citrus, floral, spicy, fresh"
-  },
-  {
-    "name": "Bergamot FCF Oil",
-    "casNumber": "68648-33-9",
-    "density": 0.87,
-    "note": "Top",
-    "pricePer10g": 2.80,
-    "notes": "Furocoumarin-free, safe citrus"
-  },
-  {
-    "name": "Black Pepper Oil",
-    "casNumber": "8006-82-4",
-    "density": 0.87,
-    "note": "Middle",
-    "pricePer10g": 3.00,
-    "notes": "Spicy, fresh, woody, terpency"
-  },
-  {
-    "name": "Blood Orange Oil",
-    "casNumber": "8008-57-9",
-    "density": 0.85,
-    "note": "Top",
-    "pricePer10g": 0.90,
-    "notes": "Sweet, juicy, citrus, aldehydic"
-  },
-  {
-    "name": "Cardamom Oil",
-    "casNumber": "8000-66-6",
-    "density": 0.93,
-    "note": "Middle",
-    "pricePer10g": 8.50,
-    "notes": "Spicy, balsamic, camphoraceous"
-  },
-  {
-    "name": "Cashmeran",
-    "casNumber": "33704-61-9",
-    "density": 0.96,
-    "note": "Base",
-    "pricePer10g": 4.00,
-    "notes": "Musk, woody, spicy, floral"
-  },
-  {
-    "name": "Cedarwood Atlas Oil",
-    "casNumber": "8023-85-6",
-    "density": 0.93,
-    "note": "Base",
-    "pricePer10g": 1.50,
-    "notes": "Woody, balsamic, sweet, warm"
-  },
-  {
-    "name": "Cedarwood Virginia Oil",
-    "casNumber": "8000-27-9",
-    "density": 0.95,
-    "note": "Base",
-    "pricePer10g": 1.10,
-    "notes": "Woody, pencil shavings, dry"
-  },
-  {
-    "name": "Cinnamic Aldehyde",
-    "casNumber": "104-55-2",
-    "density": 1.05,
-    "note": "Middle",
-    "pricePer10g": 0.80,
-    "notes": "Cinnamon, spicy, warm, sweet"
-  },
-  {
-    "name": "Citral",
-    "casNumber": "5392-40-5",
-    "density": 0.89,
-    "note": "Top",
-    "pricePer10g": 1.50,
-    "notes": "Lemon, fresh, sharp, aldehydic"
-  },
-  {
-    "name": "Citronellol",
-    "casNumber": "106-22-9",
-    "density": 0.86,
-    "note": "Middle",
-    "pricePer10g": 1.80,
-    "notes": "Rose, floral, fresh, waxy"
-  },
-  {
-    "name": "Clary Sage Oil",
-    "casNumber": "8016-63-5",
-    "density": 0.90,
-    "note": "Middle",
-    "pricePer10g": 3.20,
-    "notes": "Herbal, sweet, tea-like, ambery"
-  },
-  {
-    "name": "Coumarin",
-    "casNumber": "91-64-5",
-    "density": 0.94,
-    "note": "Base",
-    "pricePer10g": 1.20,
-    "notes": "Sweet, hay, tonka, almond"
-  },
-  {
-    "name": "Dihydromyrcenol",
-    "casNumber": "18479-58-8",
-    "density": 0.83,
-    "note": "Top",
-    "pricePer10g": 0.90,
-    "notes": "Fresh, citrus, lime, lavender"
-  },
-  {
-    "name": "Ethylene Brassylate",
-    "casNumber": "105-95-3",
-    "density": 1.04,
-    "note": "Base",
-    "pricePer10g": 1.50,
-    "notes": "Musk, sweet, floral, powdery"
-  },
-  {
-    "name": "Eugenol",
-    "casNumber": "97-53-0",
-    "density": 1.06,
-    "note": "Middle",
-    "pricePer10g": 1.80,
-    "notes": "Spicy, clove, warm, woody"
-  },
-  {
-    "name": "Evernia Prunastri (Oakmoss)",
-    "casNumber": "90028-68-5",
-    "density": 1.05,
-    "note": "Base",
-    "pricePer10g": 6.50,
-    "notes": "Earthy, mossy, woody, marine"
-  },
-  {
-    "name": "Frankincense (Olibanum) Oil",
-    "casNumber": "8016-36-2",
-    "density": 0.87,
-    "note": "Base",
-    "pricePer10g": 4.50,
-    "notes": "Resinous, balsamic, spicy, citrus"
-  },
-  {
-    "name": "Galaxolide 50 IPM",
-    "casNumber": "1222-05-5",
-    "density": 0.95,
-    "note": "Base",
-    "pricePer10g": 1.20,
-    "notes": "Musk, clean, floral, sweet"
-  },
-  {
-    "name": "Geraniol",
-    "casNumber": "106-24-1",
-    "density": 0.88,
-    "note": "Middle",
-    "pricePer10g": 1.50,
-    "notes": "Rose, floral, sweet, citrus"
-  },
-  {
-    "name": "Geranium Bourbon Oil",
-    "casNumber": "8000-46-2",
-    "density": 0.89,
-    "note": "Middle",
-    "pricePer10g": 5.00,
-    "notes": "Floral, green, rosy, minty"
-  },
-  {
-    "name": "Hedione",
-    "casNumber": "24851-98-7",
-    "density": 1.00,
-    "note": "Middle",
-    "pricePer10g": 1.80,
-    "notes": "Fresh, jasmine, citrus, floral"
-  },
-  {
-    "name": "Helional",
-    "casNumber": "1205-17-0",
-    "density": 1.05,
-    "note": "Middle",
-    "pricePer10g": 2.50,
-    "notes": "Green, floral, marine, melon"
-  },
-  {
-    "name": "Iso E Super",
-    "casNumber": "54464-57-2",
-    "density": 0.96,
-    "note": "Base",
-    "pricePer10g": 1.50,
-    "notes": "Woody, amber, velvet, cedar"
-  },
-  {
-    "name": "Jasmine Absolute",
-    "casNumber": "8022-96-6",
-    "density": 0.95,
-    "note": "Middle",
-    "pricePer10g": 25.00,
-    "notes": "Floral, rich, sweet, animalic"
-  },
-  {
-    "name": "Labdanum Absolute",
-    "casNumber": "8016-26-0",
-    "density": 1.05,
-    "note": "Base",
-    "pricePer10g": 8.00,
-    "notes": "Amber, balsamic, sweet, leathery"
-  },
-  {
-    "name": "Lavender Oil",
-    "casNumber": "8000-28-0",
-    "density": 0.88,
-    "note": "Top",
-    "pricePer10g": 3.50,
-    "notes": "Floral, herbal, fresh, sweet"
-  },
-  {
-    "name": "Lemon Oil",
-    "casNumber": "8008-56-8",
-    "density": 0.85,
-    "note": "Top",
-    "pricePer10g": 1.00,
-    "notes": "Citrus, fresh, zest, sharp"
-  },
-  {
-    "name": "Linalool",
-    "casNumber": "78-70-6",
-    "density": 0.86,
-    "note": "Top",
-    "pricePer10g": 1.10,
-    "notes": "Floral, fresh, woody, citrus"
-  },
-  {
-    "name": "Linalyl Acetate",
-    "casNumber": "115-95-7",
-    "density": 0.90,
-    "note": "Top",
-    "pricePer10g": 1.20,
-    "notes": "Floral, bergamot, fresh, sweet"
-  },
-  {
-    "name": "Mandarin Oil",
-    "casNumber": "8008-31-9",
-    "density": 0.85,
-    "note": "Top",
-    "pricePer10g": 2.20,
-    "notes": "Citrus, sweet, fruity, fresh"
-  },
-  {
-    "name": "Musk Ketone",
-    "casNumber": "81-14-1",
-    "density": 1.00,
-    "note": "Base",
-    "pricePer10g": 3.00,
-    "notes": "Musk, sweet, animalic, powdery"
-  },
-  {
-    "name": "Neroli Oil",
-    "casNumber": "8016-38-4",
-    "density": 0.87,
-    "note": "Middle",
-    "pricePer10g": 18.00,
-    "notes": "Floral, citrus, fresh, sweet"
-  },
-  {
-    "name": "Oakmoss Absolute",
-    "casNumber": "9000-50-4",
-    "density": 1.08,
-    "note": "Base",
-    "pricePer10g": 12.00,
-    "notes": "Earthy, woody, mossy, forest"
-  },
-  {
-    "name": "Orange Sweet Oil",
-    "casNumber": "8008-57-9",
-    "density": 0.84,
-    "note": "Top",
-    "pricePer10g": 0.60,
-    "notes": "Citrus, sweet, fresh, fruity"
-  },
-  {
-    "name": "Patchouli Oil",
-    "casNumber": "8014-09-3",
-    "density": 0.96,
-    "note": "Base",
-    "pricePer10g": 4.50,
-    "notes": "Woody, earthy, camphoraceous"
-  },
-  {
-    "name": "Peppermint Oil",
-    "casNumber": "8006-90-4",
-    "density": 0.90,
-    "note": "Top",
-    "pricePer10g": 2.50,
-    "notes": "Minty, fresh, cooling, herbal"
-  },
-  {
-    "name": "Phenethyl Alcohol",
-    "casNumber": "60-12-8",
-    "density": 1.02,
-    "note": "Middle",
-    "pricePer10g": 1.20,
-    "notes": "Floral, rose, honey, sweet"
-  },
-  {
-    "name": "Rose Absolute",
-    "casNumber": "8007-01-0",
-    "density": 0.98,
-    "note": "Middle",
-    "pricePer10g": 35.00,
-    "notes": "Floral, rose, sweet, rich"
-  },
-  {
-    "name": "Sandalwood Oil (Mysore)",
-    "casNumber": "8006-87-9",
-    "density": 0.97,
-    "note": "Base",
-    "pricePer10g": 45.00,
-    "notes": "Woody, creamy, milky, soft"
-  },
-  {
-    "name": "Vanillin",
-    "casNumber": "121-33-5",
-    "density": 1.06,
-    "note": "Base",
-    "pricePer10g": 1.50,
-    "notes": "Sweet, vanilla, creamy, powdery"
-  },
-  {
-    "name": "Vetiver Oil (Haiti)",
-    "casNumber": "8016-96-4",
-    "density": 0.99,
-    "note": "Base",
-    "pricePer10g": 6.00,
-    "notes": "Woody, earthy, smoky, rooty"
-  },
-  {
-    "name": "Ylang Ylang Oil",
-    "casNumber": "8006-81-3",
-    "density": 0.93,
-    "note": "Middle",
-    "pricePer10g": 5.50,
-    "notes": "Floral, sweet, fruity, balsamic"
-  }
+  { "name": "Aldehyde C-10 (Decanal)", "casNumber": "112-31-2", "density": 0.83, "note": "Top", "pricePer10g": 1.20, "notes": "Orange peel, waxy, fatty, clean" },
+  { "name": "Aldehyde C-11 Enic (Undecylenic)", "casNumber": "112-44-7", "density": 0.84, "note": "Top", "pricePer10g": 1.50, "notes": "Waxy, rose, citrus, clean laundry" },
+  { "name": "Aldehyde C-12 MNA", "casNumber": "110-41-8", "density": 0.83, "note": "Top", "pricePer10g": 1.80, "notes": "Incense, amber, pine, fresh" },
+  { "name": "Allyl Amyl Glycolate", "casNumber": "67634-00-8", "density": 0.94, "note": "Top", "pricePer10g": 2.00, "notes": "Pineapple, green, galbanum, metallic" },
+  { "name": "Ambergris Tincture", "casNumber": "8038-65-1", "density": 0.81, "note": "Base", "pricePer10g": 15.00, "notes": "Animalic, marine, sweet" },
+  { "name": "Ambroxan", "casNumber": "6790-58-5", "density": 0.93, "note": "Base", "pricePer10g": 3.50, "notes": "Amber, woody, dry, musk-like" },
+  { "name": "Ambrettolide", "casNumber": "28645-51-4", "density": 0.96, "note": "Base", "pricePer10g": 4.50, "notes": "Musk, fruity, pear, smooth" },
+  { "name": "Amyris Oil", "casNumber": "8015-65-4", "density": 0.96, "note": "Base", "pricePer10g": 1.20, "notes": "Woody, balsamic, faintly sweet" },
+  { "name": "Aurantiol", "casNumber": "89-43-0", "density": 1.05, "note": "Base", "pricePer10g": 1.80, "notes": "Orange blossom, grape, sweet, heavy" },
+  { "name": "Bacdanol", "casNumber": "28219-61-6", "density": 0.93, "note": "Base", "pricePer10g": 1.90, "notes": "Sandalwood, creamy, cosmetic" },
+  { "name": "Benzoin Resinoid (50%)", "casNumber": "9000-05-9", "density": 1.05, "note": "Base", "pricePer10g": 2.50, "notes": "Vanilla, balsamic, sweet, warm" },
+  { "name": "Benzyl Acetate", "casNumber": "140-11-4", "density": 1.05, "note": "Top", "pricePer10g": 0.50, "notes": "Jasmine, fruity, solvent-like, sharp" },
+  { "name": "Benzyl Salicylate", "casNumber": "118-58-1", "density": 1.17, "note": "Middle", "pricePer10g": 0.80, "notes": "Balsamic, floral, UV absorber, blender" },
+  { "name": "Bergamot Oil", "casNumber": "8007-75-8", "density": 0.87, "note": "Top", "pricePer10g": 2.50, "notes": "Citrus, floral, spicy, fresh" },
+  { "name": "Bergamot FCF Oil", "casNumber": "68648-33-9", "density": 0.87, "note": "Top", "pricePer10g": 2.80, "notes": "Furocoumarin-free, safe citrus" },
+  { "name": "Black Pepper Oil", "casNumber": "8006-82-4", "density": 0.87, "note": "Middle", "pricePer10g": 3.00, "notes": "Spicy, fresh, woody, terpency" },
+  { "name": "Blood Orange Oil", "casNumber": "8008-57-9", "density": 0.85, "note": "Top", "pricePer10g": 0.90, "notes": "Sweet, juicy, citrus, aldehydic" },
+  { "name": "Calone 1951", "casNumber": "28940-11-6", "density": 1.02, "note": "Middle", "pricePer10g": 3.00, "notes": "Marine, melon, sea breeze, ozone" },
+  { "name": "Cardamom Oil", "casNumber": "8000-66-6", "density": 0.93, "note": "Middle", "pricePer10g": 8.50, "notes": "Spicy, balsamic, camphoraceous" },
+  { "name": "Cashmeran", "casNumber": "33704-61-9", "density": 0.96, "note": "Base", "pricePer10g": 4.00, "notes": "Musk, woody, spicy, floral" },
+  { "name": "Castoreum Blend", "casNumber": "8023-83-4", "density": 0.98, "note": "Base", "pricePer10g": 6.00, "notes": "Leather, animalic, smoke, warm" },
+  { "name": "Cedarwood Atlas Oil", "casNumber": "8023-85-6", "density": 0.93, "note": "Base", "pricePer10g": 1.50, "notes": "Woody, balsamic, sweet, warm" },
+  { "name": "Cedarwood Virginia Oil", "casNumber": "8000-27-9", "density": 0.95, "note": "Base", "pricePer10g": 1.10, "notes": "Woody, pencil shavings, dry" },
+  { "name": "Cinnamic Aldehyde", "casNumber": "104-55-2", "density": 1.05, "note": "Middle", "pricePer10g": 0.80, "notes": "Cinnamon, spicy, warm, sweet" },
+  { "name": "Cistus Oil", "casNumber": "8016-26-0", "density": 0.95, "note": "Base", "pricePer10g": 9.00, "notes": "Amber, labdanum, dry, incensy" },
+  { "name": "Citral", "casNumber": "5392-40-5", "density": 0.89, "note": "Top", "pricePer10g": 1.50, "notes": "Lemon, fresh, sharp, aldehydic" },
+  { "name": "Citronellol", "casNumber": "106-22-9", "density": 0.86, "note": "Middle", "pricePer10g": 1.80, "notes": "Rose, floral, fresh, waxy" },
+  { "name": "Civet Artificial", "casNumber": "Mixture", "density": 1.00, "note": "Base", "pricePer10g": 5.00, "notes": "Fecal, animalic, floral lift, warm" },
+  { "name": "Clary Sage Oil", "casNumber": "8016-63-5", "density": 0.90, "note": "Middle", "pricePer10g": 3.20, "notes": "Herbal, sweet, tea-like, ambery" },
+  { "name": "Coumarin", "casNumber": "91-64-5", "density": 0.94, "note": "Base", "pricePer10g": 1.20, "notes": "Sweet, hay, tonka, almond" },
+  { "name": "Cyclamen Aldehyde", "casNumber": "103-95-7", "density": 0.95, "note": "Middle", "pricePer10g": 1.50, "notes": "Floral, green, rhubarb, fresh" },
+  { "name": "Damascone Alpha", "casNumber": "24720-09-0", "density": 0.93, "note": "Middle", "pricePer10g": 4.00, "notes": "Rose, apple, fruity, minty" },
+  { "name": "Dihydromyrcenol", "casNumber": "18479-58-8", "density": 0.83, "note": "Top", "pricePer10g": 0.90, "notes": "Fresh, citrus, lime, lavender" },
+  { "name": "Ebanol", "casNumber": "67801-20-1", "density": 0.96, "note": "Base", "pricePer10g": 2.50, "notes": "Sandalwood, powerful, musk aspect" },
+  { "name": "Ethyl Maltol", "casNumber": "4940-11-8", "density": 1.15, "note": "Base", "pricePer10g": 2.00, "notes": "Cotton candy, strawberry, sweet, burnt sugar" },
+  { "name": "Ethylene Brassylate", "casNumber": "105-95-3", "density": 1.04, "note": "Base", "pricePer10g": 1.50, "notes": "Musk, sweet, floral, powdery" },
+  { "name": "Eugenol", "casNumber": "97-53-0", "density": 1.06, "note": "Middle", "pricePer10g": 1.80, "notes": "Spicy, clove, warm, woody" },
+  { "name": "Evernyl (Veramoss)", "casNumber": "4707-47-5", "density": 1.05, "note": "Base", "pricePer10g": 2.50, "notes": "Oakmoss, earthy, dust, woody" },
+  { "name": "Exaltolide", "casNumber": "106-02-5", "density": 0.96, "note": "Base", "pricePer10g": 3.80, "notes": "Musk, angelica, clean, berry nuances" },
+  { "name": "Frankincense (Olibanum) Oil", "casNumber": "8016-36-2", "density": 0.87, "note": "Base", "pricePer10g": 4.50, "notes": "Resinous, balsamic, spicy, citrus" },
+  { "name": "Galaxolide 50 IPM", "casNumber": "1222-05-5", "density": 0.95, "note": "Base", "pricePer10g": 1.20, "notes": "Musk, clean, floral, sweet" },
+  { "name": "Gamma Octalactone", "casNumber": "104-50-7", "density": 0.98, "note": "Middle", "pricePer10g": 1.80, "notes": "Coconut, creamy, tropical, sweet" },
+  { "name": "Geraniol", "casNumber": "106-24-1", "density": 0.88, "note": "Middle", "pricePer10g": 1.50, "notes": "Rose, floral, sweet, citrus" },
+  { "name": "Geranium Bourbon Oil", "casNumber": "8000-46-2", "density": 0.89, "note": "Middle", "pricePer10g": 5.00, "notes": "Floral, green, rosy, minty" },
+  { "name": "Habanolide", "casNumber": "111879-80-2", "density": 0.96, "note": "Base", "pricePer10g": 2.50, "notes": "Musk, metallic, hot iron, clean" },
+  { "name": "Hedione", "casNumber": "24851-98-7", "density": 1.00, "note": "Middle", "pricePer10g": 1.80, "notes": "Fresh, jasmine, citrus, floral" },
+  { "name": "Hedione HC", "casNumber": "24851-98-7", "density": 1.00, "note": "Middle", "pricePer10g": 3.50, "notes": "More radiant Hedione, cis-isomer rich" },
+  { "name": "Helional", "casNumber": "1205-17-0", "density": 1.05, "note": "Middle", "pricePer10g": 2.50, "notes": "Green, floral, marine, melon" },
+  { "name": "Heliotropin", "casNumber": "120-57-0", "density": 1.20, "note": "Middle", "pricePer10g": 3.50, "notes": "Almond, vanilla, cherry, floral" },
+  { "name": "Hexyl Cinnamic Aldehyde", "casNumber": "101-86-0", "density": 0.95, "note": "Middle", "pricePer10g": 0.80, "notes": "Jasmine, waxy, floral, mild" },
+  { "name": "Hydroxycitronellal", "casNumber": "107-75-5", "density": 0.95, "note": "Middle", "pricePer10g": 1.50, "notes": "Lily of the valley, floral, fresh, sweet" },
+  { "name": "Indole (10% Soln)", "casNumber": "120-72-9", "density": 1.00, "note": "Base", "pricePer10g": 1.50, "notes": "Animalic, mothball, white flower power" },
+  { "name": "Ionone Alpha", "casNumber": "127-41-3", "density": 0.93, "note": "Middle", "pricePer10g": 2.00, "notes": "Violet, floral, woody, iris" },
+  { "name": "Ionone Beta", "casNumber": "14901-07-6", "density": 0.94, "note": "Middle", "pricePer10g": 2.00, "notes": "Violet, berry, woody, raspberry" },
+  { "name": "Iso E Super", "casNumber": "54464-57-2", "density": 0.96, "note": "Base", "pricePer10g": 1.50, "notes": "Woody, amber, velvet, cedar" },
+  { "name": "Jasmine Absolute", "casNumber": "8022-96-6", "density": 0.95, "note": "Middle", "pricePer10g": 25.00, "notes": "Floral, rich, sweet, animalic" },
+  { "name": "Labdanum Absolute", "casNumber": "8016-26-0", "density": 1.05, "note": "Base", "pricePer10g": 8.00, "notes": "Amber, balsamic, sweet, leathery" },
+  { "name": "Lavender Oil", "casNumber": "8000-28-0", "density": 0.88, "note": "Top", "pricePer10g": 3.50, "notes": "Floral, herbal, fresh, sweet" },
+  { "name": "Lemon Oil", "casNumber": "8008-56-8", "density": 0.85, "note": "Top", "pricePer10g": 1.00, "notes": "Citrus, fresh, zest, sharp" },
+  { "name": "Linalool", "casNumber": "78-70-6", "density": 0.86, "note": "Top", "pricePer10g": 1.10, "notes": "Floral, fresh, woody, citrus" },
+  { "name": "Linalyl Acetate", "casNumber": "115-95-7", "density": 0.90, "note": "Top", "pricePer10g": 1.20, "notes": "Floral, bergamot, fresh, sweet" },
+  { "name": "Lyral (HICC)", "casNumber": "31906-04-4", "density": 0.99, "note": "Middle", "pricePer10g": 2.00, "notes": "Muguet, soft, floral, tenacious (BANNED/Restricted)" },
+  { "name": "Mandarin Oil", "casNumber": "8008-31-9", "density": 0.85, "note": "Top", "pricePer10g": 2.20, "notes": "Citrus, sweet, fruity, fresh" },
+  { "name": "Methyl Anthranilate", "casNumber": "134-20-3", "density": 1.17, "note": "Middle", "pricePer10g": 1.50, "notes": "Grape, orange blossom, fruity, sweet" },
+  { "name": "Methyl Ionone Gamma", "casNumber": "127-51-5", "density": 0.93, "note": "Base", "pricePer10g": 2.20, "notes": "Iris, violet, woody, tobacco" },
+  { "name": "Musk Ketone", "casNumber": "81-14-1", "density": 1.00, "note": "Base", "pricePer10g": 3.00, "notes": "Musk, sweet, animalic, powdery" },
+  { "name": "Neroli Oil", "casNumber": "8016-38-4", "density": 0.87, "note": "Middle", "pricePer10g": 18.00, "notes": "Floral, citrus, fresh, sweet" },
+  { "name": "Oakmoss Absolute", "casNumber": "9000-50-4", "density": 1.08, "note": "Base", "pricePer10g": 12.00, "notes": "Earthy, woody, mossy, forest" },
+  { "name": "Orange Sweet Oil", "casNumber": "8008-57-9", "density": 0.84, "note": "Top", "pricePer10g": 0.60, "notes": "Citrus, sweet, fruity, fresh" },
+  { "name": "Patchouli Oil", "casNumber": "8014-09-3", "density": 0.96, "note": "Base", "pricePer10g": 4.50, "notes": "Woody, earthy, camphoraceous" },
+  { "name": "Peppermint Oil", "casNumber": "8006-90-4", "density": 0.90, "note": "Top", "pricePer10g": 2.50, "notes": "Minty, fresh, cooling, herbal" },
+  { "name": "Phenethyl Alcohol", "casNumber": "60-12-8", "density": 1.02, "note": "Middle", "pricePer10g": 1.20, "notes": "Floral, rose, honey, sweet" },
+  { "name": "Polysantol", "casNumber": "107898-54-4", "density": 0.91, "note": "Base", "pricePer10g": 4.00, "notes": "Sandalwood, diffuse, powerful" },
+  { "name": "Raspberry Ketone", "casNumber": "5471-51-2", "density": 1.00, "note": "Base", "pricePer10g": 2.00, "notes": "Raspberry, jammy, sweet, fruity" },
+  { "name": "Rose Absolute", "casNumber": "8007-01-0", "density": 0.98, "note": "Middle", "pricePer10g": 35.00, "notes": "Floral, rose, sweet, rich" },
+  { "name": "Sandalwood Oil (Mysore)", "casNumber": "8006-87-9", "density": 0.97, "note": "Base", "pricePer10g": 45.00, "notes": "Woody, creamy, milky, soft" },
+  { "name": "Stemone", "casNumber": "22457-23-4", "density": 0.90, "note": "Middle", "pricePer10g": 1.50, "notes": "Green, leaf, fig, fresh" },
+  { "name": "Tonalide (Musk T)", "casNumber": "1506-02-1", "density": 0.96, "note": "Base", "pricePer10g": 1.50, "notes": "Musk, clean, sweet, blackberry" },
+  { "name": "Triplal", "casNumber": "68039-49-6", "density": 0.94, "note": "Top", "pricePer10g": 1.20, "notes": "Green, grass, citrus, zest" },
+  { "name": "Vanillin", "casNumber": "121-33-5", "density": 1.06, "note": "Base", "pricePer10g": 1.50, "notes": "Sweet, vanilla, creamy, powdery" },
+  { "name": "Velvione", "casNumber": "37609-25-9", "density": 0.92, "note": "Base", "pricePer10g": 4.50, "notes": "Musk, powdery, soft, cosmetic" },
+  { "name": "Vertofix Coeur", "casNumber": "32388-55-9", "density": 0.99, "note": "Base", "pricePer10g": 1.20, "notes": "Woody, cedar, leather, amber" },
+  { "name": "Vetiver Oil (Haiti)", "casNumber": "8016-96-4", "density": 0.99, "note": "Base", "pricePer10g": 6.00, "notes": "Woody, earthy, smoky, rooty" },
+  { "name": "Ylang Ylang Oil", "casNumber": "8006-81-3", "density": 0.93, "note": "Middle", "pricePer10g": 5.50, "notes": "Floral, sweet, fruity, balsamic" }
 ]
