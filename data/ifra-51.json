@@ -156,5 +156,88 @@
     "name": "Limonene",
     "type": "spec",
     "spec": { "peroxide_value_mmolL_max": 20 }
+  },
+  "101-86-0": {
+    "name": "Hexyl Cinnamic Aldehyde",
+    "type": "restricted",
+    "limits": { "4": 12.0, "5A": 10.0, "5B": 2.5, "9": 35.0 }
+  },
+  "107-75-5": {
+    "name": "Hydroxycitronellal",
+    "type": "restricted",
+    "limits": { "4": 5.0, "5A": 1.5, "5B": 0.5, "9": 2.5 }
+  },
+  "122-40-7": {
+    "name": "Amyl Cinnamic Aldehyde",
+    "type": "restricted",
+    "limits": { "4": 7.0, "5A": 4.6, "5B": 4.6, "9": 7.0 }
+  },
+  "106-22-9": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": { "4": 12.0, "5A": 3.2, "5B": 3.2, "9": 24.0 }
+  },
+  "127-51-5": {
+    "name": "Methyl Ionone Gamma (Alpha-Isomethyl Ionone)",
+    "type": "restricted",
+    "limits": { "4": 2.6, "5A": 0.64, "5B": 0.64, "9": 5.0 }
+  },
+  "120-57-0": {
+    "name": "Heliotropin",
+    "type": "restricted",
+    "limits": { "4": 8.3, "5A": 2.1, "5B": 2.1, "9": 8.3 },
+    "note": "Restricted due to potential impurities."
+  },
+  "4707-47-5": {
+    "name": "Evernyl (Veramoss)",
+    "type": "restricted",
+    "limits": { "4": 0.1, "5A": 0.1, "5B": 0.1, "9": 0.1 },
+    "note": "Only restricted if it contains specific impurities; often safe in high purity, but flagged for caution."
+  },
+  "68039-49-6": {
+    "name": "Triplal (Ligustral)",
+    "type": "restricted",
+    "limits": { "4": 1.1, "5A": 0.27, "5B": 0.27, "9": 2.0 }
+  },
+  "5471-51-2": {
+    "name": "Raspberry Ketone",
+    "type": "restricted",
+    "limits": { "4": 1.3, "5A": 0.33, "5B": 0.33, "9": 2.5 }
+  },
+  "23696-85-7": {
+    "name": "Rose Ketones (Damascones)",
+    "type": "restricted",
+    "limits": { "4": 0.043, "5A": 0.011, "5B": 0.011, "9": 0.084 }
+  },
+  "24720-09-0": {
+    "name": "Alpha Damascone",
+    "type": "restricted",
+    "limits": { "4": 0.043, "5A": 0.011, "5B": 0.011, "9": 0.084 }
+  },
+  "134-20-3": {
+    "name": "Methyl Anthranilate",
+    "type": "restricted",
+    "limits": { "4": 0.1, "5A": 0.1, "5B": 0.1, "9": 0.5 },
+    "note": "Phototoxic: Do not use with Nitrosating agents."
+  },
+  "64-17-5": {
+    "name": "Ethanol",
+    "type": "safe",
+    "note": "Safe solvent."
+  },
+  "25265-71-8": {
+    "name": "DPG",
+    "type": "safe",
+    "note": "Safe solvent."
+  },
+  "110-27-0": {
+    "name": "IPM",
+    "type": "safe",
+    "note": "Safe solvent."
+  },
+  "77-93-0": {
+    "name": "TEC",
+    "type": "safe",
+    "note": "Safe solvent."
   }
 }
