@@ -24,12 +24,10 @@
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
           .then(reg => {
-             // Optional: Check for updates
              reg.onupdatefound = () => {
                const installingWorker = reg.installing;
                installingWorker.onstatechange = () => {
                  if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                   // New update available
                    const banner = document.getElementById('updateBanner');
                    if(banner) banner.hidden = false;
                  }
@@ -122,8 +120,14 @@
         </div>
       </section>
 
-      <div class="row">
+      <div class="row" style="justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px;">
         <small id="dataStatus">Loading data…</small>
+        
+        <div>
+            <input type="file" id="importCsvInput" accept=".csv" hidden />
+            <button id="importIngredientsBtn" class="secondary" style="font-size: 12px; padding: 4px 10px;">📥 Import Inventory CSV</button>
+            <button id="clearCustomData" class="secondary" style="font-size: 12px; padding: 4px 10px; color: var(--fail); border-color: var(--fail);" hidden>Reset Custom Data</button>
+        </div>
       </div>
 
       <section class="table-wrap">
@@ -255,11 +259,11 @@
   </main>
 
   <footer class="app-footer">
-    <small>Pixel & Pour PWA • Version 1.0.0</small>
+    <small>Pixel & Pour PWA • Version 1.1.0</small>
   </footer>
 
   <div id="toast-container"></div>
 
-  <script src="./app.js?v=branding-6"></script>
+  <script src="./app.js?v=branding-7"></script>
 </body>
 </html>
