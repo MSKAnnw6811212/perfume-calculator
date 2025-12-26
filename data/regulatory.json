@@ -7,7 +7,11 @@
     "57018-52-7": "prohibited (Chloroatranol - found in Oakmoss)",
     "8023-88-9": "prohibited (Costus Root Oil)",
     "9000-05-9": "prohibited (Benzoin - crude gum only, resinoid is safe)",
-    "8007-00-9": "prohibited (Peru Balsam - crude only, distilled is safe)"
+    "8007-00-9": "prohibited (Peru Balsam - crude only, distilled is safe)",
+    "8024-12-2": "prohibited (Verbena Oil - Lippia citriodora)",
+    "68916-52-9": "prohibited (Fig Leaf Absolute)",
+    "97676-35-2": "prohibited (Alanroot Oil)",
+    "8037-19-2": "prohibited (Tobacco - unless Nicotine-free)"
   },
   "EU_ALLERGENS": {
     "127-51-5": "Alpha-Isomethyl Ionone",
