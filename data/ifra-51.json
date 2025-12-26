@@ -373,5 +373,54 @@
     "name": "Carvone",
     "type": "restricted",
     "limits": { "4": 1.2, "5A": 0.3, "5B": 0.3, "9": 4.4 }
+  },
+  "8016-20-4": {
+    "name": "Grapefruit Oil (Expressed)",
+    "type": "restricted",
+    "limits": { "4": 4.0, "5A": 4.0, "5B": 4.0, "9": 4.0 },
+    "note": "Phototoxic: Limit based on Bergapten content."
+  },
+  "8008-26-2": {
+    "name": "Lime Oil (Expressed)",
+    "type": "restricted",
+    "limits": { "4": 0.7, "5A": 0.7, "5B": 0.7, "9": 0.7 },
+    "note": "Phototoxic: Distilled Lime Oil is generally safe."
+  },
+  "8016-84-0": {
+    "name": "Tagetes Oil (Marigold)",
+    "type": "restricted",
+    "limits": { "4": 0.01, "5A": 0.01, "5B": 0.01, "9": 0.01 },
+    "note": "Phototoxic + Systemic Toxicity. Extremely low limit."
+  },
+  "8037-19-2": {
+    "name": "Tobacco Extracts",
+    "type": "prohibited",
+    "note": "Usually restricted/prohibited if Nicotine content is not removed/lowered. Check supplier specs."
+  },
+  "23696-85-7": {
+    "name": "Rose Ketones (Damascenone)",
+    "type": "restricted",
+    "limits": { "4": 0.043, "5A": 0.011, "5B": 0.011, "9": 0.084 }
+  },
+  "39255-32-8": {
+    "name": "Manzanate",
+    "type": "safe",
+    "note": "Generally safe."
+  },
+  "198404-98-7": {
+    "name": "Javanol",
+    "type": "safe",
+    "note": "Generally safe."
+  },
+  "6658-48-6": {
+    "name": "Silvial",
+    "type": "restricted",
+    "limits": { "4": 0.47, "5A": 0.12, "5B": 0.12, "9": 0.92 },
+    "note": "Strong sensitizer."
+  },
+  "68648-41-9": {
+    "name": "Treemoss Absolute",
+    "type": "restricted",
+    "limits": { "4": 0.1, "5A": 0.1, "5B": 0.1, "9": 0.1 }
   }
 }
