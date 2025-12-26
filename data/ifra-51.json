@@ -239,5 +239,139 @@
     "name": "TEC",
     "type": "safe",
     "note": "Safe solvent."
+  },
+  "2705-87-5": {
+    "name": "Allyl Cyclohexyl Propionate",
+    "type": "restricted",
+    "limits": { "4": 1.06, "5A": 0.27, "5B": 0.27, "9": 1.06 }
+  },
+  "123-11-5": {
+    "name": "Anisaldehyde",
+    "type": "restricted",
+    "limits": { "4": 0.21, "5A": 0.11, "5B": 0.022, "9": 0.065 }
+  },
+  "105-13-5": {
+    "name": "Anisyl Alcohol",
+    "type": "restricted",
+    "limits": { "4": 0.68, "5A": 0.17, "5B": 0.17, "9": 2.1 }
+  },
+  "100-52-7": {
+    "name": "Benzaldehyde",
+    "type": "restricted",
+    "limits": { "4": 0.25, "5A": 0.064, "5B": 0.064, "9": 0.49 }
+  },
+  "103-41-3": {
+    "name": "Benzyl Cinnamate",
+    "type": "restricted",
+    "limits": { "4": 2.4, "5A": 0.6, "5B": 0.6, "9": 11.0 }
+  },
+  "77-54-3": {
+    "name": "Cedryl Acetate",
+    "type": "restricted",
+    "limits": { "4": 15.0, "5A": 15.0, "5B": 15.0, "9": 15.0 },
+    "note": "Only restricted if allergenic impurities present; generally safe but limits exist for acetylated vetiver oils etc."
+  },
+  "104-54-1": {
+    "name": "Cinnamic Alcohol",
+    "type": "restricted",
+    "limits": { "4": 1.2, "5A": 0.3, "5B": 0.3, "9": 2.3 }
+  },
+  "8015-91-6": {
+    "name": "Cinnamon Bark Oil",
+    "type": "restricted",
+    "limits": { "4": 0.33, "5A": 0.08, "5B": 0.08, "9": 0.66 },
+    "note": "High Cinnamal content drives restriction."
+  },
+  "122-03-2": {
+    "name": "Cuminaldehyde",
+    "type": "restricted",
+    "limits": { "4": 0.04, "5A": 0.01, "5B": 0.01, "9": 0.08 }
+  },
+  "151-05-3": {
+    "name": "Dimethyl Benzyl Carbinyl Acetate",
+    "type": "restricted",
+    "limits": { "4": 2.5, "5A": 0.62, "5B": 0.62, "9": 7.5 }
+  },
+  "4602-84-0": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": { "4": 1.2, "5A": 0.29, "5B": 0.29, "9": 5.8 }
+  },
+  "6259-76-3": {
+    "name": "Hexyl Salicylate",
+    "type": "restricted",
+    "limits": { "4": 6.5, "5A": 1.6, "5B": 1.6, "9": 20.0 }
+  },
+  "1034798-23-6": {
+    "name": "Jasmine Sambac Absolute",
+    "type": "restricted",
+    "limits": { "4": 3.8, "5A": 0.95, "5B": 0.95, "9": 7.5 }
+  },
+  "106-72-9": {
+    "name": "Melonal",
+    "type": "restricted",
+    "limits": { "4": 5.3, "5A": 1.3, "5B": 1.3, "9": 10.0 }
+  },
+  "93-58-3": {
+    "name": "Methyl Benzoate",
+    "type": "restricted",
+    "limits": { "4": 0.2, "5A": 0.05, "5B": 0.05, "9": 0.4 }
+  },
+  "8021-36-1": {
+    "name": "Opoponax",
+    "type": "restricted",
+    "limits": { "4": 0.45, "5A": 0.11, "5B": 0.11, "9": 0.88 },
+    "note": "Limits apply to expressed/crude; rectified/distilled may differ."
+  },
+  "122-78-1": {
+    "name": "Phenylacetaldehyde",
+    "type": "restricted",
+    "limits": { "4": 0.05, "5A": 0.013, "5B": 0.013, "9": 0.025 }
+  },
+  "16409-43-1": {
+    "name": "Rose Oxide",
+    "type": "restricted",
+    "limits": { "4": 0.5, "5A": 0.13, "5B": 0.13, "9": 2.5 }
+  },
+  "116-26-7": {
+    "name": "Safranal",
+    "type": "restricted",
+    "limits": { "4": 0.0075, "5A": 0.0019, "5B": 0.0019, "9": 0.0038 }
+  },
+  "8046-19-3": {
+    "name": "Styrax",
+    "type": "restricted",
+    "limits": { "4": 0.6, "5A": 0.15, "5B": 0.15, "9": 0.6 }
+  },
+  "8024-05-3": {
+    "name": "Tuberose Absolute",
+    "type": "restricted",
+    "limits": { "4": 0.25, "5A": 0.063, "5B": 0.063, "9": 0.5 }
+  },
+  "111-12-6": {
+    "name": "Methyl 2-Octynoate (Folione)",
+    "type": "restricted",
+    "limits": { "4": 0.02, "5A": 0.005, "5B": 0.005, "9": 0.04 }
+  },
+  "68648-41-9": {
+    "name": "Evernia Furfuracea (Treemoss) Extract",
+    "type": "restricted",
+    "limits": { "4": 0.1, "5A": 0.1, "5B": 0.1, "9": 0.1 }
+  },
+  "97-53-0": {
+    "name": "Eugenol",
+    "type": "restricted",
+    "limits": { "4": 2.5, "5A": 0.64, "5B": 0.64, "9": 4.9 }
+  },
+  "80-54-6": {
+    "name": "Lilial (Butylphenyl Methylpropional)",
+    "type": "prohibited",
+    "limits": { "4": 0, "5A": 0, "5B": 0, "9": 0 },
+    "note": "BANNED by EU and IFRA."
+  },
+  "6485-40-1": {
+    "name": "Carvone",
+    "type": "restricted",
+    "limits": { "4": 1.2, "5A": 0.3, "5B": 0.3, "9": 4.4 }
   }
 }
