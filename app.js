@@ -1,11 +1,13 @@
-/* App: Simple + Pro | Robust Version 6 | Fixes: Performance (Map), CSV Helper, Readability */
+/* App: Simple + Pro | Robust Version 7 | Fixes: CSV Importer, Data Merging */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
 const S = {
   mode: 'simple',
-  list: [],
-  ingMap: new Map(), // Optimization: Fast lookup map
+  list: [],      // The combined list
+  dbList: [],    // The "official" JSON list
+  customList: [], // The user-imported list
+  ingMap: new Map(),
   ifraFallback: {},
   ifra51: {},
   syn: {},
@@ -32,27 +34,25 @@ function showToast(msg) {
 // --- HELPER: Parse numbers safely ---
 function parseNum(val) {
   if (!val) return 0;
-  // Replace comma with dot, remove non-numeric chars except . and -
   const clean = String(val).replace(/,/g, '.').replace(/[^\d.-]/g, '');
   const num = parseFloat(clean);
   if (isNaN(num)) return 0;
   return num < 0 ? 0 : num;
 }
 
-// --- HELPER: Fetch JSON (Renamed from j() for clarity) ---
+// --- HELPER: Fetch JSON ---
 async function fetchJSON(u){ 
-  // Cache Buster: adds ?t=Date to force browser to always get new file
   try {
     const r = await fetch(u + '?t=' + new Date().getTime(), {cache: 'no-store'}); 
     if(!r.ok) throw new Error(u); 
     return r.json();
   } catch(e) {
     console.warn("Failed to load:", u, e);
-    return {}; // Return empty object on fail so app doesn't crash
+    return {}; 
   }
 }
 
-// --- HELPER: Download CSV (DRY: Don't Repeat Yourself) ---
+// --- HELPER: Download CSV ---
 function downloadCSV(filename, content) {
     const blob = new Blob(['\uFEFF' + content], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -119,18 +119,14 @@ function nameToCAS(name){
   if(!name) return null;
   const n = name.trim().toLowerCase();
   
-  // 1. Check Synonyms
   if(S.syn[n]) return String(S.syn[n]);
   
-  // 2. Check Map (Instant lookup - O(1) performance)
   const ing = S.ingMap.get(n); 
   if(ing?.casNumber) return String(ing.casNumber);
 
-  // 3. Regex Fallback
   const n2 = n.replace(/\s*\(.*?\)\s*/g,' ').trim();
   if(S.syn[n2]) return String(S.syn[n2]);
   
-  // 4. Check Map again for cleaned name
   const ing2 = S.ingMap.get(n2);
   if(ing2?.casNumber) return String(ing2.casNumber);
   
@@ -151,13 +147,114 @@ function resolveIFRA({name, category, finishedPct}){
       if(lim != null){ limit = Number(lim); status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
     }
   } else {
-    // Fallback: Check direct name if CAS failed
-    const ing = S.ingMap.get((name||'').toLowerCase()); // Optimized lookup
+    const ing = S.ingMap.get((name||'').toLowerCase());
     const lim = (ing?.ifraLimits?.[category] ?? S.ifraFallback[name]?.[category]);
     if(lim != null){ limit = Number(lim); source = ing ? 'ING' : 'FALLBACK'; status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
   }
   if(cas && EU.has(cas)){ status = 'eu-ban'; limit = 0.0; source = 'EU'; }
   return {cas, status, limit, spec, source};
+}
+
+// --- CSV IMPORTER LOGIC ---
+function setupImporter() {
+  const btn = $$('#importIngredientsBtn');
+  const input = $$('#importCsvInput');
+  const clearBtn = $$('#clearCustomData');
+
+  if(btn && input) {
+    btn.onclick = () => input.click();
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => processCSV(evt.target.result);
+      reader.readAsText(file);
+      input.value = ''; // reset
+    };
+  }
+
+  // Show "Reset" button if we have custom data
+  if(clearBtn) {
+    const hasCustom = localStorage.getItem('pc_custom_ingredients');
+    if(hasCustom) clearBtn.hidden = false;
+    clearBtn.onclick = () => {
+      if(confirm('Remove all imported custom ingredients?')) {
+        localStorage.removeItem('pc_custom_ingredients');
+        location.reload();
+      }
+    };
+  }
+}
+
+function processCSV(text) {
+  try {
+    const lines = text.split(/\r\n|\n/);
+    if(lines.length < 2) throw new Error("Empty CSV");
+
+    // Robust CSV split (handles quoted commas)
+    const splitCSV = (str) => {
+      const arr = [];
+      let quote = false;  // 'true' means we're inside a quoted field
+      let col = "";
+      for (let c of str) {
+          if (c === '"') { quote = !quote; }
+          else if (c === ',' && !quote) { arr.push(col.trim()); col = ""; }
+          else { col += c; }
+      }
+      arr.push(col.trim());
+      return arr.map(s => s.replace(/^"|"$/g, '').replace(/""/g, '"')); // Clean quotes
+    };
+
+    const headers = splitCSV(lines[0].toLowerCase());
+    
+    // Auto-map headers
+    const map = { name: -1, cas: -1, den: -1, price: -1, note: -1, notes: -1 };
+    
+    headers.forEach((h, i) => {
+      if(h.includes('name') || h.includes('ingredient')) map.name = i;
+      else if(h.includes('cas')) map.cas = i;
+      else if(h.includes('den') || h.includes('gravity')) map.den = i;
+      else if(h.includes('price') || h.includes('cost')) map.price = i;
+      else if(h === 'note' || h.includes('pyramid')) map.note = i;
+      else if(h.includes('desc') || h.includes('odor') || h === 'notes') map.notes = i;
+    });
+
+    if(map.name === -1) throw new Error("Could not find a 'Name' or 'Ingredient' column.");
+
+    const newItems = [];
+    
+    for(let i=1; i<lines.length; i++) {
+      if(!lines[i].trim()) continue;
+      const cols = splitCSV(lines[i]);
+      if(cols.length < headers.length - 2) continue; // Skip malformed rows
+
+      const item = {
+        name: cols[map.name],
+        casNumber: map.cas > -1 ? cols[map.cas] : '',
+        density: map.den > -1 ? parseNum(cols[map.den]) : 0.85, // Default density
+        pricePer10g: map.price > -1 ? parseNum(cols[map.price]) : 0,
+        note: map.note > -1 ? cols[map.note] : 'Middle',
+        notes: map.notes > -1 ? cols[map.notes] : ''
+      };
+
+      if(item.name) newItems.push(item);
+    }
+
+    if(newItems.length > 0) {
+      // Save to LocalStorage
+      const existing = JSON.parse(localStorage.getItem('pc_custom_ingredients') || '[]');
+      const combined = [...existing, ...newItems];
+      localStorage.setItem('pc_custom_ingredients', JSON.stringify(combined));
+      alert(`Successfully imported ${newItems.length} ingredients! Page will reload.`);
+      location.reload();
+    } else {
+      alert("No valid ingredients found in CSV.");
+    }
+
+  } catch(e) {
+    console.error(e);
+    alert("Import Failed: " + e.message);
+  }
 }
 
 // --- START: Simple Mode Functions ---
@@ -169,7 +266,6 @@ function s_row(d={name:'',pct:0}){
       <div class="ac-list" hidden></div>
     </div>`;
   const pctTd = document.createElement('td');
-  // Use simple class "num-input" selector
   pctTd.innerHTML = `<input type="text" inputmode="decimal" class="num-input" placeholder="0" value="${d.pct??0}">`;
   const finTd = document.createElement('td'); finTd.className='finished'; finTd.textContent='0';
   const mkIfraCell = (c)=>{ const td=document.createElement('td'); td.className='ifra ifra-'+c; td.innerHTML='<span class="status">n/a</span>'; return td; };
@@ -194,7 +290,6 @@ function s_row(d={name:'',pct:0}){
 }
 
 function s_rows(){ 
-  // More robust selector
   return Array.from($$$('#tableBody tr')).map(tr => ({
     tr, 
     name: tr.querySelector('input[list]') ? tr.querySelector('input[list]').value.trim() : '', 
@@ -378,7 +473,10 @@ function s_bind(){
 function buildACList(){
   const namesFromIFRA = Object.values(S.ifra51||{}).map(v => v?.name).filter(Boolean);
   const synKeys = Object.keys(S.syn||{});
-  const set = new Set([...synKeys, ...namesFromIFRA]);
+  // Combine names from official list AND custom list
+  const ingNames = S.list.map(i => i.name).filter(Boolean);
+  
+  const set = new Set([...synKeys, ...namesFromIFRA, ...ingNames]);
   const arr = Array.from(set).filter(Boolean).sort((a,b)=> a.localeCompare(b));
   S.acList = arr;
 }
@@ -418,7 +516,6 @@ function p_row(d={}){
   const dil = d.dilution ?? 100;
   const solv = d.solvent ?? 'Ethanol';
 
-  // FIX F-2: Use classes p-vol, p-den, p-wt etc. and inputmode="decimal"
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
     <td><input type="text" inputmode="decimal" class="p-vol num-input" placeholder="0" value="${d.vol??0}"></td>
     <td><input type="text" inputmode="decimal" class="p-den num-input" placeholder="0.85" value="${d.den??0.85}"></td>
@@ -459,7 +556,6 @@ function p_calc(){
   let totalActiveWt = 0;
 
   rows.forEach(tr => {
-    // Robust selection by class
     totalWt += parseNum(tr.querySelector('.p-wt').value);
   });
 
@@ -569,18 +665,13 @@ function p_bind(){
     
     // AUTO-FILL DATA (Fixing the Lookup Issue)
     if(e.target.classList.contains('p-name')){
-      // Use case-insensitive search via Map if possible, or fall back to find
       const val = e.target.value.trim().toLowerCase();
-      // Optimized lookup
       const sel = S.ingMap.get(val);
-      
       if(sel){ 
         if(tr.querySelector('.p-cas')) tr.querySelector('.p-cas').value = sel.casNumber||''; 
         if(tr.querySelector('.p-price')) tr.querySelector('.p-price').value = sel.pricePer10g||0; 
         if(tr.querySelector('.p-notes')) tr.querySelector('.p-notes').value = sel.notes||''; 
-        // Force the new density
         if(tr.querySelector('.p-den')) tr.querySelector('.p-den').value = sel.density || 0.85; 
-        // Force the new Note
         if(tr.querySelector('.p-note')) tr.querySelector('.p-note').value = sel.note || 'N/A';
       }
     }
@@ -706,9 +797,18 @@ async function loadData(){
       fetchJSON('data/synonyms.json'),
       fetchJSON('data/regulatory.json'),
     ]);
-    S.list=ings||[]; S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
     
-    // OPTIMIZATION: Build Map for fast lookups
+    S.dbList = ings || [];
+    
+    // LOAD CUSTOM INGREDIENTS FROM LOCALSTORAGE
+    S.customList = JSON.parse(localStorage.getItem('pc_custom_ingredients') || '[]');
+    
+    // MERGE DB + CUSTOM
+    S.list = [...S.dbList, ...S.customList];
+
+    S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
+    
+    // OPTIMIZATION: Build Map for fast lookups (DB + Custom)
     S.ingMap = new Map();
     (S.list||[]).forEach(o=>{ 
       if(o.name) S.ingMap.set(o.name.toLowerCase(), o);
@@ -716,7 +816,13 @@ async function loadData(){
 
     const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
     buildACList();
-    if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded (version: ${S.version||'n/a'})`;
+    
+    const countInfo = S.customList.length > 0 ? ` (+${S.customList.length} custom)` : '';
+    if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded: ${S.dbList.length}${countInfo} items`;
+    
+    // Show clear button if custom data exists
+    if($$('#clearCustomData') && S.customList.length > 0) $$('#clearCustomData').hidden = false;
+
     const prev=localStorage.getItem('pc_data_version'); if(S.version && prev && prev!==S.version) showUpdate(); if(S.version) localStorage.setItem('pc_data_version',S.version);
   }catch(e){ console.error("LoadData Error", e); if($$('#dataStatus')) $$('#dataStatus').textContent='Failed to load data. Check console.'; }
 }
@@ -724,6 +830,7 @@ async function loadData(){
 function bindGlobal(){ 
   if($$('#modeSimple')) $$('#modeSimple').onclick=()=>setMode('simple'); 
   if($$('#modePro')) $$('#modePro').onclick=()=>setMode('pro'); 
+  setupImporter();
 }
 
 function init(){
@@ -735,7 +842,7 @@ function init(){
     s_row(); s_bind();
     p_row(); p_bind();
     loadData();
-    // registerSW(); // keep disabled during debugging
+    // registerSW(); 
   } catch(e) {
     console.error("CRITICAL INIT ERROR:", e);
     alert("App failed to initialize. Please clear cache and refresh.");
