@@ -1,12 +1,12 @@
-/* App: Simple + Pro | Robust Version 7 | Fixes: CSV Importer, Data Merging */
+/* App: Simple + Pro | Robust Version 1.2.0 | Fixes: Manual CAS, Decimals, IFRA Prohibited */
 
 const $$ = s => document.querySelector(s), $$$ = s => document.querySelectorAll(s);
 
 const S = {
   mode: 'simple',
-  list: [],      // The combined list
-  dbList: [],    // The "official" JSON list
-  customList: [], // The user-imported list
+  list: [],      // Combined list
+  dbList: [],    // Official JSON list
+  customList: [], // User-imported list
   ingMap: new Map(),
   ifraFallback: {},
   ifra51: {},
@@ -31,13 +31,18 @@ function showToast(msg) {
   }, 3000);
 }
 
-// --- HELPER: Parse numbers safely ---
+// --- HELPER: Parse numbers safely (European/US Support) ---
 function parseNum(val) {
   if (!val) return 0;
-  const clean = String(val).replace(/,/g, '.').replace(/[^\d.-]/g, '');
+  // 1. Convert comma to dot (European support)
+  let clean = String(val).replace(/,/g, '.');
+  // 2. Remove anything that isn't a digit, dot, or minus
+  clean = clean.replace(/[^\d.-]/g, '');
+  // 3. Parse
   const num = parseFloat(clean);
+  // 4. Sanity checks
   if (isNaN(num)) return 0;
-  return num < 0 ? 0 : num;
+  return num; // Allow negatives? Usually no for weight, but useful for density adjustments? Keeping as is.
 }
 
 // --- HELPER: Fetch JSON ---
@@ -115,6 +120,7 @@ function setupTheme(){
   };
 }
 
+// --- LOGIC: Name to CAS Lookup ---
 function nameToCAS(name){
   if(!name) return null;
   const n = name.trim().toLowerCase();
@@ -133,18 +139,23 @@ function nameToCAS(name){
   return null;
 }
 
-function resolveIFRA({name, category, finishedPct}){
+// --- LOGIC: Resolve Safety ---
+// UPDATED: Now accepts an optional 'manualCas' which overrides the name lookup
+function resolveIFRA({name, manualCas, category, finishedPct}){
   const EU = new Set(Object.keys((S.reg?.EU_COSMETICS)||{}));
-  const cas = nameToCAS(name);
+  
+  // 1. Determine CAS: Use manual input if provided, otherwise lookup by name
+  let cas = manualCas ? manualCas.trim() : null;
+  if(!cas) cas = nameToCAS(name);
+
   let status = 'n/a', limit = null, spec = null, source = 'NONE';
 
+  // 2. IFRA Check
   if(cas && S.ifra51[cas]){
     const rec = S.ifra51[cas];
     source = 'IFRA51';
-    if(rec.type === 'spec'){ 
-      status = 'spec'; spec = rec.spec||{}; 
-    }
-    // FIX: Check for BOTH 'restricted' and 'prohibited' types
+    if(rec.type === 'spec'){ status = 'spec'; spec = rec.spec||{}; }
+    // Handles BOTH Restricted and Prohibited items
     else if(rec.type === 'restricted' || rec.type === 'prohibited'){
       const lim = rec.limits?.[category];
       if(lim != null){ 
@@ -153,17 +164,13 @@ function resolveIFRA({name, category, finishedPct}){
       }
     }
   } else {
-    // Fallback to old manually entered list if not found in IFRA 51
+    // Fallback
     const ing = S.ingMap.get((name||'').toLowerCase());
     const lim = (ing?.ifraLimits?.[category] ?? S.ifraFallback[name]?.[category]);
-    if(lim != null){ 
-      limit = Number(lim); 
-      source = ing ? 'ING' : 'FALLBACK'; 
-      status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; 
-    }
+    if(lim != null){ limit = Number(lim); source = ing ? 'ING' : 'FALLBACK'; status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
   }
 
-  // EU Bans always override everything with a strict 0 limit
+  // 3. EU Check (Overrides IFRA if Banned)
   if(cas && EU.has(cas)){ status = 'eu-ban'; limit = 0.0; source = 'EU'; }
   
   return {cas, status, limit, spec, source};
@@ -183,11 +190,10 @@ function setupImporter() {
       const reader = new FileReader();
       reader.onload = (evt) => processCSV(evt.target.result);
       reader.readAsText(file);
-      input.value = ''; // reset
+      input.value = ''; 
     };
   }
 
-  // Show "Reset" button if we have custom data
   if(clearBtn) {
     const hasCustom = localStorage.getItem('pc_custom_ingredients');
     if(hasCustom) clearBtn.hidden = false;
@@ -205,23 +211,20 @@ function processCSV(text) {
     const lines = text.split(/\r\n|\n/);
     if(lines.length < 2) throw new Error("Empty CSV");
 
-    // Robust CSV split (handles quoted commas)
     const splitCSV = (str) => {
       const arr = [];
-      let quote = false;  // 'true' means we're inside a quoted field
+      let quote = false;
       let col = "";
       for (let c of str) {
           if (c === '"') { quote = !quote; }
-          else if (c === ',' && !quote) { arr.push(col.trim()); col = ""; }
+          else if ((c === ',' || c === ';') && !quote) { arr.push(col.trim()); col = ""; } // Support semicolon too!
           else { col += c; }
       }
       arr.push(col.trim());
-      return arr.map(s => s.replace(/^"|"$/g, '').replace(/""/g, '"')); // Clean quotes
+      return arr.map(s => s.replace(/^"|"$/g, '').replace(/""/g, '"')); 
     };
 
     const headers = splitCSV(lines[0].toLowerCase());
-    
-    // Auto-map headers
     const map = { name: -1, cas: -1, den: -1, price: -1, note: -1, notes: -1 };
     
     headers.forEach((h, i) => {
@@ -233,38 +236,41 @@ function processCSV(text) {
       else if(h.includes('desc') || h.includes('odor') || h === 'notes') map.notes = i;
     });
 
-    if(map.name === -1) throw new Error("Could not find a 'Name' or 'Ingredient' column.");
+    if(map.name === -1) throw new Error("Could not find a 'Name' column.");
 
     const newItems = [];
-    
+    const existing = JSON.parse(localStorage.getItem('pc_custom_ingredients') || '[]');
+    const existingMap = new Map(existing.map(i => [i.name.toLowerCase(), i]));
+
     for(let i=1; i<lines.length; i++) {
       if(!lines[i].trim()) continue;
       const cols = splitCSV(lines[i]);
-      if(cols.length < headers.length - 2) continue; // Skip malformed rows
+      if(cols.length < 1) continue; 
 
       const item = {
         name: cols[map.name],
         casNumber: map.cas > -1 ? cols[map.cas] : '',
-        density: map.den > -1 ? parseNum(cols[map.den]) : 0.85, // Default density
+        density: map.den > -1 ? parseNum(cols[map.den]) : 0.85, 
         pricePer10g: map.price > -1 ? parseNum(cols[map.price]) : 0,
         note: map.note > -1 ? cols[map.note] : 'Middle',
         notes: map.notes > -1 ? cols[map.notes] : ''
       };
 
-      if(item.name) newItems.push(item);
+      if(item.name) {
+          // Deduplication: Overwrite if name exists
+          existingMap.set(item.name.toLowerCase(), item);
+          newItems.push(item);
+      }
     }
 
     if(newItems.length > 0) {
-      // Save to LocalStorage
-      const existing = JSON.parse(localStorage.getItem('pc_custom_ingredients') || '[]');
-      const combined = [...existing, ...newItems];
+      const combined = Array.from(existingMap.values());
       localStorage.setItem('pc_custom_ingredients', JSON.stringify(combined));
-      alert(`Successfully imported ${newItems.length} ingredients! Page will reload.`);
+      alert(`Successfully imported/updated ${newItems.length} ingredients! Page will reload.`);
       location.reload();
     } else {
-      alert("No valid ingredients found in CSV.");
+      alert("No valid ingredients found.");
     }
-
   } catch(e) {
     console.error(e);
     alert("Import Failed: " + e.message);
@@ -332,7 +338,7 @@ function s_update(){
       if(r.status==='eu-ban'){
         html = `<span class="status eu">EU PROHIBITED</span>`;
       } else if(r.status==='spec'){
-        html = `<span class="status spec">SPEC <span class="spec-help" data-tip="This ingredient has a specification, e.g., maximum peroxide value. Refer to IFRA standards for details.">?</span></span>`;
+        html = `<span class="status spec">SPEC <span class="spec-help" data-tip="Refer to IFRA standards.">?</span></span>`;
       } else if(r.limit != null){
         const cls = fin <= r.limit ? ( (r.limit>0 && fin/r.limit>0.8) ? 'warn' : 'ok') : 'fail';
         html = badge(fin, r.limit, cls, r.source);
@@ -401,7 +407,6 @@ function s_batch_export() {
     lines.push([`"${r.name.replace(/"/g, '""')}"`, r.pct.toFixed(3), r.oilVol.toFixed(3), r.weight.toFixed(3)].join(','));
   });
   downloadCSV('batch-export.csv', lines.join('\n'));
-  showToast('Batch CSV Exported'); 
 }
 
 function s_bind(){
@@ -411,13 +416,11 @@ function s_bind(){
   });
   if($$('#tableBody')) $$('#tableBody').addEventListener('input', s_update);
   if($$('#dosage')) $$('#dosage').addEventListener('input', s_update);
-
   if($$('#batchCalcBtn')) $$('#batchCalcBtn').onclick = s_batch_calc;
   if($$('#batchExportBtn')) $$('#batchExportBtn').onclick = s_batch_export;
   ['#batchVolume', '#batchDensity'].forEach(id => {
     if($$(id)) $$(id).addEventListener('input', s_batch_calc);
   });
-
   if($$('#saveRecipe')) $$('#saveRecipe').onclick = () => {
     const n = $$('#recipeName').value.trim(); if(!n) return alert('Name?');
     const rows = s_rows().map(r=>({name:r.name,pct:r.pct}));
@@ -435,7 +438,6 @@ function s_bind(){
     s_renum(); s_update();
     showToast(`Recipe "${n}" Loaded`);
   };
-   
   if($$('#deleteRecipe')) $$('#deleteRecipe').onclick = () => {
     const n = $$('#savedRecipes').value;
     const all = JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}');
@@ -447,7 +449,6 @@ function s_bind(){
     $$('#recipeName').value = ''; 
     showToast('Recipe Deleted');
   };
-
   if($$('#exportCsv')) $$('#exportCsv').onclick = () => {
     const dosage = parseNum($$('#dosage').value); const rows = s_rows();
     const lines = [['#','Ingredient','% in concentrate','Dosage %','Finished %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9'].join(',')];
@@ -456,8 +457,7 @@ function s_bind(){
       const vals = ['4','5A','5B','9'].map(cat => {
         const z = resolveIFRA({name:r.name,category:cat,finishedPct:fin});
         if(z.status==='eu-ban') return 'EU PROHIBITED';
-        if(z.status==='spec') return 'SPEC';
-        return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
+        return z.limit!=null ? `≤ ${z.limit}%` : 'n/a';
       });
       lines.push([i+1, `"${r.name.replace(/"/g,'""')}"`, r.pct, dosage, fin.toFixed(3), ...vals].join(','));
     });
@@ -466,10 +466,8 @@ function s_bind(){
   };
   if($$('#printBtn')) $$('#printBtn').onclick = () => window.print();
   if($$('#clearAll')) $$('#clearAll').onclick = () => { if(!confirm('Clear all rows?')) return; $$('#tableBody').innerHTML=''; s_row(); s_renum(); s_update(); };
-
   function s_pop(sel=''){ 
-    const s=$$('#savedRecipes'); 
-    if(!s) return;
+    const s=$$('#savedRecipes'); if(!s) return;
     const all=JSON.parse(localStorage.getItem('pc_recipes_v1')||'{}'); 
     s.innerHTML=''; 
     Object.keys(all).sort().forEach(k=>{ 
@@ -481,19 +479,15 @@ function s_bind(){
   } 
   s_pop();
 }
-// --- END: Simple Mode Functions ---
-
 
 function buildACList(){
   const namesFromIFRA = Object.values(S.ifra51||{}).map(v => v?.name).filter(Boolean);
   const synKeys = Object.keys(S.syn||{});
-  // Combine names from official list AND custom list
   const ingNames = S.list.map(i => i.name).filter(Boolean);
-  
   const set = new Set([...synKeys, ...namesFromIFRA, ...ingNames]);
-  const arr = Array.from(set).filter(Boolean).sort((a,b)=> a.localeCompare(b));
-  S.acList = arr;
+  S.acList = Array.from(set).filter(Boolean).sort((a,b)=> a.localeCompare(b));
 }
+
 function bindAutocomplete(input, listEl){
   function render(items, q=''){
     if(!items.length){ listEl.hidden = true; listEl.innerHTML=''; return; }
@@ -513,14 +507,6 @@ function bindAutocomplete(input, listEl){
   });
   input.addEventListener('focus', () => { if(!input.value) render(S.acList.slice(0,12)); });
   listEl.addEventListener('mousedown', e => { const it=e.target.closest('.ac-item'); if(it) pick(it.dataset.val); });
-  input.addEventListener('keydown', e => {
-    const items = Array.from(listEl.querySelectorAll('.ac-item'));
-    const idx = items.findIndex(it => it.classList.contains('active'));
-    if(e.key==='ArrowDown'){ e.preventDefault(); const ni=Math.min(items.length-1, idx+1); items.forEach(it=>it.classList.remove('active')); if(items[ni]) items[ni].classList.add('active'); }
-    else if(e.key==='ArrowUp'){ e.preventDefault(); const ni=Math.max(0, idx-1); items.forEach(it=>it.classList.remove('active')); if(items[ni]) items[ni].classList.add('active'); }
-    else if(e.key==='Enter'){ const cur = items.find(it=>it.classList.contains('active')); if(cur){ e.preventDefault(); pick(cur.dataset.val); } }
-    else if(e.key==='Escape'){ listEl.hidden=true; }
-  });
   document.addEventListener('click', (e)=>{ if(!listEl.contains(e.target) && e.target!==input){ listEl.hidden=true; } });
 }
 
@@ -529,7 +515,8 @@ function p_row(d={}){
   const tr=document.createElement('tr');
   const dil = d.dilution ?? 100;
   const solv = d.solvent ?? 'Ethanol';
-
+  
+  // NOTE: 'p-cas' is the MANUAL entry field
   tr.innerHTML=`<td><input type="text" class="p-name" list="ingredientList" value="${(d.name||'')}"></td>
     <td><input type="text" inputmode="decimal" class="p-vol num-input" placeholder="0" value="${d.vol??0}"></td>
     <td><input type="text" inputmode="decimal" class="p-den num-input" placeholder="0.85" value="${d.den??0.85}"></td>
@@ -556,7 +543,7 @@ function p_row(d={}){
         <option ${d.note==='Base'?'selected':''}>Base</option>
     </select></td>
     <td><input type="text" class="p-supplier" value="${d.supplier??''}"></td>
-    <td><input type="text" class="p-cas" value="${d.cas??''}"></td>
+    <td><input type="text" class="p-cas" value="${d.cas??''}" placeholder="123-45-6"></td>
     <td><textarea class="p-notes">${d.notes??''}</textarea></td>
     <td class="p-del">❌</td>`;
    
@@ -597,7 +584,6 @@ function p_calc(){
   if($$('#proTotalVol')) $$('#proTotalVol').textContent = totalVol.toFixed(2);
   if($$('#proTotalWt')) $$('#proTotalWt').textContent = totalWt.toFixed(2);
   if($$('#proTotalCost')) $$('#proTotalCost').textContent = totalCost.toFixed(2);
-   
   if($$('#proTotalPct')) $$('#proTotalPct').textContent = totalWt > 0 
     ? ((totalActiveWt / totalWt) * 100).toFixed(2) + '% (Active)' 
     : '0.00 %';
@@ -632,16 +618,22 @@ function p_ifra(){
   rows.forEach(tr=>{
     const nameEl = tr.querySelector('.p-name');
     const name = nameEl ? nameEl.value.trim() : '';
+    // FIXED: Now we grab the manual CAS input
+    const casInput = tr.querySelector('.p-cas');
+    const manualCas = casInput ? casInput.value.trim() : null;
+
     const activePct = parseFloat(tr.dataset.activePct) || 0;
-    const r=resolveIFRA({name,category:cat,finishedPct:activePct});
+    
+    // PASS manualCas to resolve function
+    const r = resolveIFRA({name, manualCas, category:cat, finishedPct:activePct});
     
     if(r.status==='eu-ban') {
-        bad.push({name,msg:'EU PROHIBITED'});
+        bad.push({name: name || manualCas, msg:'EU PROHIBITED'});
     } else if(r.limit!=null){
       if(activePct > r.limit) {
-          bad.push({name,msg:`${activePct.toFixed(3)}% > ${r.limit}%`});
+          bad.push({name: name || manualCas, msg:`${activePct.toFixed(3)}% > ${r.limit}%`});
       } else if(r.limit > 0 && (activePct/r.limit) > 0.8) {
-          warn.push({name,msg:`${activePct.toFixed(3)}% (~${Math.round(activePct/r.limit*100)}% of limit)`});
+          warn.push({name: name || manualCas, msg:`${activePct.toFixed(3)}% (~${Math.round(activePct/r.limit*100)}% of limit)`});
       }
     }
   });
@@ -677,7 +669,6 @@ function p_bind(){
   if($$('#proBody')) $$('#proBody').addEventListener('input', e=>{
     const tr=e.target.closest('tr'); if(!tr) return;
     
-    // AUTO-FILL DATA (Fixing the Lookup Issue)
     if(e.target.classList.contains('p-name')){
       const val = e.target.value.trim().toLowerCase();
       const sel = S.ingMap.get(val);
@@ -742,7 +733,6 @@ function p_bind(){
 
   if($$('#proNew')) $$('#proNew').onclick=()=>{ $$('#proBody').innerHTML=''; p_row(); p_calc(); };
   if($$('#proPrint')) $$('#proPrint').onclick=()=>window.print();
-   
   if($$('#proExport')) $$('#proExport').onclick=()=>{
     const rows=p_rows().map(tr=>({ 
         name:tr.querySelector('.p-name').value||'', 
@@ -758,18 +748,14 @@ function p_bind(){
         cas:tr.querySelector('.p-cas').value||'', 
         notes:(tr.querySelector('.p-notes').value||'').replace(/\n/g,' ') 
     }));
-    
     const lines=[['Ingredient','Volume (ml)','Density (g/ml)','Weight (g)','Price/10g (€)','Cost (€)','Dilution %','Solvent','Active %','IFRA 4','IFRA 5A','IFRA 5B','IFRA 9','Note','Supplier','CAS','Notes'].join(',')];
-    
     rows.forEach(r=>{ 
         const cost=(r.wt/10)*(r.price||0); 
         const cats=['4','5A','5B','9'].map(cat=>{
-          const z=resolveIFRA({name:r.name,category:cat,finishedPct:r.activePct});
+          const z=resolveIFRA({name:r.name, manualCas:r.cas, category:cat, finishedPct:r.activePct});
           if(z.status==='eu-ban') return 'EU PROHIBITED';
-          if(z.status==='spec')  return 'SPEC';
-          return z.limit!=null ? `≤ ${z.limit}% (${z.source})` : 'n/a';
+          return z.limit!=null ? `≤ ${z.limit}%` : 'n/a';
         });
-
         lines.push([
           `"${r.name.replace(/"/g,'""')}"`,
           r.vol,r.den,r.wt,
@@ -779,14 +765,12 @@ function p_bind(){
           r.note,r.supplier,r.cas,`"${r.notes.replace(/"/g,'""')}"`
         ].join(',')); 
     });
-    
     downloadCSV('pro.csv', lines.join('\n'));
     showToast('Pro CSV Exported');
   };
    
   function p_pop(sel=''){ 
-    const s=$$('#proSaved'); 
-    if(!s) return;
+    const s=$$('#proSaved'); if(!s) return;
     const all=JSON.parse(localStorage.getItem('pc_pro_recipes_v1')||'{}'); 
     s.innerHTML=''; 
     Object.keys(all).sort().forEach(k=>{ 
@@ -798,8 +782,6 @@ function p_bind(){
   } 
   p_pop();
 }
-// --- END: Pro Mode Functions ---
-
 
 async function loadData(){
   try{
@@ -811,32 +793,17 @@ async function loadData(){
       fetchJSON('data/synonyms.json'),
       fetchJSON('data/regulatory.json'),
     ]);
-    
     S.dbList = ings || [];
-    
-    // LOAD CUSTOM INGREDIENTS FROM LOCALSTORAGE
     S.customList = JSON.parse(localStorage.getItem('pc_custom_ingredients') || '[]');
-    
-    // MERGE DB + CUSTOM
     S.list = [...S.dbList, ...S.customList];
-
     S.ifraFallback=ifra||{}; S.version=ver?.data||null; S.ifra51=ifra51||{}; S.syn=syn||{}; S.reg=reg||{};
-    
-    // OPTIMIZATION: Build Map for fast lookups (DB + Custom)
     S.ingMap = new Map();
-    (S.list||[]).forEach(o=>{ 
-      if(o.name) S.ingMap.set(o.name.toLowerCase(), o);
-    });
-
+    (S.list||[]).forEach(o=>{ if(o.name) S.ingMap.set(o.name.toLowerCase(), o); });
     const dl=$$('#ingredientList'); if(dl){ dl.innerHTML=''; (S.list||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.name; dl.appendChild(opt); }); }
     buildACList();
-    
     const countInfo = S.customList.length > 0 ? ` (+${S.customList.length} custom)` : '';
     if($$('#dataStatus')) $$('#dataStatus').textContent=`Data loaded: ${S.dbList.length}${countInfo} items`;
-    
-    // Show clear button if custom data exists
     if($$('#clearCustomData') && S.customList.length > 0) $$('#clearCustomData').hidden = false;
-
     const prev=localStorage.getItem('pc_data_version'); if(S.version && prev && prev!==S.version) showUpdate(); if(S.version) localStorage.setItem('pc_data_version',S.version);
   }catch(e){ console.error("LoadData Error", e); if($$('#dataStatus')) $$('#dataStatus').textContent='Failed to load data. Check console.'; }
 }
@@ -856,7 +823,6 @@ function init(){
     s_row(); s_bind();
     p_row(); p_bind();
     loadData();
-    // registerSW(); 
   } catch(e) {
     console.error("CRITICAL INIT ERROR:", e);
     alert("App failed to initialize. Please clear cache and refresh.");
