@@ -141,17 +141,31 @@ function resolveIFRA({name, category, finishedPct}){
   if(cas && S.ifra51[cas]){
     const rec = S.ifra51[cas];
     source = 'IFRA51';
-    if(rec.type === 'spec'){ status = 'spec'; spec = rec.spec||{}; }
-    else if(rec.type === 'restricted'){
+    if(rec.type === 'spec'){ 
+      status = 'spec'; spec = rec.spec||{}; 
+    }
+    // FIX: Check for BOTH 'restricted' and 'prohibited' types
+    else if(rec.type === 'restricted' || rec.type === 'prohibited'){
       const lim = rec.limits?.[category];
-      if(lim != null){ limit = Number(lim); status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
+      if(lim != null){ 
+        limit = Number(lim); 
+        status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; 
+      }
     }
   } else {
+    // Fallback to old manually entered list if not found in IFRA 51
     const ing = S.ingMap.get((name||'').toLowerCase());
     const lim = (ing?.ifraLimits?.[category] ?? S.ifraFallback[name]?.[category]);
-    if(lim != null){ limit = Number(lim); source = ing ? 'ING' : 'FALLBACK'; status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; }
+    if(lim != null){ 
+      limit = Number(lim); 
+      source = ing ? 'ING' : 'FALLBACK'; 
+      status = (finishedPct != null) ? (finishedPct <= lim ? 'ok' : 'fail') : 'ok'; 
+    }
   }
+
+  // EU Bans always override everything with a strict 0 limit
   if(cas && EU.has(cas)){ status = 'eu-ban'; limit = 0.0; source = 'EU'; }
+  
   return {cas, status, limit, spec, source};
 }
 
