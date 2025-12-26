@@ -200,3 +200,38 @@ tfoot td { font-weight: 600; font-family: var(--font-serif); background: var(--b
   
   main { max-width: 100%; margin: 0; }
 }
+
+/* Add to bottom of styles.css */
+.spec-help[data-tip] { position: relative; cursor: help; }
+.spec-help[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 130%;
+  white-space: pre-wrap;
+  width: max-content;
+  max-width: 240px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--brand-dark);
+  color: var(--brand-cream);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  z-index: 100;
+  font-size: 12px;
+  font-weight: normal;
+  pointer-events: none;
+}
+/* Tiny arrow for the tooltip */
+.spec-help[data-tip]:hover::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 110%; /* Just below the tooltip */
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--brand-dark) transparent transparent transparent;
+  z-index: 100;
+}
