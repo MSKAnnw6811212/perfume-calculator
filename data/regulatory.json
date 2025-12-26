@@ -1,7 +1,38 @@
 {
   "EU_COSMETICS": {
-    "80-54-6": "prohibited",
-    "31906-04-4": "prohibited",
-    "51414-25-6": "prohibited"
+    "80-54-6": "prohibited (Lilial/Butylphenyl Methylpropional)",
+    "31906-04-4": "prohibited (Lyral/HICC)",
+    "51414-25-6": "prohibited (HICC Isomer)",
+    "526-37-4": "prohibited (Atranol - found in Oakmoss)",
+    "57018-52-7": "prohibited (Chloroatranol - found in Oakmoss)",
+    "8023-88-9": "prohibited (Costus Root Oil)",
+    "9000-05-9": "prohibited (Benzoin - crude gum only, resinoid is safe)",
+    "8007-00-9": "prohibited (Peru Balsam - crude only, distilled is safe)"
+  },
+  "EU_ALLERGENS": {
+    "127-51-5": "Alpha-Isomethyl Ionone",
+    "122-40-7": "Amyl Cinnamal",
+    "101-85-9": "Amylcinnamyl Alcohol",
+    "105-13-5": "Anise Alcohol",
+    "100-51-6": "Benzyl Alcohol",
+    "120-51-4": "Benzyl Benzoate",
+    "103-41-3": "Benzyl Cinnamate",
+    "118-58-1": "Benzyl Salicylate",
+    "104-55-2": "Cinnamal",
+    "104-54-1": "Cinnamyl Alcohol",
+    "5392-40-5": "Citral",
+    "106-22-9": "Citronellol",
+    "91-64-5": "Coumarin",
+    "97-53-0": "Eugenol",
+    "90028-68-5": "Evernia Prunastri (Oakmoss)",
+    "90028-67-4": "Evernia Furfuracea (Treemoss)",
+    "4602-84-0": "Farnesol",
+    "106-24-1": "Geraniol",
+    "101-86-0": "Hexyl Cinnamal",
+    "107-75-5": "Hydroxycitronellal",
+    "97-54-1": "Isoeugenol",
+    "138-86-3": "Limonene",
+    "78-70-6": "Linalool",
+    "111-12-6": "Methyl 2-Octynoate"
   }
 }
