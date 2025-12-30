@@ -1,0 +1,158 @@
+/* Print Portrait Styles - A4 */
+@page {
+    size: A4 portrait;
+    margin: 10mm;
+}
+
+body {
+    background: white !important;
+    font-size: 10pt !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+}
+
+/* Reset Layout Containers */
+.app-container,
+.table-wrap,
+.main-content,
+.panel {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Hide UI Elements */
+.app-header,
+.app-footer,
+.modes,
+.buttons-row,
+#updateBanner,
+#toast-container,
+.spec-help,
+button,
+.btn,
+.remove-btn,
+.header-actions,
+#addIngredientBtn,
+#proAdd,
+#addRow,
+.config-panel,
+.card {
+    display: none !important;
+}
+
+/* Keep Summary Cards (Except helper ones if needed, user said 'hide UI Chrome', but 'Summary Cards' are content)
+   User said: "Pro section with ... summary cards (#noteSummary, #ifraStatus, #priceHelper)"
+   User also said: "Hide UI chrome... .app-header... buttons... action columns."
+   Usually summary is useful data. I will keep Note Summary and IFRA status if they fit, 
+   but user didn't explicitly ask to hide them, just "UI chrome". 
+   However, "priceHelper" is definitely UI/calc helper.
+   Let's hide #priceHelper, keep #noteSummary and #ifraStatus but simplest possible.
+   Actually, looking at "Hide UI chrome" list, it includes ".spec-help".
+   Let's keep text content visible.
+*/
+#priceHelper {
+    display: none !important;
+}
+
+/* Table Styling */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+    font-size: 9pt !important;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tr {
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #ccc !important;
+    padding: 4px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    color: black !important;
+    position: static !important;
+    /* Disable sticky */
+}
+
+/* Disable sticky headers specifically */
+thead th,
+tbody td:first-child,
+thead th:first-child {
+    position: static !important;
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+}
+
+/* Inputs as Text */
+input,
+select,
+textarea {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: inherit !important;
+    color: black !important;
+    -webkit-appearance: none;
+    appearance: none;
+    white-space: pre-wrap !important;
+}
+
+/* PORTRAIT COLUMN POLICY (Pro Table) */
+/* Show: Ingredient(1), Volume(2), Weight(4), (Cost - NO), Dilution(9), Solvent(10), Active%(11), Note(12) */
+/* Hide: Density(3), ActMass(5), SolvMass(6), Price(7), Cost(8), Supplier(13), CAS(14), Notes(15), Del(16) */
+
+#proTable th:nth-child(3),
+#proTable td:nth-child(3),
+/* Density */
+#proTable th:nth-child(5),
+#proTable td:nth-child(5),
+/* Active Mass */
+#proTable th:nth-child(6),
+#proTable td:nth-child(6),
+/* Solvent Mass */
+#proTable th:nth-child(7),
+#proTable td:nth-child(7),
+/* Price */
+#proTable th:nth-child(8),
+#proTable td:nth-child(8),
+/* Cost */
+#proTable th:nth-child(13),
+#proTable td:nth-child(13),
+/* Supplier */
+#proTable th:nth-child(14),
+#proTable td:nth-child(14),
+/* CAS */
+#proTable th:nth-child(15),
+#proTable td:nth-child(15),
+/* Notes (Desc) */
+#proTable th:last-child,
+#proTable td:last-child
+
+/* Delete */
+    {
+    display: none !important;
+}
+
+/* Simple Table Column Policy - Keep default or specifically hide actions */
+#ingredientsTable th:last-child,
+#ingredientsTable td:last-child {
+    display: none !important;
+}
