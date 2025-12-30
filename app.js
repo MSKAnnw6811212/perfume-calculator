@@ -454,10 +454,7 @@ function processCSV(text) {
 function s_row(d = { name: '', pct: 0 }) {
   const tr = document.createElement('tr');
   const nameTd = document.createElement('td');
-  nameTd.innerHTML = `<div class="ac-wrap">
-      <input type="text" list="ingredientList" placeholder="Ingredient" value="${d.name || ''}" autocomplete="off">
-      <div class="ac-list" hidden></div>
-    </div>`;
+  nameTd.innerHTML = `<input type="text" class="s-name" list="ingredientList" placeholder="Ingredient" value="${d.name || ''}" autocomplete="off">`;
   const pctTd = document.createElement('td');
   pctTd.innerHTML = `<input type="text" inputmode="decimal" min="0" class="num-input" placeholder="0" value="${d.pct ?? 0}">`;
   const finTd = document.createElement('td'); finTd.className = 'finished'; finTd.textContent = '0';
@@ -476,16 +473,12 @@ function s_row(d = { name: '', pct: 0 }) {
   tr.appendChild(rmTd);
 
   if ($$('#tableBody')) $$('#tableBody').appendChild(tr);
-
-  const input = nameTd.querySelector('input'); // generic selector safer with/without list
-  const list = nameTd.querySelector('.ac-list');
-  bindAutocomplete(input, list);
 }
 
 function s_rows() {
   return Array.from($$$('#tableBody tr')).map(tr => ({
     tr,
-    name: tr.querySelector('input[list]') ? tr.querySelector('input[list]').value.trim() : '',
+    name: tr.querySelector('.s-name') ? tr.querySelector('.s-name').value.trim() : '',
     pct: tr.querySelector('.num-input') ? parseNum(tr.querySelector('.num-input').value) : 0
   }));
 }
