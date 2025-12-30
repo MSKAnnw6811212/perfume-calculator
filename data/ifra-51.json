@@ -1,138 +1,4353 @@
 {
-  "_meta": {
-    "description": "Seed IFRA limits for common fragrance materials (finished product %). Categories shown: 4, 5A, 5B, 9. Values taken from official IFRA Standards PDFs (Amendments 49\u201351) where available; otherwise left absent. Keep names/CAS exactly as in your ingredient list for lookups.",
-    "last_updated": "2025-08-13"
+  "144020-22-4": {
+    "name": "Acetic acid, anhydride, reaction products with 1,5,10-Trimethyl-1,5,9-cyclododecatriene",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 2.2,
+      "5A": 0.6,
+      "5B": 0.52
+    }
   },
-  "Citral": {
-    "cas": "5392-40-5",
-    "4": 0.6,
-    "5A": 0.15,
-    "5B": 0.15,
-    "9": 1.2,
-    "source": "IFRA Standard \u2013 Citral (49); see PDF lines with category table."
+  "28371-99-5": {
+    "name": "Acetic acid, anhydride, reaction products with 1,5,10-Trimethyl-1,5,9-cyclododecatriene",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 2.2,
+      "5A": 0.6,
+      "5B": 0.52
+    }
   },
-  "Citronellol": {
-    "cas": "106-22-9",
-    "4": 12.0,
-    "5A": 3.2,
-    "5B": 3.2,
-    "9": 24.0,
-    "source": "IFRA Standard \u2013 Citronellol (49)."
+  "84082-84-8": {
+    "name": "Acetylated Vetiver oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.9,
+      "9": 0.2,
+      "5A": 0.1,
+      "5B": 0.1
+    }
   },
-  "Citronellal": {
-    "cas": "106-23-0",
-    "4": 0.49,
-    "5A": 0.33,
-    "5B": 0.051,
-    "9": 1.4,
-    "source": "IFRA Standard \u2013 Citronellal (49)."
+  "68917-34-0": {
+    "name": "Acetylated Vetiver oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.9,
+      "9": 0.2,
+      "5A": 0.1,
+      "5B": 0.1
+    }
   },
-  "Geraniol": {
-    "cas": "106-24-1",
-    "4": 4.7,
-    "5A": 1.2,
-    "5B": 1.2,
-    "9": 9.2,
-    "source": "IFRA Standard \u2013 Geraniol (49)."
+  "73246-97-6": {
+    "name": "Acetylated Vetiver oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.9,
+      "9": 0.2,
+      "5A": 0.1,
+      "5B": 0.1
+    }
   },
-  "Eugenol": {
-    "cas": "97-53-0",
-    "4": 2.5,
-    "5A": 0.64,
-    "5B": 0.64,
-    "9": 4.9,
-    "source": "IFRA Standard \u2013 Eugenol (49)."
+  "62563-80-8": {
+    "name": "Acetylated Vetiver oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.9,
+      "9": 0.2,
+      "5A": 0.1,
+      "5B": 0.1
+    }
   },
-  "Isoeugenol": {
-    "cas": "97-54-1",
-    "4": 0.11,
-    "5A": 0.027,
-    "5B": 0.027,
-    "9": 0.21,
-    "source": "IFRA Standard \u2013 Isoeugenol (49)."
+  "7493-74-5": {
+    "name": "Allyl phenoxyacetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.3,
+      "9": 0.59,
+      "5A": 0.076,
+      "5B": 0.076
+    }
   },
-  "Coumarin": {
-    "cas": "91-64-5",
-    "4": 1.5,
-    "5A": 0.38,
-    "5B": 0.11,
-    "9": 0.52,
-    "source": "IFRA Standard \u2013 Coumarin (49)."
+  "863306-60-9": {
+    "name": "Allyl phenoxyacetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.3,
+      "9": 0.59,
+      "5A": 0.076,
+      "5B": 0.076
+    }
   },
-  "Benzyl salicylate": {
-    "cas": "118-58-1",
-    "4": 7.3,
-    "5A": 1.9,
-    "5B": 1.9,
-    "9": 14.0,
-    "source": "IFRA Standard \u2013 Benzyl salicylate (49)."
+  "101-85-9": {
+    "name": "alpha-Amyl cinnamic alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 1.6,
+      "5A": 0.38,
+      "5B": 0.32
+    }
   },
-  "Benzyl benzoate": {
-    "cas": "120-51-4",
-    "4": 4.8,
-    "5A": 4.3,
-    "5B": 0.21,
-    "9": 1.9,
-    "source": "IFRA Standard \u2013 Benzyl benzoate (49)."
+  "122-40-7": {
+    "name": "alpha-Amyl cinnamic aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 7,
+      "9": 1.5,
+      "5A": 2.5,
+      "5B": 0.32
+    }
   },
-  "Benzyl alcohol": {
-    "cas": "100-51-6",
-    "4": 2.5,
-    "5A": 0.64,
-    "5B": 0.17,
-    "9": 2.2,
-    "source": "IFRA Standard \u2013 Benzyl alcohol (49)."
+  "105-13-5": {
+    "name": "Anisyl alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.21,
+      "9": 0.099,
+      "5A": 0.041,
+      "5B": 0.0055
+    }
   },
-  "Benzaldehyde": {
-    "cas": "100-52-7",
-    "4": 0.25,
-    "5A": 0.064,
-    "5B": 0.064,
-    "9": 0.49,
-    "source": "IFRA Standard \u2013 Benzaldehyde (49)."
+  "1331-81-3": {
+    "name": "Anisyl alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.21,
+      "9": 0.099,
+      "5A": 0.041,
+      "5B": 0.0055
+    }
   },
-  "p-Methoxybenzaldehyde": {
-    "cas": "123-11-5",
-    "4": 0.21,
-    "5A": 0.11,
-    "5B": 0.022,
-    "9": 0.065,
-    "source": "IFRA Standard \u2013 p-Methoxybenzaldehyde (51)."
+  "100-52-7": {
+    "name": "Benzaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
   },
-  "Evernia prunastri (Oakmoss) extract": {
-    "cas": "90028-68-5",
-    "4": 0.1,
-    "5A": 0.076,
-    "5B": 0.076,
-    "9": 0.1,
-    "note": "Limits assume low-atranol qualities per IFRA spec; see also treemoss co-use note in the Standard.",
-    "source": "IFRA Standard \u2013 Oakmoss extracts (49)."
+  "100-51-6": {
+    "name": "Benzyl alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 2.2,
+      "5A": 0.64,
+      "5B": 0.17
+    }
   },
-  "beta-Damascone": {
-    "cas": "23726-91-2",
-    "4": 0.043,
-    "5A": 0.011,
-    "5B": 0.011,
-    "9": 0.084,
-    "source": "IFRA Standard \u2013 Rose ketones (49)."
+  "120-51-4": {
+    "name": "Benzyl benzoate",
+    "type": "restricted",
+    "limits": {
+      "4": 4.8,
+      "9": 1.9,
+      "5A": 4.3,
+      "5B": 0.21
+    }
   },
-  "Bergamot oil (expressed, furocoumarins present)": {
-    "cas": "8007-75-8",
-    "4": 0.4,
-    "5A": null,
-    "5B": null,
-    "9": null,
-    "note": "Phototoxic restriction; value shown is a common Cat 4 upper level when furocoumarins present. Verify against your supplier's IFRA Certificate.",
-    "source": "IFRA phototoxicity standard references; check current version."
+  "103-41-3": {
+    "name": "Benzyl cinnamate",
+    "type": "restricted",
+    "limits": {
+      "4": 2,
+      "9": 3.9,
+      "5A": 0.51,
+      "5B": 0.51
+    }
   },
-  "Linalool": {
-    "cas": "78-70-6",
-    "specification": "Peroxide value < 20 mmol/L; add antioxidant during manufacture.",
-    "source": "IFRA Specification Standard \u2013 Linalool."
+  "118-58-1": {
+    "name": "Benzyl salicylate",
+    "type": "restricted",
+    "limits": {
+      "4": 7.3,
+      "9": 14,
+      "5A": 1.9,
+      "5B": 1.9
+    }
   },
-  "Limonene": {
-    "cas": "138-86-3",
-    "specification": "Peroxide value < 20 mmol/L; add antioxidant during manufacture.",
-    "source": "IFRA Specification Standard \u2013 Limonene."
+  "7492-44-6": {
+    "name": "alpha-Butylcinnamaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "62518-65-4": {
+    "name": "3-(m-tert-Butylphenyl)-2-methylpropionaldehyde (m-BMHCA)",
+    "type": "restricted",
+    "limits": {
+      "4": 1.8,
+      "9": 0.96,
+      "5A": 0.45,
+      "5B": 0.28
+    }
+  },
+  "18127-01-0": {
+    "name": "p-tert-Butyldihydrocinnamaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.099,
+      "5A": 0.12,
+      "5B": 0.029
+    }
+  },
+  "80-54-6": {
+    "name": "p-tert-Butyl-α-methylhydrocinnamic aldehyde (p-BMHCA)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "99-49-0": {
+    "name": "Carvone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.59,
+      "9": 0.18,
+      "5A": 0.2,
+      "5B": 0.039
+    }
+  },
+  "2244-16-8": {
+    "name": "Carvone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.59,
+      "9": 0.18,
+      "5A": 0.2,
+      "5B": 0.039
+    }
+  },
+  "6485-40-1": {
+    "name": "Carvone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.59,
+      "9": 0.18,
+      "5A": 0.2,
+      "5B": 0.039
+    }
+  },
+  "104-54-1": {
+    "name": "Cinnamic alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 0.76,
+      "5A": 0.32,
+      "5B": 0.25
+    }
+  },
+  "104-55-2": {
+    "name": "Cinnamic aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.042
+    }
+  },
+  "4364-06-1": {
+    "name": "Cinnamic aldehyde dimethyl acetal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.35,
+      "9": 0.69,
+      "5A": 0.089,
+      "5B": 0.089
+    }
+  },
+  "1885-38-7": {
+    "name": "Cinnamyl nitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "4360-47-8": {
+    "name": "Cinnamyl nitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "5392-40-5": {
+    "name": "Citral",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "141-27-5": {
+    "name": "Citral",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "106-26-3": {
+    "name": "Citral",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "106-22-9": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "1117-61-9": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "26489-01-0": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "6812-78-8": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "141-25-3": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "7540-51-4": {
+    "name": "Citronellol",
+    "type": "restricted",
+    "limits": {
+      "4": 12,
+      "9": 24,
+      "5A": 3.2,
+      "5B": 3.2
+    }
+  },
+  "91-64-5": {
+    "name": "Coumarin",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 0.52,
+      "5A": 0.38,
+      "5B": 0.11
+    }
+  },
+  "122-03-2": {
+    "name": "Cuminaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "103-95-7": {
+    "name": "Cyclamen aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.95,
+      "9": 0.23,
+      "5A": 0.45,
+      "5B": 0.076
+    }
+  },
+  "106-02-5": {
+    "name": "Cyclopentadecanolide",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "103-50-4": {
+    "name": "Dibenzyl ether",
+    "type": "restricted",
+    "limits": {
+      "4": 0.012,
+      "9": 0.0037,
+      "5A": 0.0023,
+      "5B": 0.00024
+    }
+  },
+  "33704-61-9": {
+    "name": "6,7-Dihydro-1,1,2,3,3-pentamethyl-4(5H)-indanone (DPMI)",
+    "type": "restricted",
+    "limits": {
+      "4": 3.8,
+      "9": 0.13,
+      "5A": 0.31,
+      "5B": 0.025
+    }
+  },
+  "119-84-6": {
+    "name": "Dihydrocoumarin",
+    "type": "restricted",
+    "limits": {
+      "4": 0.21,
+      "9": 0.41,
+      "5A": 0.053,
+      "5B": 0.053
+    }
+  },
+  "68039-49-6": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "68039-48-5": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "27939-60-2": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "67801-65-4": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "36635-35-5": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "68084-52-6": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "35145-02-9": {
+    "name": "Dimethylcyclohex-3-ene-1-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "56973-85-4": {
+    "name": "1-(5,5-Dimethyl-1-cyclohexen-1-yl)pent-4-en-1-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.1,
+      "9": 1.4,
+      "5A": 0.27,
+      "5B": 0.27
+    }
+  },
+  "103694-68-4": {
+    "name": "2,2-Dimethyl-3-(3-tolyl)propan-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.7,
+      "9": 0.14,
+      "5A": 0.43,
+      "5B": 0.061
+    }
+  },
+  "2563-07-7": {
+    "name": "2-Ethoxy-4-methylphenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.099,
+      "9": 0.052,
+      "5A": 0.025,
+      "5B": 0.017
+    }
+  },
+  "4748-78-1": {
+    "name": "p-Ethylbenzaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "97-53-0": {
+    "name": "Eugenol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 4.9,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "4602-84-0": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "106-28-5": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "3790-71-4": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "16106-95-9": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "3879-60-5": {
+    "name": "Farnesol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "106-24-1": {
+    "name": "Geraniol",
+    "type": "restricted",
+    "limits": {
+      "4": 4.7,
+      "9": 2.8,
+      "5A": 1.2,
+      "5B": 0.78
+    }
+  },
+  "39189-74-7": {
+    "name": "2-Heptylidene cyclopentan-1-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "505-57-7": {
+    "name": "2-Hexenal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.0077,
+      "9": 0.015,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "6728-26-3": {
+    "name": "2-Hexenal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.0077,
+      "9": 0.015,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "16635-54-4": {
+    "name": "2-Hexenal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.0077,
+      "9": 0.015,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "101-86-0": {
+    "name": "alpha-Hexyl cinnamic aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 9.9,
+      "9": 19,
+      "5A": 2.5,
+      "5B": 2.5
+    }
+  },
+  "17373-89-6": {
+    "name": "alpha-Hexylidene cyclopentanone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.13,
+      "9": 0.25,
+      "5A": 0.033,
+      "5B": 0.033
+    }
+  },
+  "6259-76-3": {
+    "name": "Hexyl salicylate",
+    "type": "restricted",
+    "limits": {
+      "4": 6.5,
+      "9": 1.2,
+      "5A": 2.7,
+      "5B": 0.3
+    }
+  },
+  "107-75-5": {
+    "name": "Hydroxycitronellal",
+    "type": "restricted",
+    "limits": {
+      "4": 2.1,
+      "9": 4.1,
+      "5A": 0.53,
+      "5B": 0.53
+    }
+  },
+  "31906-04-4": {
+    "name": "3 and 4-(4-Hydroxy-4-methylpentyl)-3-cyclohexene-1-carboxaldehyde (HMPCC)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.2,
+      "9": 0.2,
+      "5A": 0.2,
+      "5B": 0.2
+    }
+  },
+  "51414-25-6": {
+    "name": "3 and 4-(4-Hydroxy-4-methylpentyl)-3-cyclohexene-1-carboxaldehyde (HMPCC)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.2,
+      "9": 0.2,
+      "5A": 0.2,
+      "5B": 0.2
+    }
+  },
+  "6658-48-6": {
+    "name": "p-Isobutyl-alpha-methyl hydrocinnamaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.99,
+      "9": 1.9,
+      "5A": 0.25,
+      "5B": 0.25
+    }
+  },
+  "1335-66-6": {
+    "name": "Isocyclocitral",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 5.9,
+      "5A": 0.76,
+      "5B": 0.76
+    }
+  },
+  "1423-46-7": {
+    "name": "Isocyclocitral",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 5.9,
+      "5A": 0.76,
+      "5B": 0.76
+    }
+  },
+  "67634-07-5": {
+    "name": "Isocyclocitral",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 5.9,
+      "5A": 0.76,
+      "5B": 0.76
+    }
+  },
+  "68527-77-5": {
+    "name": "Isocyclogeraniol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.6,
+      "9": 3.2,
+      "5A": 0.41,
+      "5B": 0.41
+    }
+  },
+  "97-54-1": {
+    "name": "Isoeugenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.11,
+      "9": 0.21,
+      "5A": 0.027,
+      "5B": 0.027
+    }
+  },
+  "5932-68-3": {
+    "name": "Isoeugenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.11,
+      "9": 0.21,
+      "5A": 0.027,
+      "5B": 0.027
+    }
+  },
+  "8022-96-6": {
+    "name": "Jasmine absolute (grandiflorum)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "8024-43-9": {
+    "name": "Jasmine absolute (grandiflorum)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "90045-94-6": {
+    "name": "Jasmine absolute (grandiflorum)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "84776-64-7": {
+    "name": "Jasmine absolute (grandiflorum)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "91770-14-8": {
+    "name": "Jasmine absolute (sambac)",
+    "type": "restricted",
+    "limits": {
+      "4": 3.8,
+      "9": 7.4,
+      "5A": 0.96,
+      "5B": 0.96
+    }
+  },
+  "1034798-23-6": {
+    "name": "Jasmine absolute (sambac)",
+    "type": "restricted",
+    "limits": {
+      "4": 3.8,
+      "9": 7.4,
+      "5A": 0.96,
+      "5B": 0.96
+    }
+  },
+  "8014-71-9": {
+    "name": "Melissa oil (genuine Melissa officinalis L.)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "84082-61-1": {
+    "name": "Melissa oil (genuine Melissa officinalis L.)",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 1.2,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "2111-75-3": {
+    "name": "Perilla aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.3,
+      "9": 0.59,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "68683-20-5": {
+    "name": "Menthadiene-7-methyl formate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "123-11-5": {
+    "name": "p-Methoxybenzaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 1.4,
+      "9": 0.42,
+      "5A": 0.38,
+      "5B": 0.093
+    }
+  },
+  "1504-74-1": {
+    "name": "o-Methoxycinnamaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "86803-90-9": {
+    "name": "Methoxy dicyclopentadiene carboxaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 1.1,
+      "9": 2.1,
+      "5A": 0.27,
+      "5B": 0.27
+    }
+  },
+  "5462-06-6": {
+    "name": "4-Methoxy-alpha-methylbenzenepropanal",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 2.7,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "93-51-6": {
+    "name": "2-Methoxy-4-methylphenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.047,
+      "9": 0.092,
+      "5A": 0.012,
+      "5B": 0.012
+    }
+  },
+  "1205-17-0": {
+    "name": "alpha-Methyl-1,3-benzodioxole-5-propionaldehyde (MMDHCA)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.6,
+      "9": 0.15,
+      "5A": 0.39,
+      "5B": 0.077
+    }
+  },
+  "101-39-3": {
+    "name": "alpha-Methyl cinnamic aldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "1604-28-0": {
+    "name": "6-Methyl-3,5-heptadien-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.047,
+      "9": 0.092,
+      "5A": 0.012,
+      "5B": 0.012
+    }
+  },
+  "111-12-6": {
+    "name": "Methyl heptine carbonate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.047,
+      "9": 0.092,
+      "5A": 0.012,
+      "5B": 0.012
+    }
+  },
+  "1335-46-2": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "127-42-4": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "127-43-5": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "127-51-5": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "7779-30-8": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "79-89-0": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "1335-94-0": {
+    "name": "Methyl ionone, mixed isomers",
+    "type": "restricted",
+    "limits": {
+      "4": 30,
+      "9": 59,
+      "5A": 7.6,
+      "5B": 7.6
+    }
+  },
+  "111-80-8": {
+    "name": "Methyl octine carbonate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.01,
+      "9": 0.02,
+      "5A": 0.0026,
+      "5B": 0.0026
+    }
+  },
+  "68922-13-4": {
+    "name": "3-Methyl-2-(pentyloxy)cyclopent-2-en-1-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "13257-44-8": {
+    "name": "2-Nonyn-1-al dimethyl acetal",
+    "type": "restricted",
+    "limits": {
+      "4": 9.9,
+      "9": 19,
+      "5A": 2.5,
+      "5B": 2.5
+    }
+  },
+  "90028-68-5": {
+    "name": "Oakmoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "68917-10-2": {
+    "name": "Oakmoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "9000-50-4": {
+    "name": "Oakmoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "54464-57-2": {
+    "name": "1-(1,2,3,4,5,6,7,8 Octahydro-2,3,8,8-tetramethyl-2-naphthalenyl) ethanone (OTNE)",
+    "type": "restricted",
+    "limits": {
+      "4": 20,
+      "9": 2.4,
+      "5A": 5.1,
+      "5B": 0.56
+    }
+  },
+  "54464-59-4": {
+    "name": "1-(1,2,3,4,5,6,7,8 Octahydro-2,3,8,8-tetramethyl-2-naphthalenyl) ethanone (OTNE)",
+    "type": "restricted",
+    "limits": {
+      "4": 20,
+      "9": 2.4,
+      "5A": 5.1,
+      "5B": 0.56
+    }
+  },
+  "68155-66-8": {
+    "name": "1-(1,2,3,4,5,6,7,8 Octahydro-2,3,8,8-tetramethyl-2-naphthalenyl) ethanone (OTNE)",
+    "type": "restricted",
+    "limits": {
+      "4": 20,
+      "9": 2.4,
+      "5A": 5.1,
+      "5B": 0.56
+    }
+  },
+  "68155-67-9": {
+    "name": "1-(1,2,3,4,5,6,7,8 Octahydro-2,3,8,8-tetramethyl-2-naphthalenyl) ethanone (OTNE)",
+    "type": "restricted",
+    "limits": {
+      "4": 20,
+      "9": 2.4,
+      "5A": 5.1,
+      "5B": 0.56
+    }
+  },
+  "2442-10-6": {
+    "name": "1-Octen-3-yl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "8021-36-1": {
+    "name": "Opoponax",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "9000-78-6": {
+    "name": "Opoponax",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "93384-32-8": {
+    "name": "Opoponax",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "8007-00-9": {
+    "name": "Peru balsam",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "13144-88-2": {
+    "name": "1-(2,4,4,5,5-Pentamethyl-1-cyclopenten-1-yl)ethan-1-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "122-78-1": {
+    "name": "Phenylacetaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
+  },
+  "16251-77-7": {
+    "name": "3-Phenylbutanal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.44,
+      "9": 0.08,
+      "5A": 0.24,
+      "5B": 0.023
+    }
+  },
+  "93-53-8": {
+    "name": "2-Phenylpropionaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.16,
+      "9": 0.32,
+      "5A": 0.041,
+      "5B": 0.041
+    }
+  },
+  "1340-11-0": {
+    "name": "2-Phenylpropionaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.16,
+      "9": 0.32,
+      "5A": 0.041,
+      "5B": 0.041
+    }
+  },
+  "34713-70-7": {
+    "name": "2-Phenylpropionaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.16,
+      "9": 0.32,
+      "5A": 0.041,
+      "5B": 0.041
+    }
+  },
+  "17369-59-4": {
+    "name": "3-Propylidenephthalide",
+    "type": "restricted",
+    "limits": {
+      "4": 0,
+      "9": 0.79,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "23696-85-7": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "23726-93-4": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "59739-63-8": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "43052-87-5": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "24720-09-0": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "23726-94-5": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "23726-92-3": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "23726-91-2": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "35044-68-9": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "57378-68-4": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "71048-82-3": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "35087-49-1": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "39872-57-6": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "70266-48-7": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "33673-71-1": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "87064-19-5": {
+    "name": "Rose ketones",
+    "type": "restricted",
+    "limits": {
+      "4": 0.043,
+      "9": 0.084,
+      "5A": 0.011,
+      "5B": 0.011
+    }
+  },
+  "8046-19-3": {
+    "name": "Styrax",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8024-01-9": {
+    "name": "Styrax",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "94891-27-7": {
+    "name": "Styrax",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "94891-28-8": {
+    "name": "Styrax",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "101227-15-0": {
+    "name": "Styrax",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "84650-60-2": {
+    "name": "Tea leaf absolute",
+    "type": "restricted",
+    "limits": {
+      "4": 0.21,
+      "9": 0.4,
+      "5A": 0.052,
+      "5B": 0.052
+    }
+  },
+  "90028-67-4": {
+    "name": "Treemoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "68648-41-9": {
+    "name": "Treemoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "68917-40-8": {
+    "name": "Treemoss extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "9": 0.1,
+      "5A": 0.076,
+      "5B": 0.076
+    }
+  },
+  "529-20-4": {
+    "name": "o,m,p-Tolualdehydes and their mixtures",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "620-23-5": {
+    "name": "o,m,p-Tolualdehydes and their mixtures",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "104-87-0": {
+    "name": "o,m,p-Tolualdehydes and their mixtures",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "1334-78-7": {
+    "name": "o,m,p-Tolualdehydes and their mixtures",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "116-26-7": {
+    "name": "2,6,6-Trimethylcyclohex-1,3-dienyl methanal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.012,
+      "9": 0.024,
+      "5A": 0.0032,
+      "5B": 0.0032
+    }
+  },
+  "8024-12-2": {
+    "name": "Verbena oil and absolute (Lippia citriodora Kunth.)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "85116-63-8": {
+    "name": "Verbena oil and absolute (Lippia citriodora Kunth.)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8006-81-3": {
+    "name": "Ylang ylang extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.73,
+      "9": 1.4,
+      "5A": 0.18,
+      "5B": 0.18
+    }
+  },
+  "68606-83-7": {
+    "name": "Ylang ylang extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.73,
+      "9": 1.4,
+      "5A": 0.18,
+      "5B": 0.18
+    }
+  },
+  "83863-30-3": {
+    "name": "Ylang ylang extracts",
+    "type": "restricted",
+    "limits": {
+      "4": 0.73,
+      "9": 1.4,
+      "5A": 0.18,
+      "5B": 0.18
+    }
+  },
+  "15323-35-0": {
+    "name": "Acetyl hexamethyl indan (AHMI)",
+    "type": "restricted",
+    "limits": {
+      "4": 2,
+      "5A": 2,
+      "5B": 2
+    }
+  },
+  "8015-64-3": {
+    "name": "Angelica root oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.8,
+      "5A": 0.8,
+      "5B": 0.8
+    }
+  },
+  "84775-41-7": {
+    "name": "Angelica root oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.8,
+      "5A": 0.8,
+      "5B": 0.8
+    }
+  },
+  "8007-75-8": {
+    "name": "Bergamot oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 0.4,
+      "5A": 0.4,
+      "5B": 0.4
+    }
+  },
+  "89957-91-5": {
+    "name": "Bergamot oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 0.4,
+      "5A": 0.4,
+      "5B": 0.4
+    }
+  },
+  "68916-04-1": {
+    "name": "Bitter orange peel oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 1.25,
+      "5A": 1.25,
+      "5B": 1.25
+    }
+  },
+  "72968-50-4": {
+    "name": "Bitter orange peel oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 1.25,
+      "5A": 1.25,
+      "5B": 1.25
+    }
+  },
+  "8014-13-9": {
+    "name": "Cumin oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.4,
+      "5A": 0.4,
+      "5B": 0.4
+    }
+  },
+  "84775-51-9": {
+    "name": "Cumin oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.4,
+      "5A": 0.4,
+      "5B": 0.4
+    }
+  },
+  "8016-20-4": {
+    "name": "Grapefruit oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 4,
+      "5A": 4,
+      "5B": 4
+    }
+  },
+  "90045-43-5": {
+    "name": "Grapefruit oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 4,
+      "5A": 4,
+      "5B": 4
+    }
+  },
+  "8008-56-8": {
+    "name": "Lemon oil cold pressed",
+    "type": "restricted",
+    "limits": {
+      "4": 2,
+      "5A": 2,
+      "5B": 2
+    }
+  },
+  "84929-31-7": {
+    "name": "Lemon oil cold pressed",
+    "type": "restricted",
+    "limits": {
+      "4": 2,
+      "5A": 2,
+      "5B": 2
+    }
+  },
+  "8008-26-2": {
+    "name": "Lime oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 0.7,
+      "5A": 0.7,
+      "5B": 0.7
+    }
+  },
+  "90063-52-8": {
+    "name": "Lime oil expressed",
+    "type": "restricted",
+    "limits": {
+      "4": 0.7,
+      "5A": 0.7,
+      "5B": 0.7
+    }
+  },
+  "85-91-6": {
+    "name": "Methyl N-methylanthranilate",
+    "type": "restricted",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "93-08-3": {
+    "name": "Methyl beta-naphthyl ketone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.2,
+      "5A": 0.2,
+      "5B": 0.2
+    }
+  },
+  "8014-29-7": {
+    "name": "Rue oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.15,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "84929-47-5": {
+    "name": "Rue oil",
+    "type": "restricted",
+    "limits": {
+      "4": 0.15,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "90131-43-4": {
+    "name": "Tagetes oil and absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8016-84-0": {
+    "name": "Tagetes oil and absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "91722-29-1": {
+    "name": "Tagetes oil and absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "91770-75-1": {
+    "name": "Tagetes oil and absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "98-01-1": {
+    "name": "Furfural",
+    "type": "restricted",
+    "limits": {
+      "4": 0.001,
+      "9": 0.001,
+      "5A": 0.001,
+      "5B": 0.001
+    }
+  },
+  "140-67-0": {
+    "name": "Estragole",
+    "type": "restricted",
+    "limits": {
+      "4": 0.014,
+      "9": 0.0041,
+      "5A": 0.0022,
+      "5B": 0.00063
+    }
+  },
+  "1407-27-8": {
+    "name": "Estragole",
+    "type": "restricted",
+    "limits": {
+      "4": 0.014,
+      "9": 0.0041,
+      "5A": 0.0022,
+      "5B": 0.00063
+    }
+  },
+  "77525-18-9": {
+    "name": "Estragole",
+    "type": "restricted",
+    "limits": {
+      "4": 0.014,
+      "9": 0.0041,
+      "5A": 0.0022,
+      "5B": 0.00063
+    }
+  },
+  "93-15-2": {
+    "name": "Methyl eugenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.011,
+      "9": 0.0017,
+      "5A": 0.0015,
+      "5B": 0.00021
+    }
+  },
+  "41270-80-8": {
+    "name": "Methyl N-formylanthranilate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.1,
+      "5A": 0.1,
+      "5B": 0.1
+    }
+  },
+  "546-80-5": {
+    "name": "Thujone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.4,
+      "9": 0.13,
+      "5A": 0.095,
+      "5B": 0.032
+    }
+  },
+  "471-15-8": {
+    "name": "Thujone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.4,
+      "9": 0.13,
+      "5A": 0.095,
+      "5B": 0.032
+    }
+  },
+  "76231-76-0": {
+    "name": "Thujone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.4,
+      "9": 0.13,
+      "5A": 0.095,
+      "5B": 0.032
+    }
+  },
+  "1125-12-8": {
+    "name": "Thujone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.4,
+      "9": 0.13,
+      "5A": 0.095,
+      "5B": 0.032
+    }
+  },
+  "88-29-9": {
+    "name": "Acetyl ethyl tetramethyl tetralin (AETT)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "13706-86-0": {
+    "name": "Acetyl isovaleryl",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "84012-20-4": {
+    "name": "Alantroot oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "97676-35-2": {
+    "name": "Alantroot oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "73157-43-4": {
+    "name": "Allyl heptine carbonate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "57-06-7": {
+    "name": "Allyl isothiocyanate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "25564-22-1": {
+    "name": "Amylcyclopentenone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "943-88-4": {
+    "name": "Anisylidene acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "494-40-6": {
+    "name": "cis-and trans-Asarone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "2883-98-9": {
+    "name": "cis-and trans-Asarone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5273-86-9": {
+    "name": "cis-and trans-Asarone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "71-43-2": {
+    "name": "Benzene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "140-29-4": {
+    "name": "Benzyl cyanide",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "122-57-6": {
+    "name": "Benzylidene acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8001-88-5": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "68917-50-0": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "84012-15-7": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "85251-66-7": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "85940-29-0": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "91745-85-6": {
+    "name": "Birch wood pyrolysate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8022-81-9": {
+    "name": "Boldo oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "84649-96-7": {
+    "name": "Boldo oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "76-29-9": {
+    "name": "3-Bromo-1,7,7-trimethylbicyclo[2.2.1]heptane-2-one",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "103-64-0": {
+    "name": "Bromostyrene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "98-54-4": {
+    "name": "p-tert-Butylphenol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8013-10-3": {
+    "name": "Cade oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "90046-02-9": {
+    "name": "Cade oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "33204-74-9": {
+    "name": "Carvone oxide",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8006-99-3": {
+    "name": "Chenopodium oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8024-11-1": {
+    "name": "Chenopodium oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "89997-47-7": {
+    "name": "Chenopodium oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "4173-44-8": {
+    "name": "Cinnamylidene acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8050-09-7": {
+    "name": "Colophony",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8023-88-9": {
+    "name": "Costus root oil, absolute and concrete",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "90106-55-1": {
+    "name": "Costus root oil, absolute and concrete",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "4756-19-8": {
+    "name": "Cyclamen alcohol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "63697-53-0": {
+    "name": "Musk alpha",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "62265-99-0": {
+    "name": "Musk KS",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "3591-42-2": {
+    "name": "2,2-Dichloro-1-methylcyclopropylbenzene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "764-40-9": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "142-83-6": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "80466-34-8": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5910-85-0": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "30361-28-5": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "6750-03-4": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "2363-88-4": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "13162-46-4": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "21662-16-8": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "25152-84-5": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "30361-29-6": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "4313-03-5": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "20432-40-0": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "4488-48-6": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5577-44-6": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5910-87-2": {
+    "name": "2,4-Dienals",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "141-05-9": {
+    "name": "Diethyl maleate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "6248-20-0": {
+    "name": "2,4-Dihydroxy-3-methylbenzaldehyde",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "17874-34-9": {
+    "name": "4,6-Dimethyl-8-tert-butylcoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "40607-48-5": {
+    "name": "3,7-Dimethyl-2-octen-1-ol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "617-54-9": {
+    "name": "Dimethyl citraconate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "122-39-4": {
+    "name": "Diphenylamine",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "18485-38-6": {
+    "name": "2,4-Dodecadien-1-ol, (2E, 4E)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "10031-92-2": {
+    "name": "Esters of 2-Nonynoic acid (except Methyl octine carbonate)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "10484-32-9": {
+    "name": "Esters of 2-Octynoic acid (except Methyl heptine carbonate)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "10519-20-7": {
+    "name": "Esters of 2-Octynoic acid (except Methyl heptine carbonate)",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "140-88-5": {
+    "name": "Ethyl acrylate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "68916-52-9": {
+    "name": "Fig leaf absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "90028-74-3": {
+    "name": "Fig leaf absolute",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "98-00-0": {
+    "name": "Furfuryl alcohol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "623-15-4": {
+    "name": "Furfurylidene acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5146-66-7": {
+    "name": "Geranyl nitrile",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5585-39-7": {
+    "name": "Geranyl nitrile",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "31983-27-4": {
+    "name": "Geranyl nitrile",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "18829-55-5": {
+    "name": "trans-2-Heptenal",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "111-28-4": {
+    "name": "2,4-Hexadien-1-ol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "17102-64-6": {
+    "name": "2,4-Hexadien-1-ol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "700-82-3": {
+    "name": "Hexahydrocoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "67746-30-9": {
+    "name": "trans-2-Hexenal diethyl acetal",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "18318-83-7": {
+    "name": "trans-2-Hexenal dimethyl acetal",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "13393-93-6": {
+    "name": "Hydroabietyl alcohol, Dihydroabietyl alcohol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "26266-77-3": {
+    "name": "Hydroabietyl alcohol, Dihydroabietyl alcohol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "1333-89-7": {
+    "name": "Hydroabietyl alcohol, Dihydroabietyl alcohol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "622-62-8": {
+    "name": "Hydroquinone monoethyl ether",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "150-76-5": {
+    "name": "Hydroquinone monomethyl ether",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "78-59-1": {
+    "name": "Isophorone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "34131-99-2": {
+    "name": "6-Isopropyl-2-decalol",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "85085-26-3": {
+    "name": "Massoia bark oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "54814-64-1": {
+    "name": "Massoia lactone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "51154-96-2": {
+    "name": "Massoia lactone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "531-59-9": {
+    "name": "7-Methoxycoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "104-27-8": {
+    "name": "α-Methyl anisylidene acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "92-48-8": {
+    "name": "6-Methylcoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "2445-83-2": {
+    "name": "7-Methylcoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "623-43-8": {
+    "name": "Methyl crotonate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "87-05-8": {
+    "name": "4-Methyl-7-ethoxycoumarin",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "5406-12-2": {
+    "name": "p-Methylhydrocinnamic aldehyde",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "80-62-6": {
+    "name": "Methyl methacrylate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "53153-66-5": {
+    "name": "3-Methyl-2(3)-nonenenitrile",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "116-66-5": {
+    "name": "Musk moskene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "83-66-9": {
+    "name": "Musk ambrette",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "145-39-1": {
+    "name": "Musk tibetene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "81-15-2": {
+    "name": "Musk xylene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "98-95-3": {
+    "name": "Nitrobenzene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "25677-40-1": {
+    "name": "2-Pentylidene cyclohexanone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "103-79-7": {
+    "name": "Phenyl acetone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "93-99-2": {
+    "name": "Phenyl benzoate",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "141-10-6": {
+    "name": "Pseudoionone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "26651-96-7": {
+    "name": "Pseudo methylionones",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "72968-25-3": {
+    "name": "Pseudo methylionones",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "1117-41-5": {
+    "name": "Pseudo methylionones",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "91-22-5": {
+    "name": "Quinoline",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "94-59-7": {
+    "name": "Safrole, Isosafrole and Dihydrosafrole",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "120-58-1": {
+    "name": "Safrole, Isosafrole and Dihydrosafrole",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "94-58-6": {
+    "name": "Safrole, Isosafrole and Dihydrosafrole",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "84961-58-0": {
+    "name": "Santolina oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "8024-00-8": {
+    "name": "Savin oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "90046-04-1": {
+    "name": "Savin oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "68916-94-9": {
+    "name": "Savin oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "90046-03-0": {
+    "name": "Savin oil",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "108-88-3": {
+    "name": "Toluene",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "94-86-0": {
+    "name": "Propenylguaethol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.99,
+      "9": 0.75,
+      "5A": 0.25,
+      "5B": 0.21
+    }
+  },
+  "63477-41-8": {
+    "name": "Propenylguaethol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.99,
+      "9": 0.75,
+      "5A": 0.25,
+      "5B": 0.21
+    }
+  },
+  "2785-87-7": {
+    "name": "2-Methoxy-4-propylphenol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.73,
+      "9": 1.4,
+      "5A": 0.19,
+      "5B": 0.19
+    }
+  },
+  "515-69-5": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "23089-26-1": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "23178-88-3": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "78148-59-1": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "76738-75-5": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "72691-24-8": {
+    "name": "alpha-Bisabolol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.4,
+      "9": 4.6,
+      "5A": 0.6,
+      "5B": 0.6
+    }
+  },
+  "589-18-4": {
+    "name": "p-Tolyl alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 0.53,
+      "5A": 0.64,
+      "5B": 0.048
+    }
+  },
+  "536-60-7": {
+    "name": "p-Isopropylbenzyl alcohol",
+    "type": "restricted",
+    "limits": {
+      "4": 2.5,
+      "9": 2,
+      "5A": 0.64,
+      "5B": 0.64
+    }
+  },
+  "24048-14-4": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "185019-19-6": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "58001-88-0": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "58001-87-9": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "1373932-23-0": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "1018832-07-9": {
+    "name": "2,6,10-Trimethylundeca-5,9-dien-1-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "11028-42-5": {
+    "name": "Cedrene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "469-61-4": {
+    "name": "Cedrene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "546-28-1": {
+    "name": "Cedrene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "17488-65-2": {
+    "name": "4-Phenyl-3-buten-2-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.4,
+      "5A": 0.32,
+      "5B": 0.32
+    }
+  },
+  "475-20-7": {
+    "name": "Longifolene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "16846-09-6": {
+    "name": "Longifolene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "19067-29-9": {
+    "name": "Longifolene",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "3658-77-3": {
+    "name": "4-Hydroxy-2,5-dimethyl-3(2H)-furanone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
+  },
+  "19317-11-4": {
+    "name": "Farnesal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 0.57,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "41448-29-7": {
+    "name": "3,7-Dimethyl-2,6-nonadien-1-al",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 0.16,
+      "5A": 0.15,
+      "5B": 0.15
+    }
+  },
+  "762-26-5": {
+    "name": "5,9-Dimethyl-4,8-decadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 2.5,
+      "5A": 0.76,
+      "5B": 0.15
+    }
+  },
+  "55722-59-3": {
+    "name": "3,7-Dimethyl-3,6-octadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 0.79,
+      "5A": 0.76,
+      "5B": 0.12
+    }
+  },
+  "1754-00-3": {
+    "name": "3,7-Dimethyl-3,6-octadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 0.79,
+      "5A": 0.76,
+      "5B": 0.12
+    }
+  },
+  "72203-98-6": {
+    "name": "3,7-Dimethyl-3,6-octadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 0.79,
+      "5A": 0.76,
+      "5B": 0.12
+    }
+  },
+  "72203-97-5": {
+    "name": "3,7-Dimethyl-3,6-octadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 3,
+      "9": 0.79,
+      "5A": 0.76,
+      "5B": 0.12
+    }
+  },
+  "106-23-0": {
+    "name": "Citronellal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.49,
+      "9": 1.4,
+      "5A": 0.33,
+      "5B": 0.051
+    }
+  },
+  "5949-05-3": {
+    "name": "Citronellal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.49,
+      "9": 1.4,
+      "5A": 0.33,
+      "5B": 0.051
+    }
+  },
+  "71077-31-1": {
+    "name": "4,8-Dimethyl-4,9-decadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.24,
+      "9": 0.46,
+      "5A": 0.06,
+      "5B": 0.06
+    }
+  },
+  "5502-75-0": {
+    "name": "cis,trans-4-(Isopropyl)cyclohexanemethanol",
+    "type": "restricted",
+    "limits": {
+      "4": 4.7,
+      "9": 0.39,
+      "5A": 1.2,
+      "5B": 0.15
+    }
+  },
+  "13828-37-0": {
+    "name": "cis,trans-4-(Isopropyl)cyclohexanemethanol",
+    "type": "restricted",
+    "limits": {
+      "4": 4.7,
+      "9": 0.39,
+      "5A": 1.2,
+      "5B": 0.15
+    }
+  },
+  "13674-19-6": {
+    "name": "cis,trans-4-(Isopropyl)cyclohexanemethanol",
+    "type": "restricted",
+    "limits": {
+      "4": 4.7,
+      "9": 0.39,
+      "5A": 1.2,
+      "5B": 0.15
+    }
+  },
+  "67634-03-1": {
+    "name": "4-(Isopropyl)-.beta.-methylcyclohexanethanol",
+    "type": "restricted",
+    "limits": {
+      "4": 6.4,
+      "9": 4.9,
+      "5A": 0.52,
+      "5B": 0.26
+    }
+  },
+  "68480-15-9": {
+    "name": "Cyclohexanemethanol, 2,4-dimethyl-",
+    "type": "restricted",
+    "limits": {
+      "4": 0.0013,
+      "9": 3.1,
+      "5A": 1.3,
+      "5B": 0.0013
+    }
+  },
+  "107898-54-4": {
+    "name": "3,3-Dimethyl-5-(2,2,3-trimethyl-3-cyclopenten-1-yl)-4-penten-2-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.1,
+      "9": 1.7,
+      "5A": 0.27,
+      "5B": 0.27
+    }
+  },
+  "65113-99-7": {
+    "name": "5-(2,2,3-Trimethyl-3-cyclopentenyl)-3-methylpentan-2-ol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.3,
+      "5A": 0.29,
+      "5B": 0.29
+    }
+  },
+  "65114-03-6": {
+    "name": "alpha,2,2,3-Tetramethylcyclopent-3-ene-1-butyraldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.21,
+      "9": 0.42,
+      "5A": 0.054,
+      "5B": 0.054
+    }
+  },
+  "5471-51-2": {
+    "name": "4-(4-Hydroxyphenyl)butan-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1,
+      "9": 1,
+      "5A": 1,
+      "5B": 0.14
+    }
+  },
+  "13341-72-5": {
+    "name": "Mintlactone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "38049-04-6": {
+    "name": "Mintlactone",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "116044-44-1": {
+    "name": "Ethyl isopropyl bicycloheptene-2-carboxylate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.94,
+      "9": 1.8,
+      "5A": 0.24,
+      "5B": 0.24
+    }
+  },
+  "116126-82-0": {
+    "name": "Ethyl isopropyl bicycloheptene-2-carboxylate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.94,
+      "9": 1.8,
+      "5A": 0.24,
+      "5B": 0.24
+    }
+  },
+  "33885-52-8": {
+    "name": "Tetramethyl bicyclo-2-heptene-2-propionaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 1.3,
+      "9": 0.087,
+      "5A": 0.019,
+      "5B": 0.0014
+    }
+  },
+  "70788-30-6": {
+    "name": "1-(2,2,6-Trimethylcyclohexyl)-3-hexanol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.3,
+      "9": 2.6,
+      "5A": 0.34,
+      "5B": 0.34
+    }
+  },
+  "139504-68-0": {
+    "name": "1-(2-tert.-Butyl cyclohexyloxy)-2-butanol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.3,
+      "9": 2.6,
+      "5A": 0.34,
+      "5B": 0.34
+    }
+  },
+  "1891-67-4": {
+    "name": "3,6,7-Trimethyl-2,6-octadienal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.6,
+      "9": 0.24,
+      "5A": 0.15,
+      "5B": 0.034
+    }
+  },
+  "74338-72-0": {
+    "name": "2,4,4,7-Tetramethyl-6-octen-3-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 3.7,
+      "5A": 0.48,
+      "5B": 0.48
+    }
+  },
+  "916887-53-1": {
+    "name": "2-Cyclohexylidene-2-ortho-tolylacetonitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.52,
+      "9": 1,
+      "5A": 0.13,
+      "5B": 0.13
+    }
+  },
+  "27538-09-6": {
+    "name": "Ethyl and Methyl furaneol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
+  },
+  "27538-10-9": {
+    "name": "Ethyl and Methyl furaneol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
+  },
+  "16429-07-5": {
+    "name": "2-Hexylidenecyclohexan-1-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.13,
+      "9": 0.25,
+      "5A": 0.033,
+      "5B": 0.033
+    }
+  },
+  "623-36-9": {
+    "name": "2-Methyl-2-pentenal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.0077,
+      "9": 0.015,
+      "5A": 0.002,
+      "5B": 0.002
+    }
+  },
+  "4643-27-0": {
+    "name": "2-Octen-4-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.047,
+      "9": 0.092,
+      "5A": 0.012,
+      "5B": 0.012
+    }
+  },
+  "67801-33-6": {
+    "name": "Methyl lavender ketone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.082,
+      "9": 0.16,
+      "5A": 0.021,
+      "5B": 0.021
+    }
+  },
+  "67633-95-8": {
+    "name": "Methyl lavender ketone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.082,
+      "9": 0.16,
+      "5A": 0.021,
+      "5B": 0.021
+    }
+  },
+  "81786-75-6": {
+    "name": "3,4,5,6,6-Pentamethylhept-3-en-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.39,
+      "5A": 0.26,
+      "5B": 0.029
+    }
+  },
+  "81786-73-4": {
+    "name": "3,4,5,6,6-Pentamethylhept-3-en-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.39,
+      "5A": 0.26,
+      "5B": 0.029
+    }
+  },
+  "86115-11-9": {
+    "name": "3,4,5,6,6-Pentamethylhept-3-en-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.39,
+      "5A": 0.26,
+      "5B": 0.029
+    }
+  },
+  "81786-74-5": {
+    "name": "3,4,5,6,6-Pentamethylhept-3-en-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.39,
+      "5A": 0.26,
+      "5B": 0.029
+    }
+  },
+  "93893-89-1": {
+    "name": "3-Methyl-5-phenylpent-2-enenitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.12,
+      "9": 0.23,
+      "5A": 0.029,
+      "5B": 0.029
+    }
+  },
+  "53243-59-7": {
+    "name": "3-Methyl-5-phenylpent-2-enenitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.12,
+      "9": 0.23,
+      "5A": 0.029,
+      "5B": 0.029
+    }
+  },
+  "53243-60-0": {
+    "name": "3-Methyl-5-phenylpent-2-enenitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.12,
+      "9": 0.23,
+      "5A": 0.029,
+      "5B": 0.029
+    }
+  },
+  "1669-44-9": {
+    "name": "3-Octen-2-one",
+    "type": "restricted",
+    "limits": {
+      "4": 0.047,
+      "9": 0.092,
+      "5A": 0.012,
+      "5B": 0.012
+    }
+  },
+  "2550-11-0": {
+    "name": "Dimethyl octenone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 1.5,
+      "5A": 0.48,
+      "5B": 0.37
+    }
+  },
+  "16587-71-6": {
+    "name": "Isopentylcyclohexanone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.15,
+      "9": 0.29,
+      "5A": 0.038,
+      "5B": 0.038
+    }
+  },
+  "338735-71-0": {
+    "name": "Woody furan",
+    "type": "restricted",
+    "limits": {
+      "4": 0.94,
+      "9": 1.8,
+      "5A": 0.24,
+      "5B": 0.24
+    }
+  },
+  "351343-77-6": {
+    "name": "Woody furan",
+    "type": "restricted",
+    "limits": {
+      "4": 0.94,
+      "9": 1.8,
+      "5A": 0.24,
+      "5B": 0.24
+    }
+  },
+  "2705-87-5": {
+    "name": "Allyl 3-cyclohexylpropionate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.47,
+      "9": 0.92,
+      "5A": 0.12,
+      "5B": 0.12
+    }
+  },
+  "60763-41-9": {
+    "name": "alpha-Amylcinnamicaldehyde diethyl acetal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.35,
+      "9": 0.69,
+      "5A": 0.089,
+      "5B": 0.089
+    }
+  },
+  "91-87-2": {
+    "name": "alpha-Amylcinnamicaldehyde dimethyl acetal",
+    "type": "restricted",
+    "limits": {
+      "4": 0.35,
+      "9": 0.69,
+      "5A": 0.089,
+      "5B": 0.089
+    }
+  },
+  "10461-98-0": {
+    "name": "alpha-Cyclohexylidene benzeneacetonitrile",
+    "type": "restricted",
+    "limits": {
+      "4": 0.52,
+      "9": 1,
+      "5A": 0.13,
+      "5B": 0.13
+    }
+  },
+  "155514-23-1": {
+    "name": "5-Hexen-1-yl 2-methylbutanoate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.64,
+      "9": 1.3,
+      "5A": 0.16,
+      "5B": 0.16
+    }
+  },
+  "97-42-7": {
+    "name": "Carvyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.24,
+      "9": 0.46,
+      "5A": 0.06,
+      "5B": 0.06
+    }
+  },
+  "1205-42-1": {
+    "name": "Carvyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.24,
+      "9": 0.46,
+      "5A": 0.06,
+      "5B": 0.06
+    }
+  },
+  "1134-95-8": {
+    "name": "Carvyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.24,
+      "9": 0.46,
+      "5A": 0.06,
+      "5B": 0.06
+    }
+  },
+  "1576-78-9": {
+    "name": "cis-3-Heptenyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "35154-45-1": {
+    "name": "cis-3-Hexenyl isovalerate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "67633-96-9": {
+    "name": "cis-3-Hexenyl methyl carbonate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.56,
+      "9": 1.1,
+      "5A": 0.14,
+      "5B": 0.14
+    }
+  },
+  "13049-88-2": {
+    "name": "cis-3-Nonenyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "150-84-5": {
+    "name": "Citronellyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 2.7,
+      "9": 5.4,
+      "5A": 0.7,
+      "5B": 0.7
+    }
+  },
+  "67601-05-2": {
+    "name": "Citronellyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 2.7,
+      "9": 5.4,
+      "5A": 0.7,
+      "5B": 0.7
+    }
+  },
+  "141-11-7": {
+    "name": "Citronellyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 2.7,
+      "9": 5.4,
+      "5A": 0.7,
+      "5B": 0.7
+    }
+  },
+  "2550-52-9": {
+    "name": "Cyclohexadecanone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "88642-03-9": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "5365-06-0": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "2550-59-6": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "3100-36-5": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "5120-20-7": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "854373-71-0": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "854373-70-9": {
+    "name": "Cyclohexadecenone",
+    "type": "restricted",
+    "limits": {
+      "4": 4.3,
+      "9": 8.4,
+      "5A": 1.1,
+      "5B": 1.1
+    }
+  },
+  "60241-52-3": {
+    "name": "1-(2,2,6-Trimethylcyclohexyl)-3-pentanol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.3,
+      "9": 2.6,
+      "5A": 0.34,
+      "5B": 0.34
+    }
+  },
+  "60241-53-4": {
+    "name": "1-(2,2,6-Trimethylcyclohexyl)-3-pentanol",
+    "type": "restricted",
+    "limits": {
+      "4": 1.3,
+      "9": 2.6,
+      "5A": 0.34,
+      "5B": 0.34
+    }
+  },
+  "58567-11-6": {
+    "name": "(Ethoxymethoxy)-cyclododecane",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.38
+    }
+  },
+  "62439-42-3": {
+    "name": "6-Hydroxy-2,6-dimethylheptanal",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.4,
+      "5A": 0.32,
+      "5B": 0.32
+    }
+  },
+  "122-67-8": {
+    "name": "Isobutyl cinnamate",
+    "type": "restricted",
+    "limits": {
+      "4": 1.2,
+      "9": 2.4,
+      "5A": 0.32,
+      "5B": 0.32
+    }
+  },
+  "93-29-8": {
+    "name": "Isoeugenyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.99,
+      "9": 0.2,
+      "5A": 0.25,
+      "5B": 0.061
+    }
+  },
+  "68966-86-9": {
+    "name": "4-Methyl-1-propan-2-ylbicyclo[2.2.2]oct-2-ene-8-carboxylate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.94,
+      "9": 1.8,
+      "5A": 0.24,
+      "5B": 0.24
+    }
+  },
+  "5533-03-9": {
+    "name": "Methyl vanillyl ether",
+    "type": "restricted",
+    "limits": {
+      "4": 1.5,
+      "9": 2.9,
+      "5A": 0.38,
+      "5B": 0.065
+    }
+  },
+  "72403-67-9": {
+    "name": "Myraldyl acetate",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.84,
+      "5A": 0.11,
+      "5B": 0.11
+    }
+  },
+  "68738-94-3": {
+    "name": "Octahydro-dimethylnaphthalene-2-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.1,
+      "9": 4.2,
+      "5A": 0.54,
+      "5B": 0.54
+    }
+  },
+  "68738-96-5": {
+    "name": "Octahydro-dimethylnaphthalene-2-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.1,
+      "9": 4.2,
+      "5A": 0.54,
+      "5B": 0.54
+    }
+  },
+  "68991-96-8": {
+    "name": "Octahydro-dimethylnaphthalene-2-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.1,
+      "9": 4.2,
+      "5A": 0.54,
+      "5B": 0.54
+    }
+  },
+  "68991-97-9": {
+    "name": "Octahydro-dimethylnaphthalene-2-carbaldehyde (mixed isomers)",
+    "type": "restricted",
+    "limits": {
+      "4": 2.1,
+      "9": 4.2,
+      "5A": 0.54,
+      "5B": 0.54
+    }
+  },
+  "106-44-5": {
+    "name": "p-Cresol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.005,
+      "9": 0.005,
+      "5A": 0.005,
+      "5B": 0.005
+    }
+  },
+  "1319-77-3": {
+    "name": "p-Cresol",
+    "type": "restricted",
+    "limits": {
+      "4": 0.005,
+      "9": 0.005,
+      "5A": 0.005,
+      "5B": 0.005
+    }
+  },
+  "2120-70-9": {
+    "name": "Phenoxyacetaldehyde",
+    "type": "restricted",
+    "limits": {
+      "4": 0.25,
+      "9": 0.49,
+      "5A": 0.064,
+      "5B": 0.064
+    }
+  },
+  "499-70-7": {
+    "name": "Carvomenthone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.054,
+      "5A": 0.079,
+      "5B": 0.0019
+    }
+  },
+  "59471-80-6": {
+    "name": "Carvomenthone",
+    "type": "restricted",
+    "limits": {
+      "4": 1.9,
+      "9": 0.054,
+      "5A": 0.079,
+      "5B": 0.0019
+    }
+  },
+  "98-53-3": {
+    "name": "4-tert-Butylcyclohexanone",
+    "type": "restricted",
+    "limits": {
+      "4": 0.15,
+      "9": 0.29,
+      "5A": 0.038,
+      "5B": 0.038
+    }
+  },
+  "53767-86-5": {
+    "name": "7-Methoxy-3,7-dimethyloct-1-ene",
+    "type": "restricted",
+    "limits": {
+      "4": 0.00001,
+      "9": 0.0042,
+      "5A": 0.042,
+      "5B": 0.00001
+    }
+  },
+  "2986-54-1": {
+    "name": "Methoxycyclododecane",
+    "type": "restricted",
+    "limits": {
+      "4": 0.43,
+      "9": 0.026,
+      "5A": 0.018,
+      "5B": 0.0046
+    }
+  },
+  "10599-70-9": {
+    "name": "3-Acetyl-2,5-dimethylfuran",
+    "type": "prohibited",
+    "limits": {
+      "4": 0,
+      "9": 0,
+      "5A": 0,
+      "5B": 0
+    }
+  },
+  "358331-95-0": {
+    "name": "2,5-Octadien-4-one, 5,6,7-trimethyl-, (2E)-",
+    "type": "restricted",
+    "limits": {
+      "4": 0.11,
+      "9": 0.21,
+      "5A": 0.027,
+      "5B": 0.027
+    }
+  },
+  "357650-26-1": {
+    "name": "2,5-Octadien-4-one, 5,6,7-trimethyl-, (2E)-",
+    "type": "restricted",
+    "limits": {
+      "4": 0.11,
+      "9": 0.21,
+      "5A": 0.027,
+      "5B": 0.027
+    }
+  },
+  "847144-75-6": {
+    "name": "2,5-Octadien-4-one, 5,6,7-trimethyl-, (2E)-",
+    "type": "restricted",
+    "limits": {
+      "4": 0.11,
+      "9": 0.21,
+      "5A": 0.027,
+      "5B": 0.027
+    }
   }
 }
