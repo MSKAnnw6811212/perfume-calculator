@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="Professional Artisan Perfume Calculator. Formulate, check IFRA limits, and manage recipes offline.">
+  <meta name="description"
+    content="Professional Artisan Perfume Calculator. Formulate, check IFRA limits, and manage recipes offline.">
   <meta name="theme-color" content="#C4A24C">
-  
+
   <title>Pixel & Pour - Artisan Perfume Calculator</title>
 
   <link rel="manifest" href="./manifest.json">
@@ -15,30 +17,34 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="./styles.css?v=branding-final" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css?v=revert-stable-1" />
+  <link id="print-css" rel="stylesheet" media="print" href="print-portrait.css">
 
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
           .then(reg => {
-             reg.onupdatefound = () => {
-               const installingWorker = reg.installing;
-               installingWorker.onstatechange = () => {
-                 if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                   const banner = document.getElementById('updateBanner');
-                   if(banner) banner.hidden = false;
-                 }
-               };
-             };
+            reg.onupdatefound = () => {
+              const installingWorker = reg.installing;
+              installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  const banner = document.getElementById('updateBanner');
+                  if (banner) banner.hidden = false;
+                }
+              };
+            };
           })
           .catch(err => console.log('SW registration failed: ', err));
       });
     }
   </script>
 </head>
+
 <body>
   <header class="app-header">
     <div class="logo-container">
@@ -46,11 +52,14 @@
       <h1>Pixel & Pour</h1>
     </div>
     <nav class="modes" aria-label="Calculator Modes">
-      <button id="modeSimple" class="tab-btn" data-mode="simple" aria-pressed="true" title="Switch to Simple Calculator (percentages)">Simple</button>
-      <button id="modePro" class="tab-btn" data-mode="pro" aria-pressed="false" title="Switch to Pro Calculator (weight/volume & solvents)">Pro</button>
+      <button id="modeSimple" class="tab-btn" data-mode="simple" aria-pressed="true"
+        title="Switch to Simple Calculator (percentages)">Simple</button>
+      <button id="modePro" class="tab-btn" data-mode="pro" aria-pressed="false"
+        title="Switch to Pro Calculator (weight/volume & solvents)">Pro</button>
     </nav>
     <div class="header-actions">
-      <button id="themeToggle" class="secondary" aria-label="Toggle Dark Mode" title="Switch between Light and Dark themes">🌓 Theme</button>
+      <button id="themeToggle" class="secondary" aria-label="Toggle Dark Mode"
+        title="Switch between Light and Dark themes">🌓 Theme</button>
     </div>
   </header>
 
@@ -59,28 +68,33 @@
     <button id="refreshBtn" title="Click to reload the app with new features">Refresh</button>
   </div>
 
-  <main>
+  <main class="app-container">
     <section id="simpleSection" class="panel">
       <h2>
-        Simple Calculator 
-        <span class="spec-help" data-tip="Best for beginners. Formulate by percentage and auto-check safety limits.">?</span>
+        Simple Calculator
+        <span class="spec-help"
+          data-tip="Best for beginners. Formulate by percentage and auto-check safety limits.">?</span>
       </h2>
 
       <div class="row">
-        <label for="dosage" title="How much fragrance concentrate is in the final bottle?">Dosage in finished product (%)</label>
-        <input type="text" inputmode="decimal" id="dosage" value="20" placeholder="20" class="num-input" title="Standard EdP is 15-20%. Extrait is 20-30%." />
+        <label for="dosage" title="How much fragrance concentrate is in the final bottle?">Dosage in finished product
+          (%)</label>
+        <input type="text" inputmode="decimal" min="0" id="dosage" value="20" placeholder="20" class="num-input"
+          title="Standard EdP is 15-20%. Extrait is 20-30%." />
       </div>
 
       <div class="row wrap buttons-row">
         <button id="addRow" title="Add a new empty ingredient row">+ Add ingredient</button>
         <div class="input-group">
-            <input type="text" id="recipeName" placeholder="Recipe name" aria-label="Recipe Name" title="Name your creation to save it for later" />
+          <input type="text" id="recipeName" placeholder="Recipe name" aria-label="Recipe Name"
+            title="Name your creation to save it for later" />
         </div>
         <button id="saveRecipe" title="Save this recipe to your browser's local storage">Save</button>
         <select id="savedRecipes" aria-label="Load Saved Recipe" title="Choose a previously saved recipe"></select>
         <button id="loadRecipe" class="secondary" title="Load the selected recipe into the table">Load</button>
         <button id="deleteRecipe" class="danger" title="Permanently delete the selected recipe">Delete</button>
-        <button id="exportCsv" class="secondary" title="Download this formula as a CSV file for Excel">Export CSV</button>
+        <button id="exportCsv" class="secondary" title="Download this formula as a CSV file for Excel">Export
+          CSV</button>
         <button id="printBtn" class="secondary" title="Print this formula or save as PDF">Print</button>
         <button id="clearAll" class="danger" title="Clear all rows and start fresh">Clear</button>
       </div>
@@ -89,18 +103,22 @@
         <h3 id="batchHeader" class="sr-only">Batch Helper</h3>
         <div class="row wrap">
           <strong>Batch scaling helper</strong>
-          <span class="spec-help" data-tip="Calculate exactly how many grams of oil and alcohol you need to fill a specific bottle size.">?</span>
-          
+          <span class="spec-help"
+            data-tip="Calculate exactly how many grams of oil and alcohol you need to fill a specific bottle size.">?</span>
+
           <div class="input-group">
-              <label for="batchVolume">Target Vol (ml)</label>
-              <input type="text" inputmode="decimal" id="batchVolume" value="1000" class="num-input" title="Total amount of perfume you want to make" />
+            <label for="batchVolume">Target Vol (ml)</label>
+            <input type="text" inputmode="decimal" min="0" id="batchVolume" value="1000" class="num-input"
+              title="Total amount of perfume you want to make" />
           </div>
           <div class="input-group">
-              <label for="batchDensity">Density (g/ml)</label>
-              <input type="text" inputmode="decimal" id="batchDensity" value="0.85" class="num-input" title="Default is 0.85 (average for alcohol-based perfume)" />
+            <label for="batchDensity">Density (g/ml)</label>
+            <input type="text" inputmode="decimal" min="0" id="batchDensity" value="0.85" class="num-input"
+              title="Default is 0.85 (average for alcohol-based perfume)" />
           </div>
           <button id="batchCalcBtn" class="secondary" title="Update the weight calculations below">Calculate</button>
-          <button id="batchExportBtn" class="secondary" title="Download the batch weights as a CSV">Export Batch CSV</button>
+          <button id="batchExportBtn" class="secondary" title="Download the batch weights as a CSV">Export Batch
+            CSV</button>
         </div>
         <div class="table-wrap">
           <table id="batchTable">
@@ -125,13 +143,17 @@
         </div>
       </section>
 
-      <div class="row" style="justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px;">
+      <div class="row"
+        style="justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px;">
         <small id="dataStatus" title="Status of the ingredient database">Loading data…</small>
-        
+
         <div>
-            <input type="file" id="importCsvInput" accept=".csv" hidden />
-            <button id="importIngredientsBtn" class="secondary" style="font-size: 12px; padding: 4px 10px;" title="Bulk upload your own ingredients from an Excel/CSV file">📥 Import Inventory CSV</button>
-            <button id="clearCustomData" class="secondary" style="font-size: 12px; padding: 4px 10px; color: var(--fail); border-color: var(--fail);" hidden title="Delete all your imported custom ingredients">Reset Custom Data</button>
+          <input type="file" id="importCsvInput" accept=".csv" hidden />
+          <button id="importIngredientsBtn" class="secondary" style="font-size: 12px; padding: 4px 10px;"
+            title="Bulk upload your own ingredients from an Excel/CSV file">📥 Import Inventory CSV</button>
+          <button id="clearCustomData" class="secondary"
+            style="font-size: 12px; padding: 4px 10px; color: var(--fail); border-color: var(--fail);" hidden
+            title="Delete all your imported custom ingredients">Reset Custom Data</button>
         </div>
       </div>
 
@@ -167,22 +189,24 @@
     <section id="proSection" class="panel" hidden>
       <h2>
         Artisan Pro Calculator
-        <span class="spec-help" data-tip="Professional mode. Tracks cost, solvent dilution, and weight/volume conversions.">?</span>
+        <span class="spec-help"
+          data-tip="Professional mode. Tracks cost, solvent dilution, and weight/volume conversions.">?</span>
       </h2>
 
       <div class="row wrap buttons-row">
         <div class="input-group">
-            <label for="targetVolume">Target Volume (ml)</label>
-            <input type="text" inputmode="decimal" id="targetVolume" value="100" class="num-input" title="Total volume of the final product" />
+          <label for="targetVolume">Target Volume (ml)</label>
+          <input type="text" inputmode="decimal" min="0" id="targetVolume" value="100" class="num-input"
+            title="Total volume of the final product" />
         </div>
         <div class="input-group">
-            <label for="ifraCategory">IFRA Category</label>
-            <select id="ifraCategory" title="Select the product type to check safety limits">
-              <option value="4">4 – Fine Fragrance</option>
-              <option value="5A">5A – Body Lotion</option>
-              <option value="5B">5B – Face Cream</option>
-              <option value="9">9 – Soap</option>
-            </select>
+          <label for="ifraCategory">IFRA Category</label>
+          <select id="ifraCategory" title="Select the product type to check safety limits">
+            <option value="4">4 – Fine Fragrance</option>
+            <option value="5A">5A – Body Lotion</option>
+            <option value="5B">5B – Face Cream</option>
+            <option value="9">9 – Soap</option>
+          </select>
         </div>
         <button id="proSave" title="Save Pro Recipe">Save</button>
         <select id="proSaved" aria-label="Saved Pro Recipes" title="Select a saved Pro recipe"></select>
@@ -201,13 +225,16 @@
               <th>Volume (ml)</th>
               <th>Density (g/ml)</th>
               <th>Weight (g)</th>
+              <th>Active Mass (g)</th>
+              <th>Solvent Mass (g)</th>
               <th>Price/10g (€)</th>
               <th>Cost (€)</th>
               <th>Dilution %</th>
               <th>Solvent</th>
               <th>
-                Active % 
-                <span class="spec-help" title="The actual percentage of aromatic material in the total formula (excluding solvent). IFRA limits are checked against this value.">?</span>
+                Active %
+                <span class="spec-help"
+                  title="The actual percentage of aromatic material in the total formula (excluding solvent). IFRA limits are checked against this value.">?</span>
               </th>
               <th>Note</th>
               <th>Supplier</th>
@@ -242,7 +269,8 @@
         <div id="ifraStatus" class="card">
           <h4>
             IFRA Compliance
-            <span class="spec-help" title="Calculated using the 'Active %' of each ingredient against the official IFRA limits for the selected category.">?</span>
+            <span class="spec-help"
+              title="Calculated using the 'Active %' of each ingredient against the official IFRA limits for the selected category.">?</span>
           </h4>
           <div id="ifraStatusText">Enter rows to evaluate.</div>
         </div>
@@ -250,12 +278,12 @@
           <h4>Price per 10g</h4>
           <div class="row">
             <div class="input-group">
-                <label for="helperCost">Total Cost (€)</label>
-                <input type="number" id="helperCost" readonly title="Calculated automatically" />
+              <label for="helperCost">Total Cost (€)</label>
+              <input type="number" id="helperCost" readonly title="Calculated automatically" />
             </div>
             <div class="input-group">
-                <label for="helperWeight">Total Weight (g)</label>
-                <input type="number" id="helperWeight" readonly title="Calculated automatically" />
+              <label for="helperWeight">Total Weight (g)</label>
+              <input type="number" id="helperWeight" readonly title="Calculated automatically" />
             </div>
             <strong>Result: <span id="helperResult">€0.00 per 10g</span></strong>
           </div>
@@ -270,8 +298,43 @@
     <small>Pixel & Pour PWA • Version 1.1.0</small>
   </footer>
 
+  <!-- Upgrade Modal -->
+  <div id="upgradeModal" class="modal-overlay" hidden>
+    <div class="modal card">
+      <div id="modalOfferContent">
+        <h2>Unlock Pro</h2>
+        <ul class="upgrade-features">
+          <li>✨ Full IFRA Categories (4, 5A, 5B, 9) + Numeric Limits</li>
+          <li>⚖️ Pro Mode (Weight, Volume, Dilution, Solvents)</li>
+          <li>📄 CSV Exports & Professional Print Layouts</li>
+          <li>📥 Inventory Import & Unlimited Recipes</li>
+        </ul>
+        <div class="modal-actions">
+          <button id="upgradeBtn" class="primary-action">Start Trial / Upgrade</button>
+          <button id="upgradeNotNow" class="secondary">Not now</button>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--muted);">
+          <a href="#" id="triggerLicense" style="color: inherit; text-decoration: underline;">Have a key? Activate
+            here.</a>
+        </p>
+      </div>
+
+      <div id="modalLicenseContent" hidden>
+        <h2>Activate License</h2>
+        <p style="color: var(--muted); margin-bottom: 12px;">Enter your license key to unlock Pro features.</p>
+        <input type="text" id="licenseInput" placeholder="Enter Key (e.g. PRO-TEST)"
+          style="width: 100%; margin-bottom: 16px; text-align: center;">
+        <div class="modal-actions">
+          <button id="activateKeyBtn" class="primary-action">Activate</button>
+          <button id="cancelActivateBtn" class="secondary">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="toast-container"></div>
 
-  <script src="./app.js?v=branding-final"></script>
+  <script src="./app.js?v=revert-stable-1"></script>
 </body>
+
 </html>
