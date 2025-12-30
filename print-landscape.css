@@ -1,0 +1,135 @@
+/* Print Landscape Styles - A4 */
+@page {
+    size: A4 landscape;
+    margin: 10mm;
+}
+
+body {
+    background: white !important;
+    font-size: 10pt !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+}
+
+/* Reset Layout Containers */
+.app-container,
+.table-wrap,
+.main-content,
+.panel {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Hide UI Elements */
+.app-header,
+.app-footer,
+.modes,
+.buttons-row,
+#updateBanner,
+#toast-container,
+.spec-help,
+button,
+.btn,
+.remove-btn,
+.header-actions,
+#addIngredientBtn,
+#proAdd,
+#addRow,
+.config-panel,
+.card {
+    display: none !important;
+}
+
+#priceHelper {
+    display: none !important;
+}
+
+/* Table Styling */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+    font-size: 9pt !important;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tr {
+    page-break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #ccc !important;
+    padding: 4px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    color: black !important;
+    position: static !important;
+}
+
+/* Disable sticky headers */
+thead th,
+tbody td:first-child,
+thead th:first-child {
+    position: static !important;
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+}
+
+/* Inputs as Text */
+input,
+select,
+textarea {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: inherit !important;
+    color: black !important;
+    -webkit-appearance: none;
+    appearance: none;
+    white-space: pre-wrap !important;
+}
+
+/* LANDSCAPE COLUMN POLICY (Pro Table) */
+/* Show: Ingredient(1), Volume(2), Density(3), Weight(4), ActiveMass(5-NO), SolvMass(6-NO), Price(7-NO), Cost(8), Dil(9), Solv(10), Act%(11), Note(12), Supplier(13), CAS(14-Option) */
+/* Hide: ActiveMass(5), SolvMass(6), Price(7), Notes(15), Del(16) */
+
+#proTable th:nth-child(5),
+#proTable td:nth-child(5),
+/* Active Mass */
+#proTable th:nth-child(6),
+#proTable td:nth-child(6),
+/* Solvent Mass */
+#proTable th:nth-child(7),
+#proTable td:nth-child(7),
+/* Price */
+#proTable th:nth-child(15),
+#proTable td:nth-child(15),
+/* Notes (Desc) - usually too long */
+#proTable th:last-child,
+#proTable td:last-child
+
+/* Delete */
+    {
+    display: none !important;
+}
+
+/* Simple Table Column Policy */
+#ingredientsTable th:last-child,
+#ingredientsTable td:last-child {
+    display: none !important;
+}
